@@ -27,37 +27,14 @@
       home.url = "github:nix-community/home-manager/release-21.11";
       home.inputs.nixpkgs.follows = "nixos";
       digga.inputs.home-manager.follows = "home";
-
-      # Deploy
-      deploy.url = "github:serokell/deploy-rs";
-      deploy.inputs.nixpkgs.follows = "nixos";
-      digga.inputs.deploy.follows = "deploy";
-
-      # Secrets
-      agenix.url = "github:ryantm/agenix";
-      agenix.inputs.nixpkgs.follows = "nixos";
-
-      # Nvfetcher
-      nvfetcher.url = "github:berberman/nvfetcher";
-      nvfetcher.inputs.nixpkgs.follows = "nixos";
-
-      # Tooling
-      bud.url = "github:divnix/bud";
-      bud.inputs.nixpkgs.follows = "nixos";
-      bud.inputs.devshell.follows = "digga/devshell";
     };
 
   outputs =
     { self
     , digga
-    , bud
     , nixos
     , home
     , nixos-hardware
-    , nur
-    , agenix
-    , nvfetcher
-    , deploy
     , nixpkgs
     , ...
     } @ inputs:
@@ -89,10 +66,6 @@
             });
           })
 
-          nur.overlay
-          agenix.overlay
-          nvfetcher.overlay
-
           (import ./pkgs)
         ];
 
@@ -106,8 +79,6 @@
               digga.nixosModules.bootstrapIso
               digga.nixosModules.nixConfig
               home.nixosModules.home-manager
-              agenix.nixosModules.age
-              bud.nixosModules.bud
             ];
           };
 
@@ -134,7 +105,6 @@
               { lib.our = self.lib; }
               digga.darwinModules.nixConfig
               home.darwinModules.home-manager
-              agenix.nixosModules.age
             ];
           };
 
@@ -162,9 +132,6 @@
           (digga.lib.mkHomeConfigurations self.darwinConfigurations)
           (digga.lib.mkHomeConfigurations self.nixosConfigurations)
         ;
-
-        deploy.nodes = digga.lib.mkDeployNodes self.nixosConfigurations { };
-
       }
   ;
 }
