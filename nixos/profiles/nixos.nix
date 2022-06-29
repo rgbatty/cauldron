@@ -1,9 +1,9 @@
 { config, lib, pkgs, self, ... }:
 
 {
-  imports = [
-    ./common.nix
-  ];
+  # imports = [
+  #   ./common.nix
+  # ];
 
   # This is just a representation of the nix default
   nix.systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];

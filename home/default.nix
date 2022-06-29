@@ -11,10 +11,13 @@ in
   importables = rec {
     profiles = digga.lib.rakeLeaves ./profiles;
     suites = with profiles; rec {
-      base = [ direnv git ];
+      base = [ core ];
+      alternateShells = [ shells.fish shells.zsh ];
+
+      personal = base ++ alternateShells ++ [ qmk ];
     };
   };
   users = {
-    rbatty = { suites, ... }: { imports = suites.base; };
+    rgbatty = { suites, ... }: { imports = suites.personal; };
   };
 }

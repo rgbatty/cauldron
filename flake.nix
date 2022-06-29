@@ -69,63 +69,9 @@
           (import ./pkgs)
         ];
 
-        nixos = {
-          hostDefaults = {
-            system = "x86_64-linux";
-            channelName = "nixos";
-            imports = [ (digga.lib.importExportableModules ./modules) ];
-            modules = [
-              { lib.our = self.lib; }
-              digga.nixosModules.bootstrapIso
-              digga.nixosModules.nixConfig
-              home.nixosModules.home-manager
-            ];
-          };
-
-          imports = [ (digga.lib.importHosts ./hosts/nixos) ];
-          hosts = {
-            koumori = { };
-          };
-          importables = rec {
-            profiles = digga.lib.rakeLeaves ./profiles // {
-              users = digga.lib.rakeLeaves ./home/users;
-            };
-            suites = with profiles; rec {
-              base = [ core.nixos users.rbatty users.root ];
-            };
-          };
-        };
-
-        darwin = {
-          hostDefaults = {
-            system = "x86_64-darwin";
-            channelName = "nixpkgs-darwin-stable";
-            imports = [ (digga.lib.importExportableModules ./modules) ];
-            modules = [
-              { lib.our = self.lib; }
-              digga.darwinModules.nixConfig
-              home.darwinModules.home-manager
-            ];
-          };
-
-          imports = [ (digga.lib.importHosts ./hosts/darwin) ];
-          hosts = {
-            luna = {
-              system = "aarch64-darwin";
-            };
-          };
-          importables = rec {
-            profiles = digga.lib.rakeLeaves ./profiles // {
-              users = digga.lib.rakeLeaves ./home/users;
-            };
-            suites = with profiles; rec {
-              base = [ core.darwin users.rbatty ];
-            };
-          };
-        };
-
+        darwin = ./darwin;
+        nixos = ./nixos;
         home = ./home;
-
         devshell = ./shell;
 
         homeConfigurations = digga.lib.mergeAny

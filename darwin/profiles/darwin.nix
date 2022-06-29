@@ -1,9 +1,9 @@
 { self, config, lib, pkgs, ... }:
 
 {
-  imports = [
-    ./common.nix
-  ];
+  # imports = [
+  #   ./common.nix
+  # ];
 
   # Recreate /run/current-system symlink after boot
   services.activate-system.enable = true;
@@ -46,16 +46,16 @@
 
   };
 
-  programs.bash = {
-    # nix-darwin's shell options are very different from those on nixos. there
-    # is no `promptInit` option, for example. so instead, we throw the prompt
-    # init line into `interactiveShellInit`.
-    #
-    # https://github.com/LnL7/nix-darwin/blob/master/modules/programs/bash/default.nix
-    interactiveShellInit = ''
-      eval "$(${pkgs.starship}/bin/starship init bash)"
-      eval "$(${pkgs.direnv}/bin/direnv hook bash)"
-    '';
-  };
+  # programs.bash = {
+  #   # nix-darwin's shell options are very different from those on nixos. there
+  #   # is no `promptInit` option, for example. so instead, we throw the prompt
+  #   # init line into `interactiveShellInit`.
+  #   #
+  #   # https://github.com/LnL7/nix-darwin/blob/master/modules/programs/bash/default.nix
+  #   interactiveShellInit = ''
+  #     eval "$(${pkgs.starship}/bin/starship init bash)"
+  #     eval "$(${pkgs.direnv}/bin/direnv hook bash)"
+  #   '';
+  # };
 
 }
