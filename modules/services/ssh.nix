@@ -10,7 +10,8 @@
           controlPersist = "5";
 
           addKeysToAgent = "yes";
-          useKeychain = "yes";
+          # TODO: 'useKeychain' doesn't work in ubuntu?
+          # useKeychain = "yes";
 
           serverAliveCountMax = "6";
           serverAliveInterval = "300";
