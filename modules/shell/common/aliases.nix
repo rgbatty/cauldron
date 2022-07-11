@@ -53,7 +53,8 @@
   # =================================================================
 
   # Uses human sizes, classifications, and color output for `ls`.
-  ls = "command ls -Fh \${colorflag}";
+  # TODO: adapt 'ls' alias to fish
+  # ls = "command ls -Fh \${colorflag}";
 
 
   # Finds directories.
@@ -73,7 +74,8 @@
   sudo = "sudo ";
 
   # Prints each $PATH entry on a separate line.
-  path = "echo -e \${PATH//:/\\n}";
+  # TODO: adapt 'path' alias to fish
+  # path = "echo -e \${PATH//:/\\n}";
 
   # Reloads the configuration.
   # if [ -n "$ZSH_VERSION" ]; then

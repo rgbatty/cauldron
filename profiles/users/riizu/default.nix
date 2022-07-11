@@ -6,7 +6,7 @@ let
 
   shells = [
     ../../../modules/shell/fish
-    ../../../modules/shell/zsh
+    # ../../../modules/shell/zsh
   ];
 in
 {

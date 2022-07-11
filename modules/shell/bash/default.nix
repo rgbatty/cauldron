@@ -25,12 +25,13 @@ in
 
     shellOptions = [
       "histappend"
-      "histreeddit"
+      "histreedit"
       "checkwinsize"
       "nocaseglob"
       "globstar"
       "no_empty_cmd_completion"
-      "noclobber"
+      # TODO - 'noclobber' is invalid
+      # "noclobber"
     ];
   };
 
