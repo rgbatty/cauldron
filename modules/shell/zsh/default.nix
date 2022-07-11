@@ -4,7 +4,10 @@ let
   // (import ../common/abbrs.nix);
 in
 {
-  home.packages = [ pkgs.zsh ];
+  home.packages = with pkgs; [
+    zsh
+    nix-zsh-completions
+  ];
 
   programs.zsh = {
     inherit shellAliases;
