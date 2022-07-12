@@ -1,22 +1,34 @@
-{
-  programs.ssh = {
-    enable = true;
+{ config, lib, pkgs, ... }:
 
-    matchBlocks = {
-      "*" = {
-        extraOptions = {
-          controlMaster = "auto";
-          controlPath = "~/.ssh/controlmasters/%r@%h:%p";
-          controlPersist = "5";
+with lib;
+let
+  cfg = config.modules.services.ssh;
+in {
+  options.modules.services.ssh = with types; {
+    enable = mkEnableOption "ssh";
+  };
 
-          addKeysToAgent = "yes";
-          # TODO: 'useKeychain' doesn't work in ubuntu?
-          # useKeychain = "yes";
+  config = mkIf cfg.enable {
+    programs.ssh = {
+      enable = true;
 
-          serverAliveCountMax = "6";
-          serverAliveInterval = "300";
+      matchBlocks = {
+        "*" = {
+          extraOptions = {
+            controlMaster = "auto";
+            controlPath = "~/.ssh/controlmasters/%r@%h:%p";
+            controlPersist = "5";
+
+            addKeysToAgent = "yes";
+            # TODO: 'useKeychain' doesn't work in ubuntu?
+            # useKeychain = "yes";
+
+            serverAliveCountMax = "6";
+            serverAliveInterval = "300";
+          };
         };
       };
     };
   };
+
 }

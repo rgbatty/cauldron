@@ -1,20 +1,10 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 let
-  hardware = [
-    ../../../modules/hardware/qmk.nix
-  ];
+in {
+  imports = [ ../common.nix ];
 
-  shells = [
-    ../../../modules/shell/fish
-    ../../../modules/shell/zsh
-  ];
-in
-{
-  imports = shells ++ hardware;
-
-  home.username = "riizu";
-  home.homeDirectory = "/home/riizu";
-
-  # fonts.fonts = with pkgs; [ powerline-fonts dejavu_fonts ];
-    # fonts-firacode
+  home = {
+    username = "riizu";
+    homeDirectory = "/home/riizu";
+  };
 }

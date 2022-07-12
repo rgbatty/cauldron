@@ -1,33 +1,41 @@
-{ config, lib, pkgs, ... }:
+{ config, options, lib, pkgs, ... }:
+
+with lib;
 let
+  cfg = config.modules.shell.zsh;
+  # configDir = config.dotfiles.configDir;
   shellAliases = (import ../common/aliases.nix)
   // (import ../common/abbrs.nix);
-in
-{
-  home.packages = with pkgs; [
-    zsh
-    nix-zsh-completions
-  ];
-
-  programs.zsh = {
-    inherit shellAliases;
-
-    # TODO: Add zimfw/decide if needed
-
-    enable = true;
-    dotDir = ".config/zsh";
-    enableCompletion = true;
-    enableSyntaxHighlighting = true;
-    enableAutosuggestions = true;
-
-    history.path = "${config.xdg.dataHome}/zsh/history";
-    history.expireDuplicatesFirst = true;
-    history.extended = true;
-    history.ignoreDups = true;
+in {
+  options.modules.shell.zsh = with types; {
+    enable = mkEnableOption "zsh";
   };
 
-  programs.fzf.enableZshIntegration = true;
-  programs.navi.enableZshIntegration = true;
-  programs.zoxide.enableZshIntegration = true;
-  programs.starship.enableZshIntegration = true;
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      zsh
+      nix-zsh-completions
+    ];
+
+    programs.zsh = {
+      inherit shellAliases;
+
+      enable = true;
+      dotDir = ".config/zsh";
+      # TODO: Possibly slow completion?
+      enableCompletion = true;
+      enableSyntaxHighlighting = true;
+      enableAutosuggestions = true;
+
+      history.path = "${config.xdg.dataHome}/zsh/history";
+      history.expireDuplicatesFirst = true;
+      history.extended = true;
+      history.ignoreDups = true;
+    };
+
+    programs.fzf.enableZshIntegration = true;
+    programs.navi.enableZshIntegration = true;
+    programs.zoxide.enableZshIntegration = true;
+    programs.starship.enableZshIntegration = true;
+  };
 }

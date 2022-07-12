@@ -1,23 +1,10 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 let
-  hardware = [
-    ../../../modules/hardware/qmk
-  ];
+in {
+  imports = [ ../common.nix ];
 
-  shells = [
-    ../../../modules/shell/fish
-    ../../../modules/shell/zsh
-  ];
-in
-{
-  imports = shells;
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
-  home.username = "rgbatty";
-  home.homeDirectory = "/home/rgbatty";
-
-  # imports = core ++ extraShells ++ personal;
-
-  # fonts.fonts = with pkgs; [ powerline-fonts dejavu_fonts ];
-    # fonts-firacode
+  home = {
+    username = "rgbatty";
+    homeDirectory = "/home/rgbatty";
+  };
 }
