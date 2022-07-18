@@ -16,7 +16,7 @@ let
 in {
   flake = {
     homeConfigurations = {
-      "rbatty@Luna" = withSystem "x86_64-linux" (ctx@{ pkgs, system, ... }:
+      "rbatty@Luna" = withSystem "aarch64-darwin" (ctx@{ pkgs, system, ... }:
         mkHome {
           inherit pkgs;
           host = ../profiles/hosts/luna;
