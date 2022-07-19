@@ -18,9 +18,9 @@ let
 
   networking = with pkgs; [
     curl
-    dnsutils
+    # dnsutils
     jq
-    nettools
+    # nettools
     nmap
     wget
     whois
