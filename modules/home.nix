@@ -6,9 +6,7 @@ let
   browser = [  ];
   associations = {};
 in {
-  options.modules.home.enable = mkEnableOption "home";
-
-  config = mkIf cfg.enable {
+  config = {
     home = {
       packages = lib.optionals (pkgs.stdenv.isLinux) [ pkgs.xdg_utils ];
       stateVersion = "22.11";
