@@ -1,5 +1,3 @@
-{ config, ... }:
-let
-in {
+{ config, ... }: {
   imports = [ ../common.nix ];
 }

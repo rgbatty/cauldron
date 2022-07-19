@@ -4,13 +4,14 @@ let
 
   mkHome = system: user: withSystem system (ctx @ { pkgs, ... }:
     let
-      homePrefix = if pkgs.stdenv.isDarwin then "/Users" else "/home";
-      baseConfig = { home = { username = user; homeDirectory = "${homePrefix}/${user}"; }; };
-      userModules = [ ../modules ../profiles/users/${user} ];
+      inherit (pkgs.stdenv) isDarwin;
+
+      homePath = if isDarwin then "/Users/${user}" else "/home/${user}";
+      baseConfig = { home = { username = user; homeDirectory = homePath; }; };
 
     in homeManagerConfiguration {
       inherit pkgs;
-      modules = [ baseConfig ] ++ userModules;
+      modules = [ baseConfig ../modules ../profiles/users/${user} ];
       extraSpecialArgs = { flake = self; };
     });
 
@@ -20,9 +21,9 @@ let
 in {
   flake = {
     homeConfigurations = {
-        "rbatty@luna" = mkHomeAppleSilicon "rbatty" ;
-        "rbatty@fang" = mkHomeAppleIntel "rbatty" ;
-        "riizu@koumori" = mkHomeLinux "riizu" ;
+      "rbatty@luna" = mkHomeAppleSilicon "rbatty" ;
+      "rbatty@fang" = mkHomeAppleIntel "rbatty" ;
+      "riizu@koumori" = mkHomeLinux "riizu" ;
     };
 
     packages.aarch64-darwin."rbatty@luna" =

@@ -1,39 +1,29 @@
-{ pkgs, config, lib, ... }:
+{ inputs, pkgs, config, lib, users, ... }:
 
 with lib;
-{
-  imports = [];
+let
+  mapUsersToAttrs = users: fn: builtins.listToAttrs (
+    map (user: { name = user; value = fn(user); }) users
+  );
+in {
+  imports = [  ];
 
   environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
 
-  nix =
-    let
-      # filteredInputs = filterAttrs (n: _: n != "self") inputs;
-      # nixPathInputs  = mapAttrsToList (n: v: "${n}=${v}") filteredInputs;
-      # registryInputs = mapAttrs (_: v: { flake = v; }) filteredInputs;
-    in {
-      extraOptions = "experimental-features = nix-command flakes";
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = "experimental-features = nix-command flakes";
 
-      # package = pkgs.nixFlakes;
-      gc = {
-        # automatic = true;
-        # dates = "daily";
-        # persistent = true;
-        # randomizedDelaySec = "30min";
-      };
+    # Improve nix store disk usage
+    settings.auto-optimise-store = true;
+    optimise.automatic = true;
 
-      nixPath = [];
-
-      # registry = registryInputs // { dotfiles.flake = inputs.self; };
-      # settings = {
-      #   substituters = [
-      #     "https://nix-community.cachix.org"
-      #   ];
-      #   trusted-public-keys = [
-      #     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      #   ];
-      #   auto-optimise-store = true;
-      # };
+    gc = {
+      automatic = true;
+      dates = "daily";
+      persistent = true;
+      randomizedDelaySec = "30min";
+    };
   };
 
   system.stateVersion = "21.11";
@@ -69,5 +59,20 @@ with lib;
     wget
     gnumake
     unzip
+
+    dosfstools
+    gptfdisk
+    iputils
+    usbutils
+    utillinux
   ];
+
+  users.users = mapUsersToAttrs users (user: {
+    name = user;
+    isNormalUser = true;
+  });
+
+  home-manager.users = mapUsersToAttrs users (user: {
+    imports = [ ../../../modules ../../../profiles/users/${user} ];
+  });
 }

@@ -1,13 +1,6 @@
-{ config, flake, pkgs, ... }: {
+{ lib, config, flake, pkgs, home-manager, users, ... }: {
   imports = [
     ../../profiles/base
     ./hardware-configuration.nix
   ];
-
-  users.users = {
-    riizu = {
-      name = "riizu";
-      isNormalUser = true;
-    };
-  };
 }
