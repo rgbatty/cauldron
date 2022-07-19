@@ -7,15 +7,15 @@ let
     homeManagerConfiguration {
       inherit pkgs;
 
-      modules = [
-        ../modules
+      modules = users ++ [
         { home.stateVersion = "22.11"; }
+        ../modules
         host
-      ] ++ users;
+      ];
 
       extraSpecialArgs = {
         flake = self;
-        homePrefix = if pkgs.stdenv.isLinux then "/Users" else "/home";
+        homePrefix = if pkgs.stdenv.isDarwin then "/Users" else "/home";
       };
     };
 
