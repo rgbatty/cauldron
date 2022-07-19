@@ -40,14 +40,14 @@ in {
 
   config = {
     home.packages = with pkgs; [
-      autoconf
-      automake
-      binutils
+      # autoconf
+      # automake
+      # binutils
       colordiff
-      coreutils
+      # coreutils
       direnv
-      gcc
-      moreutils
+      # gcc
+      # moreutils
       tmux
     ]
     ++ networking
