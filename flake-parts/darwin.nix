@@ -1,16 +1,16 @@
 { inputs, self, withSystem, ... }:
 let
-  inherit (inputs) darwin;
-  inherit (darwin.lib) darwinSystem;
   inherit (inputs.home-manager.darwinModules) home-manager;
 
-  mkDarwin = system: machineConfig:
+  mkDarwin = system: host:
     withSystem system ({ pkgs, ... }:
-      darwinSystem {
+      inputs.darwin.lib.darwinSystem {
         inherit pkgs system;
         inputs = { inherit (inputs) darwin; };
-        modules =
-          [ home-manager machineConfig ];
+        modules = [
+          home-manager
+          host
+        ];
       });
 
   mkDarwinArm = mkDarwin "aarch64-darwin";
@@ -18,13 +18,13 @@ let
 in {
   flake = {
     darwinConfigurations = {
-      luna = mkDarwinArm ../darwin/hosts/luna;
-      fang = mkDarwinIntel ../darwin/hosts/fang;
+      luna = mkDarwinArm ../hosts/darwin/luna;
+      fang = mkDarwinIntel ../hosts/darwin/fang;
     };
 
-    # packages = with self.outputs.darwinConfigurations; {
-    #   luna = luna.config.system.build.toplevel;
-    #   fang = fang.config.system.build.toplevel;
-    # };
+    packages = with self.outputs.darwinConfigurations; {
+      aarch64-darwin.darwin-luna = luna.config.system.build.toplevel;
+      x86_64-darwin.darwin-fang = fang.config.system.build.toplevel;
+    };
   };
 }

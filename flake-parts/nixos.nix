@@ -1,9 +1,6 @@
 { inputs, lib, self, withSystem, ... }:
 let
-  inherit (inputs.home-manager.nixosModules) home-manager;
-  # inherit (inputs.nixpkgs.nixosModules) notDetected;
-
-  mkNixos = machineConfig: { pkgs, system }:
+  mkNixos = host: { pkgs, system }:
     lib.nixosSystem {
       inherit pkgs system;
 
@@ -14,20 +11,21 @@ let
             flake = self;
           };
         }
-        # notDetected
+        inputs.nixpkgs.nixosModules.notDetected
         # inputs.agenix.nixosModules.age
-        home-manager
-        machineConfig
+        inputs.home-manager.nixosModules.home-manager
+        host
+        ../hosts/nixos
       ];
     };
 in {
   flake = {
     nixosConfigurations = withSystem "x86_64-linux" ({ pkgs, system, ... }: {
-      koumori = mkNixos ../profiles/hosts/koumori { inherit pkgs system; };
+      koumori = mkNixos ../hosts/nixos/koumori { inherit pkgs system; };
     });
 
-    # packages.x86_64-linux = lib.attrsets.mapAttrs' (name: value:
-    #   lib.attrsets.nameValuePair "nixos-${name}"
-    #   value.config.system.build.toplevel) self.outputs.nixosConfigurations;
+    packages.x86_64-linux = lib.attrsets.mapAttrs' (name: value:
+      lib.attrsets.nameValuePair "nixos-${name}"
+      value.config.system.build.toplevel) self.outputs.nixosConfigurations;
   };
 }

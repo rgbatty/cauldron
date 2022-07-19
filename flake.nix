@@ -2,45 +2,34 @@
   description = "Cauldron: A Colony of Bats and Other Witchcraft";
 
   inputs = {
-    agenix = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:ryantm/agenix";
-    };
-    darwin = {
-      url = "github:LnL7/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
-    };
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
 
+    darwin.url = "github:LnL7/nix-darwin/master";
+    darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
+
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    # nixpkgs-arm.url = "nixpkgs/nixos-22.05-aarch64";
     nixpkgs-darwin.url = "nixpkgs/nixpkgs-22.05-darwin";
     nixpkgs-master.url = "nixpkgs/master";
-    nixpkgs.url = "nixpkgs/nixos-22.05";
-    unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
 
-    # System
-    # nixos-hardware.url = "github:nixos/nixos-hardware";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Extras
     # nixos-generators.url = "github:nix-community/nixos-generators";
+    # nixos-hardware.url = "github:nixos/nixos-hardware";
+    # emacs-overlay.url  = "github:nix-community/emacs-overlay";
   };
 
 
-  outputs = inputs @ { self, nixpkgs, home-manager, flake-parts, ... }:
+  outputs = inputs @ { self, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit self; } {
+      imports = [ ./flake-parts ];
       systems = [ "aarch64-darwin" "x86_64-darwin" "x86_64-linux" ];
-
-      imports = [
-        # TODO: configure Darwin
-        # ./flake-parts/darwin.nix
-        ./flake-parts/home-manager.nix
-        # TODO: configure NixOS
-        # ./flake-parts/nixos.nix
-      ];
     };
 }
-

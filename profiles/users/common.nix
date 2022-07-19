@@ -49,6 +49,8 @@ in {
 
     git.enable = true;
 
+    home.enable = true;
+
     services = {
       ssh.enable = true;
       # docker.enable = true;

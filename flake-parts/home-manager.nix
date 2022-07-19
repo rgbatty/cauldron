@@ -1,4 +1,4 @@
-{ inputs, self, withSystem, ... }:
+{ inputs, lib, self, withSystem, ... }:
 let
   inherit (inputs.home-manager.lib) homeManagerConfiguration;
 
@@ -11,25 +11,40 @@ let
         { home.stateVersion = "22.11"; }
         host
       ] ++ users;
+
+      extraSpecialArgs = { flake = self; };
     };
 
 in {
   flake = {
     homeConfigurations = {
-      "rbatty@Luna" = withSystem "aarch64-darwin" (ctx@{ pkgs, system, ... }:
-        mkHome {
+      aarch64-darwin = withSystem "aarch64-darwin" (ctx@{ pkgs, ... }: {
+        luna = mkHome {
           inherit pkgs;
-          host = ../profiles/hosts/luna;
+          host = ../hosts/darwin/luna;
           users = [ ../profiles/users/rbatty ];
-        }
-      );
-      "riizu@Koumori" = withSystem "x86_64-linux" (ctx@{ pkgs, system, ... }:
-        mkHome {
+        };
+      });
+
+      x86_64-darwin = withSystem "x86_64-darwin" (ctx@{ pkgs, ... }: {
+        fang = mkHome {
           inherit pkgs;
-          host = ../profiles/hosts/koumori;
+          host = ../hosts/darwin/fang;
+          users = [ ../profiles/users/rbatty ];
+        };
+      });
+
+      x86_64-linux = withSystem "x86_64-linux" (ctx@{ pkgs, ... }: {
+        koumori = mkHome {
+          inherit pkgs;
+          host = ../hosts/nixos/koumori;
           users = [ ../profiles/users/riizu ];
-        }
-      );
+        };
+      });
     };
+
+    packages.x86_64-linux = lib.attrsets.mapAttrs' (name: value:
+      lib.attrsets.nameValuePair "home-${name}"
+      value.activationPackage) self.outputs.homeConfigurations.x86_64-linux;
   };
 }

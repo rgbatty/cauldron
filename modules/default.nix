@@ -2,8 +2,9 @@
 let
   commonModules = [
     # Core
-    ./packages.nix
     ./git
+    ./home.nix
+    ./packages.nix
 
     # Desktop
     # # apps
@@ -58,12 +59,8 @@ in {
   # TODO: Find a way to auto-import the whole modules directory
   imports = commonModules;
 
-  nixpkgs.config.allowUnfree = true;
-
   home.packages = with pkgs; [
     manix
     nix-index
   ];
-
-  programs.home-manager.enable = true;
 }
