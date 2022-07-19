@@ -1,8 +1,9 @@
 # cachix_name := "rgbatty"
 
 host_short := lowercase(`hostname -s`)
+username := env_var('USER')
 # TODO: Revisit
-home_package := ".#home-" + host_short
+home_package := ".#" + username + "@" + host_short
 
 nix_flags := "--print-build-logs --show-trace --verbose"
 nix_build_flags := "--keep-going"
