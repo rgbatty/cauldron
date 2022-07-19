@@ -2,6 +2,7 @@
 let
   inherit (inputs.home-manager.lib) homeManagerConfiguration;
 
+
   mkHome = { pkgs, host, users }:
     homeManagerConfiguration {
       inherit pkgs;
@@ -12,7 +13,10 @@ let
         host
       ] ++ users;
 
-      extraSpecialArgs = { flake = self; };
+      extraSpecialArgs = {
+        flake = self;
+        homePrefix = if pkgs.stdenv.isLinux then "/Users" else "/home";
+      };
     };
 
 in {

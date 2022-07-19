@@ -1,10 +1,9 @@
-{ config, ... }:
-let
-in {
+{ config, pkgs, homePrefix, ... }:
+{
   imports = [ ../common.nix ];
 
   home = {
     username = "rbatty";
-    homeDirectory = "/home/rbatty";
+    homeDirectory = "${homePrefix}/rbatty";
   };
 }
