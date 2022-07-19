@@ -2,12 +2,13 @@
 let
   inherit (inputs.home-manager.darwinModules) home-manager;
 
-  mkDarwin = system: host:
+  mkDarwin = system: { host, users }:
     withSystem system ({ pkgs, ... }:
       inputs.darwin.lib.darwinSystem {
         inherit pkgs system;
         inputs = { inherit (inputs) darwin; };
         modules = [
+          ../modules/systems/darwin
           home-manager
           host
         ];
@@ -18,8 +19,14 @@ let
 in {
   flake = {
     darwinConfigurations = {
-      luna = mkDarwinArm ../hosts/darwin/luna;
-      fang = mkDarwinIntel ../hosts/darwin/fang;
+      luna = mkDarwinArm {
+        host = ../hosts/darwin/luna;
+        users = [ ../profiles/users/rbatty ];
+      };
+      fang = mkDarwinArm {
+        host = ../hosts/darwin/fang;
+        users = [ ../profiles/users/rbatty ];
+      };
     };
 
     packages = with self.outputs.darwinConfigurations; {
