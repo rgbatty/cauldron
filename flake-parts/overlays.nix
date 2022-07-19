@@ -78,7 +78,7 @@ in {
 
         config = {
           # TODO: Possibly needed for m1
-          # allowBroken = system == "aarch64-darwin" || system == "x86_64-darwin";
+          allowBroken = system == "aarch64-darwin" || system == "x86_64-darwin";
           allowUnfree = true;
         };
 
