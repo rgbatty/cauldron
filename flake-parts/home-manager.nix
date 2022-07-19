@@ -43,6 +43,14 @@ in {
       });
     };
 
+    packages.aarch64-darwin = lib.attrsets.mapAttrs' (name: value:
+      lib.attrsets.nameValuePair "home-${name}"
+      value.activationPackage) self.outputs.homeConfigurations.aarch64-darwin;
+
+    packages.x86_64-darwin = lib.attrsets.mapAttrs' (name: value:
+      lib.attrsets.nameValuePair "home-${name}"
+      value.activationPackage) self.outputs.homeConfigurations.x86_64-darwin;
+
     packages.x86_64-linux = lib.attrsets.mapAttrs' (name: value:
       lib.attrsets.nameValuePair "home-${name}"
       value.activationPackage) self.outputs.homeConfigurations.x86_64-linux;
