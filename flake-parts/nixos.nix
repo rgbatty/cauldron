@@ -1,31 +1,39 @@
 { inputs, lib, self, withSystem, ... }:
 let
-  mkNixos = host: { pkgs, system }:
-    lib.nixosSystem {
-      inherit pkgs system;
+  inherit (lib) nixosSystem;
+  inherit (inputs.nixpkgs.nixosModules) notDetected;
+  inherit (inputs.home-manager.nixosModules) home-manager;
+  # TODO: Add agenix to NixOS
+  # inherit (inputs.agenix.nixosModules) age;
 
-      modules = [
-        {
-          config._module.args = {
-            inherit inputs;
-            flake = self;
-          };
-        }
-        inputs.nixpkgs.nixosModules.notDetected
-        # inputs.agenix.nixosModules.age
-        inputs.home-manager.nixosModules.home-manager
-        host
-        ../hosts/nixos
-      ];
-    };
+
+  mkNixos = { system, host, user }: withSystem system ({ pkgs, system, ... }:
+    let
+      configArgs = { config._module.args = { inherit inputs; flake = self; }; };
+      baseModules = [ notDetected configArgs ];
+      hostModule = ../nixos/hosts/${host};
+      userImports = [ ../modules ../profiles/users/${user} ];
+      homeManagerUsers = {
+        home-manager.users.${user} = { imports = userImports; };
+      };
+      userModules = [ hostModule home-manager homeManagerUsers ];
+
+    in nixosSystem {
+      inherit pkgs system;
+      modules = baseModules ++ userModules;
+    });
 in {
   flake = {
-    nixosConfigurations = withSystem "x86_64-linux" ({ pkgs, system, ... }: {
-      koumori = mkNixos ../hosts/nixos/koumori { inherit pkgs system; };
-    });
+    nixosConfigurations = {
+      koumori = mkNixos {
+        system = "x86_64-linux";
+        host = "koumori";
+        user = "riizu";
+      };
+    };
 
-    packages.x86_64-linux = lib.attrsets.mapAttrs' (name: value:
-      lib.attrsets.nameValuePair "nixos-${name}"
-      value.config.system.build.toplevel) self.outputs.nixosConfigurations;
+    # packages.x86_64-linux = lib.attrsets.mapAttrs' (name: value:
+    #   lib.attrsets.nameValuePair "nixos-${name}"
+    #   value.config.system.build.toplevel) self.outputs.nixosConfigurations;
   };
 }
