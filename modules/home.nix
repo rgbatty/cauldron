@@ -11,7 +11,7 @@ in {
       packages = lib.optionals (pkgs.stdenv.isLinux) [ pkgs.xdg_utils ];
       stateVersion = "22.11";
 
-    activation = {
+    activation = mkIf pkgs.stdenv.isDarwin {
       copyApplications = let
         apps = pkgs.buildEnv {
           name = "home-manager-applications";
