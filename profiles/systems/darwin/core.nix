@@ -42,12 +42,12 @@
       if [ -L ~/Applications
            -a $(readlink ~/Applications | grep --quiet
                  '/nix/store/.*-system-applications/Applications')
-         ]
+         ]; then
         rm ~/Applications
       elif [ -L '~/Applications/Nix Apps'
              -a $(readlink '~/Applications/Nix Apps' | grep --quiet
                    '/nix/store/.*-system-applications/Applications')
-           ]
+           ]; then
         rm '~/Applications/Nix Apps'
       fi
       if [ ! -e '/Applications/Nix Apps' -o -L '/Applications/Nix Apps' ]; then
