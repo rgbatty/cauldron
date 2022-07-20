@@ -51,7 +51,7 @@
       rm '~/Applications/Nix Apps'
     fi
     if [ ! -e '/Applications/Nix Apps' -o -L '/Applications/Nix Apps' ]; then
-      ln -sfn ${cfg.build.applications}/Applications '/Applications/Nix Apps'
+      ln -sfn ${config.system.build.applications}/Applications '/Applications/Nix Apps'
     else
       echo "warning: /Applications/Nix Apps is not owned by nix-darwin, skipping App linking..." >&2
     fi
