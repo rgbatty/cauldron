@@ -6,7 +6,7 @@
   environment.shells = with pkgs; [ bashInteractive fish zsh ];
 
   users.users.rbatty = {
-    name = "rbatty";
+    home = "/Users/rbatty";
     shell = pkgs.fish;
   };
 

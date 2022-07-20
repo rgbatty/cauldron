@@ -2,7 +2,7 @@
   imports = [  ];
 
   services.nix-daemon.enable = true;
-  nix.package = pkgs.nixUnstable;
+  nix.package = pkgs.nixFlakes;
   nix.trustedUsers = [ "@admin" "@staff" ];
   nix.extraOptions = ''
     auto-optimise-store = false
