@@ -1,15 +1,18 @@
 { inputs, lib, config, flake, pkgs, home-manager, ... }: {
   imports = [  ];
 
+  nix = {
+    package = pkgs.nixFlakes;
+    trustedUsers = [ "@admin" "@staff" ];
+    extraOptions = ''
+      auto-optimise-store = true
+      experimental-features = nix-command flakes
+      keep-derivations = true
+      keep-outputs = true
+    '';
+  };
+
   services.nix-daemon.enable = true;
-  nix.package = pkgs.nixFlakes;
-  nix.trustedUsers = [ "@admin" "@staff" ];
-  nix.extraOptions = ''
-    auto-optimise-store = true
-    experimental-features = nix-command flakes
-    keep-derivations = true
-    keep-outputs = true
-  '';
 
   environment.shells = with pkgs; [ bashInteractive fish zsh ];
 
