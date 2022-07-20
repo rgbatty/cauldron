@@ -6,8 +6,11 @@ let
 in {
   imports = [  ];
 
+  environment.shells = with pkgs; [ bashInteractive fish zsh ];
+
   users.users = mapUsersToAttrs inputs.users (user: {
     name = user;
+    shell = pkgs.fish;
   });
 
   home-manager.users = mapUsersToAttrs inputs.users (user: {
