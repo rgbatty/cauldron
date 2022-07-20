@@ -4,6 +4,7 @@
   ];
 
   environment.shells = with pkgs; [ bashInteractive fish zsh ];
+  
 
   users.users.rbatty = {
     home = "/Users/rbatty";
