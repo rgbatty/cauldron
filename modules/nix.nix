@@ -2,6 +2,7 @@
   config = {
     home.packages = with pkgs; [
       git
+      manix
       nix-diff
       nix-du
       nix-info

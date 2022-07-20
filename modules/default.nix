@@ -1,6 +1,6 @@
-{ inputs, config, lib, pkgs, ... }:
-let
-  commonModules = [
+{ inputs, config, lib, pkgs, ... }: {
+  # TODO: Find a way to auto-import the whole modules directory
+  imports = [
     # Core
     ./git
     ./home.nix
@@ -52,15 +52,5 @@ let
 
     # Themes
     ./themes
-  ];
-
-
-in {
-  # TODO: Find a way to auto-import the whole modules directory
-  imports = commonModules;
-
-  home.packages = with pkgs; [
-    manix
-    nix-index
   ];
 }
