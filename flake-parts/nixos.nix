@@ -11,7 +11,7 @@
         inherit pkgs system;
 
         specialArgs = { inherit inputs users; flake = self; };
-        modules = [ notDetected home-manager ../nixos/hosts/${host} ];
+        modules = [ notDetected home-manager ../profiles/systems/nixos/hosts/${host} ];
       });
   in {
     nixosConfigurations =  {

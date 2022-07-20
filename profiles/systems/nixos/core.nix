@@ -53,7 +53,6 @@ in {
   # Just the bear necessities...
   environment.systemPackages = with pkgs; [
     bind
-    cached-nix-shell
     git
     vim
     wget

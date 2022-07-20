@@ -9,7 +9,7 @@
           inherit pkgs system;
 
           inputs = { inherit users; };
-          modules = [ home-manager ../darwin/hosts/${host} ];
+          modules = [ home-manager ../profiles/systems/darwin/hosts/${host} ];
         });
 
     mkDarwinArm = mkDarwin "aarch64-darwin";
