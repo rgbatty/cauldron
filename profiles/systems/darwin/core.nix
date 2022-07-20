@@ -1,24 +1,20 @@
-{ inputs, lib, config, flake, pkgs, home-manager, ... }:
-let
-  mapUsersToAttrs = users: fn: builtins.listToAttrs (
-    map (user: { name = user; value = fn(user); }) users
-  );
-in {
+{ inputs, lib, config, flake, pkgs, home-manager, ... }: {
   imports = [  ];
 
-  environment.shells = with pkgs; [ bashInteractive fish zsh ];
-
-  users.users = mapUsersToAttrs inputs.users (user: {
-    name = user;
-    shell = pkgs.fish;
-  });
-
-  home-manager.users = mapUsersToAttrs inputs.users (user: {
-    imports = [
-      ../../../modules
-      ../../../profiles/users/${user}
-    ];
-  });
-
   services.nix-daemon.enable = true;
+  nix.package = pkgs.nixUnstable;
+  nix.trustedUsers = [ "@admin" "@staff" ];
+  nix.extraOptions = ''
+    auto-optimise-store = false
+    builders-use-substitutes = true
+    experimental-features = nix-command flakes
+    keep-derivations = true
+    keep-outputs = true
+  '';
+
+  programs.bash.enable = true;
+  programs.zsh.enable = true;
+  programs.fish.enable = true;
+
+  system.stateVersion = 4;
 }
