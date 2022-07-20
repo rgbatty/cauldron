@@ -38,12 +38,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs;
-    [
+    home.packages = with pkgs; [
       git
-    ] ++ (with pkgs.gitAndTools; [
-      gh
-    ]);
+      gitAndTools.gh
+    ];
 
     programs.git = {
       enable = true;

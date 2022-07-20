@@ -6,26 +6,40 @@ let
   # configDir = config.dotfiles.configDir;
 in {
   options.modules.shell.utilities = with types; {
-    bat.enable = mkEnableOption "bat";
-    exa.enable = mkEnableOption "exa";
-    direnv.enable = mkEnableOption "direnv";
-    fzf.enable = mkEnableOption "fzf";
-    navi.enable = mkEnableOption "navi";
-    zoxide.enable = mkEnableOption "zoxide";
+    enable = mkEnableOption "Utilities";
+    modern = mkEnableOption "Modern Utilities";
+    navi = mkEnableOption "navi";
   };
 
-  config = {
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      fd
+      fzf
+      navi
+      ripgrep
+      tealdeer
+      zoxide
+    ] ++ pkgs.lib.optionals (cfg.modern) [
+      bat
+      bottom
+      exa
+      fd
+      just
+    ] ++ pkgs.lib.optionals (cfg.navi) [
+      navi
+    ];
+
     programs.direnv = {
-      enable = cfg.direnv.enable;
+      enable = true;
       nix-direnv = {
-        enable = cfg.direnv.enable;
+        enable = true;
       };
     };
 
-    programs.bat.enable = cfg.bat.enable;
-    programs.exa.enable = cfg.exa.enable;
-    programs.fzf.enable = cfg.fzf.enable;
-    programs.navi.enable = cfg.navi.enable;
-    programs.zoxide.enable = cfg.zoxide.enable;
+    programs.fzf.enable = true;
+    programs.zoxide.enable = true;
+
+    programs.bat.enable = cfg.modern;
+    programs.navi.enable = cfg.navi;
   };
 }

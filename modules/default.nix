@@ -4,7 +4,7 @@ let
     # Core
     ./git
     ./home.nix
-    ./packages.nix
+    ./nix.nix
 
     # Desktop
     # # apps

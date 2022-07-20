@@ -61,11 +61,9 @@ in {
       zsh.enable = true;
 
       utilities = {
-        bat.enable = true;
-        exa.enable = true;
-        fzf.enable = true;
-        navi.enable = true;
-        zoxide.enable = true;
+        enable = true;
+        modern = true;
+        navi = true;
       };
     };
   };
