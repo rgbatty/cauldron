@@ -16,5 +16,7 @@
       ../../../../../profiles/users/rbatty
     ];
   };
+
+  programs.fish.enable = true;
 }
 
