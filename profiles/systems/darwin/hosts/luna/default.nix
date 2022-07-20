@@ -3,8 +3,7 @@
     ../../core.nix
   ];
 
-  environment.shells = with pkgs; [ bashInteractive fish zsh ];
-  
+
 
   users.users.rbatty = {
     home = "/Users/rbatty";
@@ -18,9 +17,6 @@
     ];
   };
 
-  # enables darwin-rebuild in shell
-  programs.bash.enable = true;
-  programs.fish.enable = true;
-  programs.zsh.enable = true;
+
 }
 
