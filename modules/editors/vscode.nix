@@ -86,7 +86,7 @@ in {
         # terminal.integrated.fontSize = 12;
         # terminal.integrated.shell.osx = "fish";
 
-        window.title = "${activeEditorMedium}${separator}${rootName}";
+        window.title = "\${activeEditorMedium}\${separator}\${rootName}";
         window.zoomLevel = 1;
         workbench.colorTheme = "Dracula";
 
