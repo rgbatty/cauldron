@@ -4,7 +4,9 @@ with lib;
 let
   cfg = config.modules.editors.vscode;
 in {
-  options.modules.editors.vscode.enable = mkEnableOption "VS Code";
+  options.modules.editors.vscode = {
+    enable = mkEnableOption "VS Code";
+  };
 
   config = mkIf cfg.enable {
     programs.vscode = {

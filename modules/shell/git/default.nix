@@ -39,7 +39,6 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      git
       gitAndTools.gh
     ];
 

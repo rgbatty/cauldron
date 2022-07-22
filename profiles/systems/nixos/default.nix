@@ -1,34 +1,14 @@
 { inputs, pkgs, config, lib, users, ... }:
 
 with lib;
-let
-  mapUsersToAttrs = users: fn: builtins.listToAttrs (
-    map (user: { name = user; value = fn(user); }) users
-  );
-in {
-  imports = [  ];
-
-  environment.variables.NIXPKGS_ALLOW_UNFREE = "1";
+{
+  imports = [ ../. ];
 
   nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = "experimental-features = nix-command flakes";
-
-    # Improve nix store disk usage
-    settings.auto-optimise-store = true;
-    optimise.automatic = true;
-
-    gc = {
-      automatic = true;
-      dates = "daily";
-      persistent = true;
-      randomizedDelaySec = "30min";
-    };
+    settings.trusted-users = [ "root" "@wheel" ];
   };
 
   system.stateVersion = "21.11";
-
-  time.timeZone = mkDefault "America/Denver";
 
   ## Some reasonable, global defaults
   # This is here to appease 'nix flake check' for generic hosts with no
@@ -53,25 +33,13 @@ in {
   # Just the bear necessities...
   environment.systemPackages = with pkgs; [
     bind
-    git
-    vim
     wget
     gnumake
     unzip
-
     dosfstools
     gptfdisk
     iputils
     usbutils
     utillinux
   ];
-
-  users.users = mapUsersToAttrs users (user: {
-    name = user;
-    isNormalUser = true;
-  });
-
-  home-manager.users = mapUsersToAttrs users (user: {
-    imports = [ ../../../modules ../../../profiles/users/${user} ];
-  });
 }

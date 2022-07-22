@@ -3,7 +3,7 @@
 with lib;
 let
   cfg = config.modules.shell.utilities;
-  # configDir = config.dotfiles.configDir;
+  shellsCfg = config.modules.shell.shells;
 in {
   options.modules.shell.utilities = with types; {
     enable = mkEnableOption "Utilities";
@@ -36,10 +36,29 @@ in {
       };
     };
 
-    programs.fzf.enable = true;
-    programs.zoxide.enable = true;
+    programs.fzf = {
+      enable = true;
+      enableBashIntegration = shellsCfg.bash.enable;
+      enableFishIntegration = shellsCfg.fish.enable;
+      enableZshIntegration = shellsCfg.zsh.enable;
+    };
 
-    programs.bat.enable = cfg.modern;
-    programs.navi.enable = cfg.navi;
+    programs.zoxide = {
+      enable = true;
+      enableBashIntegration = shellsCfg.bash.enable;
+      enableFishIntegration = shellsCfg.fish.enable;
+      enableZshIntegration = shellsCfg.zsh.enable;
+    };
+
+    programs.bat = mkIf cfg.modern {
+      enable = true;
+    };
+
+    programs.navi = mkIf cfg.navi {
+      enable = true;
+      enableBashIntegration = shellsCfg.bash.enable;
+      enableFishIntegration = shellsCfg.fish.enable;
+      enableZshIntegration = shellsCfg.zsh.enable;
+    };
   };
 }

@@ -2,13 +2,12 @@
 
 with lib;
 let
-  cfg = config.modules.shell.fish;
-  # configDir = config.dotfiles.configDir;
+  cfg = config.modules.shell.shells.fish;
 
   shellAbbrs = import ../common/abbrs.nix;
   shellAliases = import ../common/aliases.nix;
 in {
-  options.modules.shell.fish = with types; {
+  options.modules.shell.shells.fish = with types; {
     enable = mkEnableOption "fish";
   };
 
@@ -44,7 +43,6 @@ in {
             repo = "fish";
             rev = "62b109f12faab5604f341e8b83460881f94b1550";
             sha256 = "sha256-0TlKq2ur2I6Bv7pu7JObrJxV0NbQhydmCuUs6ZdDU1I=";
-            # date = 2019-05-24T13:30:32-05:00;
           };
         }
       ];
@@ -53,11 +51,5 @@ in {
         set -g fish_greeting ""
       '';
     };
-
-    programs.fzf.enableFishIntegration = true;
-    programs.navi.enableFishIntegration = true;
-    programs.zoxide.enableFishIntegration = true;
-    programs.starship.enableFishIntegration = true;
   };
-
 }

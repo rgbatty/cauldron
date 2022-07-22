@@ -1,4 +1,17 @@
-# TODO: Add Vivaldi
-{
+{ options, config, lib, pkgs, ... }:
 
+with lib;
+let
+  cfg = config.modules.desktop.browsers.vivaldi;
+in {
+  options.modules.desktop.browsers.vivaldi = {
+    enable = mkEnableOption "Vivaldi";
+  };
+
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      # TODO: Doesn't build on darwin
+      #vivaldi
+    ];
+  };
 }

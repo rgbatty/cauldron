@@ -1,7 +1,17 @@
-# TODO: Add QMK
-{
-  # Fish config
-  # QMK CLI Support
-  #contains $HOME/.local/bin $fish_user_paths; or set -Ua fish_user_paths $HOME/.local/bin
-}
+{ config, options, lib, pkgs, ... }:
 
+with lib;
+let
+  cfg = config.modules.hardware.qmk;
+in {
+  options.modules.hardware.qmk = {
+    enable = mkEnableOption "QMK";
+  };
+
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+    ];
+  };
+
+  # TODO: Configure QMK
+}

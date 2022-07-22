@@ -6,16 +6,16 @@
     # TODO: Add agenix to NixOS
     # inherit (inputs.agenix.nixosModules) age;
 
-    mkNixos = { system ? "x86_64-linux", host, users }: withSystem system ({ pkgs, system, ... }:
+    mkNixos = host: { system ? "x86_64-linux" }: withSystem system ({ pkgs, system, ... }:
       nixosSystem {
         inherit pkgs system;
 
-        specialArgs = { inherit inputs users; flake = self; };
-        modules = [ notDetected home-manager ../profiles/systems/nixos/hosts/${host} ];
+        specialArgs = { inherit inputs; flake = self; };
+        modules = [ notDetected home-manager host ];
       });
   in {
     nixosConfigurations =  {
-      koumori = mkNixos { host = "koumori"; users = ["riizu"]; };
+      koumori = mkNixos ../profiles/hosts/koumori {};
     };
 
     packages.x86_64-linux = lib.attrsets.mapAttrs' (name: value:

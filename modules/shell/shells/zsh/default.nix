@@ -2,12 +2,12 @@
 
 with lib;
 let
-  cfg = config.modules.shell.zsh;
-  # configDir = config.dotfiles.configDir;
+  cfg = config.modules.shell.shells.zsh;
+
   shellAliases = (import ../common/aliases.nix)
   // (import ../common/abbrs.nix);
 in {
-  options.modules.shell.zsh = with types; {
+  options.modules.shell.shells.zsh = with types; {
     enable = mkEnableOption "zsh";
   };
 
@@ -32,10 +32,5 @@ in {
       history.extended = true;
       history.ignoreDups = true;
     };
-
-    programs.fzf.enableZshIntegration = true;
-    programs.navi.enableZshIntegration = true;
-    programs.zoxide.enableZshIntegration = true;
-    programs.starship.enableZshIntegration = true;
   };
 }

@@ -3,21 +3,20 @@
     inherit (inputs.darwin.lib) darwinSystem;
     inherit (inputs.home-manager.darwinModules) home-manager;
 
-    mkDarwin = system: { host, users }:
+    mkDarwin = system: host:
       withSystem system ({ pkgs, ... }:
         darwinSystem {
           inherit pkgs system;
 
-          inputs = { inherit users; };
-          modules = [ home-manager ../profiles/systems/darwin/hosts/${host} ];
+          modules = [ home-manager host ];
         });
 
     mkDarwinArm = mkDarwin "aarch64-darwin";
     mkDarwinIntel = mkDarwin "x86_64-darwin";
   in {
     darwinConfigurations = {
-      luna = mkDarwinArm { host = "luna"; users = ["rbatty"]; };
-      fang = mkDarwinIntel { host = "fang"; users = ["rbatty"]; };
+      luna = mkDarwinArm ../profiles/hosts/luna;
+      fang = mkDarwinIntel ../profiles/hosts/fang;
     };
 
     packages = with self.outputs.darwinConfigurations; {

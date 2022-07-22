@@ -1,9 +1,7 @@
 { inputs, lib, config, flake, pkgs, home-manager, ... }: {
   imports = [
-    ../../core.nix
+    ../../systems/darwin
   ];
-
-
 
   users.users.rbatty = {
     home = "/Users/rbatty";
@@ -12,11 +10,7 @@
 
   home-manager.users.rbatty = {
     imports = [
-      ../../../../../modules
-      ../../../../../profiles/users/rbatty
+      ../../users/rbatty
     ];
   };
-
-
 }
-

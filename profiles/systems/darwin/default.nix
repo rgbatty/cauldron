@@ -1,20 +1,14 @@
 { inputs, lib, config, flake, pkgs, home-manager, ... }: {
-  imports = [  ];
+  imports = [ ../. ];
 
   nix = {
-    package = pkgs.nixFlakes;
     trustedUsers = [ "@admin" "@staff" ];
     extraOptions = ''
-      auto-optimise-store = true
-      experimental-features = nix-command flakes
-      keep-derivations = true
-      keep-outputs = true
+      extra-platforms = x86_64-darwin aarch64-darwin
     '';
   };
 
   services.nix-daemon.enable = true;
-
-  environment.shells = with pkgs; [ bashInteractive fish zsh ];
 
   # Needed to address bug where $PATH is not properly set for fish:
   # https://github.com/LnL7/nix-darwin/issues/122

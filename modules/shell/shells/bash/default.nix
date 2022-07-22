@@ -2,13 +2,12 @@
 
 with lib;
 let
-  cfg = config.modules.shell.bash;
-  # configDir = config.dotfiles.configDir;
+  cfg = config.modules.shell.shells.bash;
 
   shellAliases = (import ../common/aliases.nix)
   // (import ../common/abbrs.nix);
 in {
-  options.modules.shell.bash = with types; {
+  options.modules.shell.shells.bash = with types; {
     enable = mkEnableOption "bash";
   };
 
@@ -43,10 +42,5 @@ in {
         # "noclobber"
       ];
     };
-
-    programs.fzf.enableBashIntegration = true;
-    programs.navi.enableBashIntegration = true;
-    programs.zoxide.enableBashIntegration = true;
-    programs.starship.enableBashIntegration = true;
   };
 }
