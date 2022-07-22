@@ -37,5 +37,7 @@ with lib;
     package = pkgs.nixFlakes;
   };
 
-  time.timeZone = mkDefault "America/Denver";
+
+  # TODO: Nix-Darwin doesn't like this...
+  # time.timeZone = mkDefault "America/Denver";
 }
