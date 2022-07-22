@@ -61,6 +61,7 @@ in {
 
         git.autofetch = false;
         git.inputValidationSubjectLength = 72;
+        git.confirmSync = false;
 
         html.format.enable = true;
         html.format.endWithNewline = false;
