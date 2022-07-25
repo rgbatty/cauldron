@@ -21,7 +21,7 @@
     # Extras
     # nixos-generators.url = "github:nix-community/nixos-generators";
     # nixos-hardware.url = "github:nixos/nixos-hardware";
-    # emacs-overlay.url  = "github:nix-community/emacs-overlay";
+    emacs-overlay.url  = "github:nix-community/emacs-overlay";
   };
 
 

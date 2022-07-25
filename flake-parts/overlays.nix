@@ -83,7 +83,7 @@ in {
         };
 
         overlays = [
-          # inputs.emacs-overlay.overlay
+          inputs.emacs-overlay.overlay
           overlays.nested-master
           overlays.nested-unstable
         ] ++ lib.optionals (system == "aarch64-darwin") [
