@@ -178,6 +178,8 @@ On a high level:
 
 -----
 
+<p align="right"><a href="#top" title="Back to top">🔝</a></p>
+
 ## Resources
 
 This repo has been heavily inspired by the excellent work of many other engineers, who have graciously shared their dotfile repos with the rest of us to tweak, modify, and steal to our hearts' content. Hopefully my addition will provide help and guidance for others as those engineers have for me. Please take a moment to view these projects, as Cauldron would not be possible otherwise.
