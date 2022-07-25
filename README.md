@@ -6,7 +6,7 @@
 
 <!-- badges -->
 
-[Goals](#goals-) • [Installation](#installation-) • [Toolset](#supported-toolset-) • [Resources](#resources-)
+[Installation](#installation-) • [Usage](#usage) • [Toolset](#supported-toolset-) • [Resources](#resources-)
 </div>
 
 <!-- Description -->
@@ -25,92 +25,63 @@ Given it's personal nature, these files are in a constant state of flux as my ne
     <p><strong>Be sure to <a href="#" title="star">⭐️</a> or <a href="#" title="fork">🔱</a> this repo if you find it useful! 😃</strong></p>
 </div>
 
-## TODO
-
-### P0: Missing Configuration
-- Mac: `.macos` system settings, `Terminal.app` settings, Homebrew update
-- Assets: Wallpapers ([Dracula Wallpapers](https://draculatheme.com/wallpaper))
-
-### P1: Polish
-- VS Code
-- Completions: Bash, Zsh, Fish
-
-### P2: Theming: General
-- MacOS-Specific: [Alfred](https://draculatheme.com/alfred), [iTerm](https://draculatheme.com/iterm), [Terminal.app](https://draculatheme.com/terminal), [XCode](https://draculatheme.com/xcode)
-
 ## Goals ⚽
 
-### Core Tenets
-- Cross-platform parity
-- Declaritive configuration for all users and systems
-- One-liner installation on fresh systems
-- Theming support wherever possible
-
-### For the Future
-- New shell: [WezTerm](https://wezfurlong.org/wezterm/), [(Dracula Theme)](https://draculatheme.com/wezterm)
-- Spotify: [Spicetify](https://github.com/spicetify) or a CLI tool (eg. [ncspot](https://github.com/hrkfdn/ncspot)) (theming, less overhead)
-- ASDF <-> DirEnv: [Repo](https://github.com/asdf-community/asdf-direnv)
-- Vim: Learning (Vim Adventures, Vim in VS Code), configuration
-- Doom Emacs: [Doom Emacs](https://github.com/doomemacs/doomemacs)
-- Tmux: Learn, decide on tooling ([Tmuxinator](https://github.com/tmuxinator/tmuxinator))
-- Yabai
-- Add Chocolatey
-- Starship Customization: `.config/starship.toml`
 
 <p align="right"><a href="#top" title="Back to top">🔝</a></p>
 
 ## Installation 🔮
 
-### Darwin
+### Prerequisites
 
-- temporarily change to Bash if needed:
-```
-exec bash
-```
-- Install Nix:
+**General**
+- Nix
+<details>
 ```
 sh <(curl -L https://nixos.org/nix/install --darwin-use-unencrypted-nix-store-volume --daemon
 ```
-- Build and install Nix-Darwin:
-```
-nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
-./result/bin/darwin-installer
-```
-- Enable Flakes:
+</details>
+
+- Nix Flakes support
+<details>
 ```
 mkdir -p ~/.config/nix
 echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
 ```
-- Clone and cd to project:
+</details>
+
+**Darwin**
+
+- Nix-Darwin
+<details>
 ```
-https://github.com/rgbatty/cauldron && cd cauldron
+nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
+./result/bin/darwin-installer
 ```
+</details>
+
+
 - Build and apply using build (for flake support), replacing `<host>` with chosen:
 ```
 nix build cauldron/\#darwinConfigurations.<host>.system
 ./result/sw/bin/darwin-rebuild switch --flake .#darwin-<host>
 ```
 
-### Build Outputs
+## Configuration
 
-User definitions can be found in `./home/users/default.nix`, with system-definitions in their respective `./<system>/default.nix`. Build outputs are listed under the `checks` section for `nix flake show`.
+This project utilizes [Just](https://github.com/casey/just), an alternative to `make`, to manage its build outputs.
 
-**Darwin**:
-- Command: `darwin-rebuild switch --flake .#<user>@<host>`
-- Working example: `darwin-rebuild switch --flake github:rgbatty/cauldron .#rgbatty@luna`
+Outputs should be named `<system>-<host>` for `nixosConfigurations` and `darwinConfigurations`, while `homeManagerConfigurations` are expected to be named `<user>@<host>`. Examples of each can be found in their respective `./flake-parts` file.
 
-**NixOS**
-- Command: `nixos rebuild switch --flake .#<user>@<host>`
-- Working example: `darwin-rebuild switch --flake github:rgbatty/cauldron .#rgbatty@koumori`
+By default, the flake attempts to provide outputs by granularity. The highest matching level will be used, following a pattern of:
 
-**Home Manager**
-- Command: `home-manager switch --flake .#<user>@<host>`
-- Working example: `darwin-rebuild switch --flake github:rgbatty/cauldron .#rgbatty@koumori`
+```
+System < Host < User
+```
 
-### Theming
-Any themed tools have been denoted with a 🦇, linking to the theme repository it uses. Some items require manual theming steps. Those have been denoted in the Supported Toolset section with a 🔨 next to their theme. Theming work has been duplicated and saved within these dotfiles to limit depedencies, and full credits are to their respective authors. Massive thanks are due to the Dracula theming community as a whole for their awesome support of a beautiful theme.
+Given just a `system` (eg. `aarch64-darwin`), the flake will apply configuration for `aarch64-darwin`, using defaults for `user` and `host` details, applying them to the currently logged in user.
 
-
+Simply forking the repo, adding your `profiles`, and re-running the desired `just` command will apply your new configurations wherever they are relevant.
 ### The Nix Kool-Aid
 
 > Nix allows for easy to manage, collaborative, reproducible deployments. This means that once something is setup and configured once, it works forever. If someone else shares their configuration, anyone can make use of it.
@@ -123,7 +94,6 @@ Any themed tools have been denoted with a 🦇, linking to the theme repository 
 
 ### 💻 Terminals
 
-<!-- -   [Terminal.app](https://iterm2.com/), [Theme](https://draculatheme.com/terminal) -->
 <!-- -   [iTerm2](https://iterm2.com/), [Theme](https://draculatheme.com/iterm) -->
 -   [🦇](https://draculatheme.com/windows-terminal)[Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal-preview/9n0dx20hk701): [Settings](./dot_config/windows_terminal/settings.json)
 
@@ -133,7 +103,6 @@ Any themed tools have been denoted with a 🦇, linking to the theme repository 
 - [🦇](https://draculatheme.com/fish)[Fish](https://fishshell.com)
     - Framework: [Fisher](https://github.com/jorgebucaran/fisher)
 - [Z shell](http://zsh.sourceforge.net/)
-    - Framework: [Zimfw](https://zimfw.sh)
     - [🦇](https://draculatheme.com/zsh-syntax-highlighting)[Zsh Syntax Highlighting]()
 <!-- - [Powershell](): [Settings](), [🦇](https://draculatheme.com/powershell) -->
 
