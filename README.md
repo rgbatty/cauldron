@@ -29,6 +29,7 @@ Given it's personal nature, these files are in a constant state of flux as my ne
 
 **Darwin**
 
+<details>
 Install Nix:
 ```
 sh <(curl -L https://nixos.org/nix/install --darwin-use-unencrypted-nix-store-volume --daemon
@@ -51,9 +52,11 @@ After cloning and moving to the project directory, build and apply using build p
 nix build .#darwinConfigurations.<host>.system
 ./result/sw/bin/darwin-rebuild switch --flake .#darwinConfigurations.<host>
 ```
+</details>
 
 **NixOS**
 
+<details>
 Enable Nix Flakes support:
 ```
 mkdir -p ~/.config/nix
@@ -64,9 +67,11 @@ After cloning and moving to the project directory, build and apply your chosen h
 ```
 sudo nixos-rebuild switch --flake .#nixosConfigurations.<host>
 ```
+</details>
 
 **Linux**
 
+<details>
 Install Nix:
 ```
 sh <(curl -L https://nixos.org/nix/install --darwin-use-unencrypted-nix-store-volume --daemon
@@ -95,6 +100,7 @@ After cloning and moving to the project directory, build and apply your chosen h
 ```
 home-manager switch --flake .#homeManagerConfigurations.<user@host>
 ```
+</details>
 
 ## Configuration
 
