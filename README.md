@@ -25,41 +25,29 @@ Given it's personal nature, these files are in a constant state of flux as my ne
     <p><strong>Be sure to <a href="#" title="star">⭐️</a> or <a href="#" title="fork">🔱</a> this repo if you find it useful! 😃</strong></p>
 </div>
 
-## Goals ⚽
-
-
-<p align="right"><a href="#top" title="Back to top">🔝</a></p>
-
 ## Installation 🔮
 
 ### Prerequisites
 
 **General**
 - Nix
-<details>
 ```
 sh <(curl -L https://nixos.org/nix/install --darwin-use-unencrypted-nix-store-volume --daemon
 ```
-</details>
 
 - Nix Flakes support
-<details>
 ```
 mkdir -p ~/.config/nix
 echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
 ```
-</details>
 
 **Darwin**
 
 - Nix-Darwin
-<details>
 ```
 nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
 ./result/bin/darwin-installer
 ```
-</details>
-
 
 - Build and apply using build (for flake support), replacing `<host>` with chosen:
 ```
