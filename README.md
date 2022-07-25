@@ -6,7 +6,7 @@
 
 <!-- badges -->
 
-[Installation](#installation-) • [Usage](#usage) • [Toolset](#supported-toolset-) • [Resources](#resources-)
+[Installation](#installation-) • [Nix](#the-nix-kool-aid) • [Usage](#usage) • [Toolset](#supported-toolset-) • [Resources](#resources-)
 </div>
 
 <!-- Description -->
@@ -24,6 +24,16 @@ Given it's personal nature, these files are in a constant state of flux as my ne
 <div align="center">
     <p><strong>Be sure to <a href="#" title="star">⭐️</a> or <a href="#" title="fork">🔱</a> this repo if you find it useful! 😃</strong></p>
 </div>
+
+## The Nix Kool-Aid
+
+> Nix allows for easy to manage, collaborative, reproducible deployments. This means that once something is setup and configured once, it works forever. If someone else shares their configuration, anyone can make use of it.
+
+This repo, having previously tried other dotfile management tools, has settled on Nix - predominantly out of personal interest. Nix has been a fascinating rabbit hole, but be forewarned that it is not for beginners. Development is fast, documentation can be poor, but the reward of idempotent, declarative configuration is equally exciting.
+
+For those wondering, "how do you configure X?" take a look at `./modules`. The majority of these are self-explanatory, though the syntax may not be. Raw dotfiles are kept within their associated user profile or the module itself.
+
+<p align="right"><a href="#top" title="Back to top">🔝</a></p>
 
 ## Installation 🔮
 
@@ -118,11 +128,23 @@ home-manager switch --flake .#homeManagerConfigurations.<user@host>
 ```
 </details>
 
-## Configuration
+## Usage
 
-This project utilizes [Just](https://github.com/casey/just), an alternative to `make`, to manage its build outputs.
+This project utilizes [Just](https://github.com/casey/just), an alternative to `make`, to manage its build outputs. This is available by default within the project directory, through `direnv`. Traditional outputs (eg. `homeManagerConfigurations`, `darwinConfigurations`, `nixosConfigurations`) remain for troubleshooting and usage outside of `just`.
 
-Outputs should be named `<system>-<host>` for `nixosConfigurations` and `darwinConfigurations`, while `homeManagerConfigurations` are expected to be named `<user>@<host>`. Examples of each can be found in their respective `./flake-parts` file.
+Hostnames should be lowercase to ensure `just` compatability.
+
+Common commands (listable with `just -l`) are:
+
+- `just switch-home`: Build and apply home-manager output `<user@host>`.
+- `just switch-darwin`: Build and apply nix-darwin output `darwin-<host>`.
+- `just switch-nixos`: Build and apply NixOS output `nixos-<host>`.
+
+### Configuration Profiles
+
+Outputs should be named `<nixos/darwin>-<host>` for `nixosConfigurations` and `darwinConfigurations`, while `homeManagerConfigurations` are expected to be named `<user>@<host>`. Examples of each can be found in their respective `./flake-parts` file.
+
+Meanwhile, configuration files are available within `./profiles`, sorted by `./users` and `./hosts`. Option declarations can be found within `./modules`, nested under the matching path.
 
 By default, the flake attempts to provide outputs by granularity. The highest matching level will be used, following a pattern of:
 
@@ -133,11 +155,6 @@ System < Host < User
 Given just a `system` (eg. `aarch64-darwin`), the flake will apply configuration for `aarch64-darwin`, using defaults for `user` and `host` details, applying them to the currently logged in user.
 
 Simply forking the repo, adding your `profiles`, and re-running the desired `just` command will apply your new configurations wherever they are relevant.
-### The Nix Kool-Aid
-
-> Nix allows for easy to manage, collaborative, reproducible deployments. This means that once something is setup and configured once, it works forever. If someone else shares their configuration, anyone can make use of it.
-
-### Project Structure
 
 <p align="right"><a href="#top" title="Back to top">🔝</a></p>
 
