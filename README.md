@@ -64,19 +64,27 @@ Given it's personal nature, these files are in a constant state of flux as my ne
 ### Darwin
 
 - temporarily change to Bash if needed:
-`exec bash`
+```
+exec bash
+```
 - Install Nix:
-`sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon`
-- Build Nix-Darwin:
-`nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer`
-- Install Nix-Darwin:
-`./result/bin/darwin-installer`
+```
+sh <(curl -L https://nixos.org/nix/install --darwin-use-unencrypted-nix-store-volume --daemon
+```
+- Build and install Nix-Darwin:
+```
+nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
+./result/bin/darwin-installer
+```
 - Enable Flakes:
 ```
 mkdir -p ~/.config/nix
 echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
 ```
-- Clone and cd to project: `https://github.com/rgbatty/cauldron && cd cauldron`
+- Clone and cd to project:
+```
+https://github.com/rgbatty/cauldron && cd cauldron
+```
 - Build and apply using build (for flake support), replacing `<host>` with chosen:
 ```
 nix build cauldron/\#darwinConfigurations.<host>.system
