@@ -27,9 +27,14 @@ Given it's personal nature, these files are in a constant state of flux as my ne
 
 ## Installation 🔮
 
+Listed below are installation steps for each supported platform. These are subject to change and may be out of date, but are consolidated for ease. I highly recommend users view the individual documentation for each.
+
+In summary, expect to install Nix, enable flakes, pull the repo, and then build and apply the output you're interested in.
+
 **Darwin**
 
 <details>
+
 Install Nix:
 ```
 sh <(curl -L https://nixos.org/nix/install --darwin-use-unencrypted-nix-store-volume --daemon
@@ -57,6 +62,7 @@ nix build .#darwinConfigurations.<host>.system
 **NixOS**
 
 <details>
+
 Enable Nix Flakes support:
 ```
 mkdir -p ~/.config/nix
@@ -72,6 +78,7 @@ sudo nixos-rebuild switch --flake .#nixosConfigurations.<host>
 **Linux**
 
 <details>
+
 Install Nix:
 ```
 sh <(curl -L https://nixos.org/nix/install --darwin-use-unencrypted-nix-store-volume --daemon
