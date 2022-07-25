@@ -31,10 +31,8 @@ Listed below are installation steps for each supported platform. These are subje
 
 In summary, expect to install Nix, enable flakes, pull the repo, and then build and apply the output you're interested in.
 
-**Darwin**
-
 <details>
-<summary> Darwin </summary>
+<summary> ### Darwin </summary>
 
 Install Nix:
 ```
@@ -60,9 +58,8 @@ nix build .#darwinConfigurations.<host>.system
 ```
 </details>
 
-**NixOS**
-
 <details>
+<summary> ### NixOS </summary>
 
 Enable Nix Flakes support:
 ```
@@ -76,9 +73,8 @@ sudo nixos-rebuild switch --flake .#nixosConfigurations.<host>
 ```
 </details>
 
-**Linux**
-
 <details>
+<summary> ### Linux </summary>
 
 Install Nix:
 ```
