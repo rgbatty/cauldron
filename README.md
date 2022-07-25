@@ -1,13 +1,24 @@
 <div align="center">
-    <h1>
-        <a name="top" title="dotfiles"><img src="assets/cauldron.png?raw=true" style=" width:120px ; height:120px " /></a><br/>Cauldron: A Colony of Bats and other Witchcraft<br/> <sup><sub>powered by  <a href="https://nixos.org">Nix</a> ❄</sub></sup>
-        <sup><sub>Themed with  <a href="https://draculatheme.com">Dracula</a> 🦇</sub></sup>
-    </h1>
+
+<a name="top" title="dotfiles"><img src="assets/cauldron.png?raw=true" style=" width:120px ; height:120px " /></a>
+# Cauldron: A Colony of Bats and other Witchcraft
+
+<!-- Navigation -->
+[Installation](#installation-) • [Nix](#the-nix-kool-aid) • [Usage](#usage) • [Toolset](#supported-toolset) • [Resources](#resources)
 
 <!-- badges -->
+![License](https://img.shields.io/github/license/rgbatty/cauldron?style=flat-square)
+![Latest commit](https://img.shields.io/github/last-commit/rgbatty/cauldron/master?style=flat-square)
+![Build status: master](https://img.shields.io/github/workflow/status/rgbatty/cauldron/CI/master?style=flat-square)
+![Supports Emacs 27.1 - 28.1](https://img.shields.io/badge/Supports-Emacs_27.1--28.1-blueviolet.svg?style=flat-square&logo=GNU%20Emacs&logoColor=white)
 
-[Installation](#installation-) • [Nix](#the-nix-kool-aid) • [Usage](#usage) • [Toolset](#supported-toolset) • [Resources](#resources)
+<!-- Screenshot -->
+![Cauldron Screenshot](https://raw.githubusercontent.com/doomemacs/doomemacs/screenshots/main.png)
 </div>
+
+REMOVE THIS PLACEHOLDER IMAGE
+
+---
 
 <!-- Description -->
 
@@ -17,11 +28,7 @@ Cauldron is a collection of host and user declarations for my personal computing
 
 Given it's personal nature, these files are in a constant state of flux as my needs grow and change. That said, I welcome any and all to find inspiration. It may be a little battered and rusted, but your sure to find the tools needed for any and all brews, witchcraft, and vampiric efforts - hopefully without the need for any sacrifices.
 
-<!-- Star/Fork -->
-
-<div align="center">
-    <p><strong>Be sure to <a href="#" title="star">⭐️</a> or <a href="#" title="fork">🔱</a> this repo if you find it useful! 😃</strong></p>
-</div>
+---
 
 ## The Nix Kool-Aid
 
