@@ -10,8 +10,12 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      neovim
     ];
-  };
 
-  # TODO: Configure Vim
+    home.shellAliases = {
+      vim = "nvim";
+      v = "nvim";
+    };
+  };
 }

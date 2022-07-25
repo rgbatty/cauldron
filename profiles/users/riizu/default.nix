@@ -2,6 +2,10 @@
   modules = {
     git.enable = true;
 
+    editors = {
+      vim.enable = true;
+    };
+
     services = {
       ssh.enable = true;
     };
