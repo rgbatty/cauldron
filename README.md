@@ -166,15 +166,15 @@ On a high level:
 
 |                |                                                          |
 |----------------|----------------------------------------------------------|
-| **Shell:**     | [fish](fish-shell) + a variety of utilities ([bat](bat), [exa](exa), [fzf](fzf), [zoxide](zoxide))                                                                     |
-| **DM:**        | TBD                           |
-| **WM:**        | (darwin) [yabai](yabai) + [skhd](skhd) + [sketchybar](SketchyBar) (linux) TBD                                                                         |
-| **Editor:**    | [VS Code](vscode) (future): [Doom Emacs](doom-emacs)                                                                     |
-| **Terminal:**  | (darwin): [iTerm2]() (windows): [Windows Terminal](terminal) (future): [wezterm](wez/wezterm)                                                                     |
-| **Launcher:**  | (darwin) [Alfred]() (linux) TBD (windows) [Flow Laucher](Flow-Launcher/Flow.Launcher) |
-| **Keyboard:**   | [Corne v3 (Choc)](foostan/crkbd), Choc Purpz switches, [Miryoku](manna-harbour/miryoku) layout |
+| **Shell:**     | [fish](https://github.com/fish-shell/fish-shell) + a variety of utilities ([bat](https://github.com/sharkdp/bat), [exa](https://github.com/ogham/exa), [fzf](https://github.com/junegunn/fzf), [zoxide](https://github.com/ajeetdsouza/zoxide)) |
+| **DM:**        | TBD |
+| **WM:**        | (darwin) [yabai](https://github.com/koekeishiya/yabai) + [skhd](https://github.com/koekeishiya/skhd) + [sketchybar](https://github.com/FelixKratz/SketchyBar) (linux) TBD |
+| **Editor:**    | [VS Code](https://github.com/microsoft/vscode) (future): [Doom Emacs](https://github.com/doomemacs/doomemacs) |
+| **Terminal:**  | (darwin): [iTerm2](https://github.com/gnachman/iTerm2) (windows): [Windows Terminal](https://github.com/microsoft/terminal) (future): [wezterm](https://github.com/wez/wezterm) |
+| **Launcher:**  | (darwin) [Alfred](https://alfredapp.com) (linux) TBD (windows) [Flow Laucher](https://github.com/Flow-Launcher/Flow.Launcher) |
+| **Keyboard:**   | [Corne v3 (Choc)](https://github.com/foostan/crkbd), Choc Purpz switches, [Miryoku](https://github.com/manna-harbour/miryoku) layout |
 | **Browser:**   | [Vivaldi](https://vivaldi.com) |
-| **Theme:** | [Dracula](dracula/dracula-theme)                                           |
+| **Theme:** | [Dracula](https://github.com/dracula/dracula-theme) |
 
 -----
 
