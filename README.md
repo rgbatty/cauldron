@@ -59,7 +59,7 @@ nix build .#darwinConfigurations.<host>.system
 </details>
 
 <details>
-<summary> ### NixOS </summary>
+### <summary> NixOS </summary>
 
 Enable Nix Flakes support:
 ```
