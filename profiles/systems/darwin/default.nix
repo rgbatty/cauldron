@@ -1,5 +1,5 @@
 { inputs, lib, config, flake, pkgs, home-manager, ... }: {
-  imports = [ ../. ];
+  imports = [ ../. ./preferences.nix ];
 
   nix = {
     trustedUsers = [ "@admin" "@staff" ];
