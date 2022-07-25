@@ -1,6 +1,6 @@
 { inputs, config, lib, pkgs, ... }: {
   imports = [
-    ./emacs.nix
+    ./emacs
     ./vim.nix
     ./vscode.nix
   ];

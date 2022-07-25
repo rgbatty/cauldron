@@ -16,15 +16,18 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      coreutils
       emacs-all-the-icons-fonts
+      fd
       git
       (ripgrep.override {withPCRE2 = true;})
       gnutls
     ];
 
     home.sessionVariables = mkMerge [
+      # { EDITOR = "emacsclient -t -a ''"; }
       (mkIf cfg.doom.enable {
-        # DOOMDIR = toString "${config.xdg.configHome}/doom";
+        DOOMDIR = toString "${config.xdg.configHome}/doom";
         # PATH = [ "$XDG_CONFIG_HOME/emacs/bin" "$PATH" ];
       })
     ];
@@ -39,18 +42,13 @@ in {
 
     home.activation = {
       installDoomEmacs = mkIf cfg.doom.enable (lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          if [ ! -d "$HOME/emacs" ]; then
-            $DRY_RUN_CMD git clone --depth=1 --single-branch "${cfg.doom.repoUrl}" "$HOME/emacs"
+          if [ ! -d "${config.home.homeDirectory}/emacs" ]; then
+            $DRY_RUN_CMD git clone --depth=1 --single-branch "${cfg.doom.repoUrl}" "${config.home.homeDirectory}/emacs"
           fi
         '');
     };
 
-    # system.userActivationScripts = mkIf cfg.doom.enable {
-    #   installDoomEmacs = ''
-    #     if [ ! -d "$XDG_CONFIG_HOME/emacs" ]; then
-    #        git clone --depth=1 --single-branch "${cfg.doom.repoUrl}" "$XDG_CONFIG_HOME/emacs"
-    #     fi
-    #   '';
-    # };
+    xdg.configFile.doom.source = config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/.dotfiles/config/doom";
   };
 }
