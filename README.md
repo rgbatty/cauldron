@@ -61,9 +61,27 @@ Given it's personal nature, these files are in a constant state of flux as my ne
 
 ## Installation 🔮
 
-### Prerequisites
-- Darwin or NixOS for full system configuration
-- Nix & Home Manager for home configuration
+### Darwin
+
+- temporarily change to Bash if needed:
+`exec bash`
+- Install Nix:
+`sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon`
+- Build Nix-Darwin:
+`nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer`
+- Install Nix-Darwin:
+`./result/bin/darwin-installer`
+- Enable Flakes:
+```
+mkdir -p ~/.config/nix
+echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
+```
+- Clone and cd to project: `https://github.com/rgbatty/cauldron && cd cauldron`
+- Build and apply using build (for flake support), replacing `<host>` with chosen:
+```
+nix build cauldron/\#darwinConfigurations.<host>.system
+./result/sw/bin/darwin-rebuild switch --flake .#darwin-<host>
+```
 
 ### Build Outputs
 
@@ -89,33 +107,7 @@ Any themed tools have been denoted with a 🦇, linking to the theme repository 
 
 > Nix allows for easy to manage, collaborative, reproducible deployments. This means that once something is setup and configured once, it works forever. If someone else shares their configuration, anyone can make use of it.
 
-This configuration was previously managed using the excellent [Chezmoi]() library, manual scripts, and numerous other bits and bobs. They all are totally valid ways to manage your dotfiles and system configuration, but nothing provided the one-stop-shop coverage that Nix and Home Manager did. That said, this is *not* a copy-paste-friendly environment. I highly recommend anyone interested in using my settings take a look at the Resources section, as it provides a few great first-timer resources to learning the Nix ecosystem.
-
-It can be useful to remember that `default.nix` is the entrypoint for any import that doesn't mention a `.nix` file.
-
 ### Project Structure
-
-Cauldron is heavily influenced by the [Digga]() flake framework, with some adjustments based on personal preference.
-
-<details>
-<summary>Tree Breakdown</summary>
-
-Root-level:
-- `flake.nix`: The flake entrypoint. Build outputs can be seen with `nix flake show`.
-- `./shell`: [DevShell]() configuration for remote use
-- `./pkgs`: External packages
-- `./overlays`: Input source overlays
-- `./modules`: General configuration modules
-- `./lib`: Helper functions (eg. flake compatibility tooling)
-- `./home`: Home Manager configuration
-- `./darwin`: Darwin-based system configuration
-- `./nixos`: NixOS-based system configuration
-
-`./home` and the system configuration directories have their own `./profiles` directory that holds general configuration, and then user or host profiles in their own directories. Generally speaking, this matches the expectations around Digga, without a root-level `./hosts` directory and using `./home` instead of `./users` (as a nested `users` folder felt redundant).
-
-</details>
-
-**TL;DR: `./home` for users/dotfiles, `./darwin` for Darwin-specific, `./nixos` for nixos-specific.**
 
 <p align="right"><a href="#top" title="Back to top">🔝</a></p>
 
