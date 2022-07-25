@@ -23,7 +23,7 @@
     "darwin": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-unstable"
         ]
       },
       "locked": {
@@ -47,11 +47,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1658689457,
-        "narHash": "sha256-d8nUJIx3NIsRx60Un1gAxOEKziBt9waGB6gC6Lw6yFE=",
+        "lastModified": 1658723452,
+        "narHash": "sha256-TyUCByGJ3FMyTJIhzoW2kZmpY07x2TmUB7Y2pAApTAM=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "8105f0f88edf635dbe97dc3b40984b90b2e76029",
+        "rev": "26386599653aa6040645f99a7446c47eefee05c4",
         "type": "github"
       },
       "original": {
@@ -132,11 +132,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1658720681,
-        "narHash": "sha256-Oy7r4IX6w+av7dFxSj5FujMZwtz/zAlDPrAjh15o+z0=",
+        "lastModified": 1658722900,
+        "narHash": "sha256-OGhlG/Npih3VgQOdcwe3RbrAemStvjEdeV/v9DF4WS0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e61492bc46d79d4a5db2f14047967dc4f018231a",
+        "rev": "f7bb0cf1042b8565f4d8881fa2da2cedc15a979b",
         "type": "github"
       },
       "original": {
