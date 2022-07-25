@@ -2,9 +2,9 @@
 
 with lib;
 let
-  cfg = config.modules.dev.node;
+  cfg = config.modules.home.dev.node;
 in {
-  options.modules.dev.node = {
+  options.modules.home.dev.node = {
     enable = mkEnableOption "Node";
   };
 

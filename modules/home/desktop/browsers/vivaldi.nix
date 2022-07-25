@@ -2,9 +2,9 @@
 
 with lib;
 let
-  cfg = config.modules.desktop.browsers.vivaldi;
+  cfg = config.modules.home.desktop.browsers.vivaldi;
 in {
-  options.modules.desktop.browsers.vivaldi = {
+  options.modules.home.desktop.browsers.vivaldi = {
     enable = mkEnableOption "Vivaldi";
   };
 

@@ -1,28 +1,30 @@
 { config, ... }: {
   modules = {
-    git.enable = true;
-
-    editors = {
-      vim.enable = true;
-    };
-
-    services = {
-      ssh.enable = true;
-    };
-
-    shell = {
-      shells = {
-        bash.enable = true;
-        fish.enable = true;
-        zsh.enable = true;
+    home = {
+      editors = {
+        vim.enable = true;
       };
 
-      starship.enable = true;
+      services = {
+        ssh.enable = true;
+      };
 
-      utilities = {
-        enable = true;
-        modern = true;
-        navi = true;
+      shell = {
+        git.enable = true;
+
+        shells = {
+          bash.enable = true;
+          fish.enable = true;
+          zsh.enable = true;
+        };
+
+        starship.enable = true;
+
+        utilities = {
+          enable = true;
+          modern = true;
+          navi = true;
+        };
       };
     };
   };

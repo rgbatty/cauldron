@@ -2,7 +2,7 @@
 
 with lib;
 let
-  cfg = config.modules.git;
+  cfg = config.modules.home.shell.git;
 
   # TODO: Update git templates
   commit-templates = {
@@ -33,7 +33,7 @@ let
     dotfiles = { commit = { template = commit-templates.dotfiles.outPath; }; };
   };
 in {
-  options.modules.git = with types; {
+  options.modules.home.shell.git = with types; {
     enable = mkEnableOption "git";
   };
 

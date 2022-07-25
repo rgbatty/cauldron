@@ -2,12 +2,12 @@
 
 with lib;
 let
-  cfg = config.modules.shell.shells.bash;
+  cfg = config.modules.home.shell.shells.bash;
 
   shellAliases = (import ../common/aliases.nix)
   // (import ../common/abbrs.nix);
 in {
-  options.modules.shell.shells.bash = with types; {
+  options.modules.home.shell.shells.bash = with types; {
     enable = mkEnableOption "bash";
   };
 

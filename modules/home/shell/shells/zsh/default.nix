@@ -2,12 +2,12 @@
 
 with lib;
 let
-  cfg = config.modules.shell.shells.zsh;
+  cfg = config.modules.home.shell.shells.zsh;
 
   shellAliases = (import ../common/aliases.nix)
   // (import ../common/abbrs.nix);
 in {
-  options.modules.shell.shells.zsh = with types; {
+  options.modules.home.shell.shells.zsh = with types; {
     enable = mkEnableOption "zsh";
   };
 

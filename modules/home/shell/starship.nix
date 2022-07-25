@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.modules.shell.starship;
-  shellsCfg = config.modules.shell.shells;
+  cfg = config.modules.home.shell.starship;
+  shellsCfg = config.modules.home.shell.shells;
 in {
-  options.modules.shell.starship = {
+  options.modules.home.shell.starship = {
     enable = mkEnableOption "Starship";
   };
 

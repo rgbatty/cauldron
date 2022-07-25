@@ -1,9 +1,9 @@
 { config, options, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.modules.desktop.media.spotify;
+let cfg = config.modules.home.desktop.media.spotify;
 in {
-  options.modules.desktop.media.spotify = {
+  options.modules.home.desktop.media.spotify = {
     enable = mkEnableOption false;
   };
 

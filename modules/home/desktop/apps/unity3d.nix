@@ -2,9 +2,9 @@
 
 with lib;
 let
-  cfg = config.modules.desktop.apps.unity3d;
+  cfg = config.modules.home.desktop.apps.unity3d;
 in {
-  options.modules.desktop.apps.unity3d = {
+  options.modules.home.desktop.apps.unity3d = {
     enable = mkEnableOption "Unity3D";
   };
 

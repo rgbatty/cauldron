@@ -2,11 +2,11 @@
 
 with lib;
 let
-  cfg = config.modules.editors.emacs;
+  cfg = config.modules.home.editors.emacs;
   emacsPackage = with pkgs; (
     if stdenv.isDarwin then emacsNativeComp else emacsPgtkNativeComp);
 in {
-  options.modules.editors.emacs = {
+  options.modules.home.editors.emacs = {
     enable = mkEnableOption "Emacs";
     doom = rec {
       enable = mkEnableOption "Doom Emacs";

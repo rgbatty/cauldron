@@ -1,9 +1,9 @@
 { config, options, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.modules.dev.go;
+let cfg = config.modules.home.dev.go;
 in {
-  options.modules.dev.go = {
+  options.modules.home.dev.go = {
     enable = mkEnableOption "GoLang";
   };
 

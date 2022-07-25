@@ -2,10 +2,10 @@
 
 with lib;
 let
-  cfg = config.modules.shell.utilities;
-  shellsCfg = config.modules.shell.shells;
+  cfg = config.modules.home.shell.utilities;
+  shellsCfg = config.modules.home.shell.shells;
 in {
-  options.modules.shell.utilities = with types; {
+  options.modules.home.shell.utilities = with types; {
     enable = mkEnableOption "Utilities";
     modern = mkEnableOption "Modern Utilities";
     navi = mkEnableOption "navi";

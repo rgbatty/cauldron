@@ -2,9 +2,9 @@
 
 with lib;
 let
-  cfg = config.modules.dev.python;
+  cfg = config.modules.home.dev.python;
 in {
-  options.modules.dev.python = {
+  options.modules.home.dev.python = {
     enable = mkEnableOption "Python";
   };
 

@@ -2,9 +2,9 @@
 
 with lib;
 let
-  cfg = config.modules.desktop.gaming.steam;
+  cfg = config.modules.home.desktop.gaming.steam;
 in {
-  options.modules.desktop.gaming.steam = {
+  options.modules.home.desktop.gaming.steam = {
     enable = mkEnableOption "Steam";
   };
 

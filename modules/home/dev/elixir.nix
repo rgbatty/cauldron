@@ -1,9 +1,9 @@
 { config, options, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.modules.dev.elixir;
+let cfg = config.modules.home.dev.elixir;
 in {
-  options.modules.dev.elixir = {
+  options.modules.home.dev.elixir = {
     enable = mkEnableOption "Elixir";
   };
 

@@ -2,9 +2,9 @@
 
 with lib;
 let
-  cfg = config.modules.desktop.media.recording;
+  cfg = config.modules.home.desktop.media.recording;
 in {
-  options.modules.desktop.media.recording = {
+  options.modules.home.desktop.media.recording = {
     enable = mkEnableOption "Recording";
     audio.enable = mkEnableOption "Audio";
     video.enable = mkEnableOption "Video";

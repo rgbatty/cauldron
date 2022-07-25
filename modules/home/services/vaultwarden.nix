@@ -2,9 +2,9 @@
 
 with lib;
 let
-  cfg = config.modules.services.vaultwarden;
+  cfg = config.modules.home.services.vaultwarden;
 in {
-  options.modules.services.vaultwarden = {
+  options.modules.home.services.vaultwarden = {
     enable = mkEnableOption "Vaultwarden";
   };
 

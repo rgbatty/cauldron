@@ -2,9 +2,9 @@
 
 with lib;
 let
-  cfg = config.modules.dev.rust;
+  cfg = config.modules.home.dev.rust;
 in {
-  options.modules.dev.rust = {
+  options.modules.home.dev.rust = {
     enable = mkEnableOption "Rust";
   };
 

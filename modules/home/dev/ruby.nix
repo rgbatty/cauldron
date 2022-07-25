@@ -2,9 +2,9 @@
 
 with lib;
 let
-  cfg = config.modules.dev.ruby;
+  cfg = config.modules.home.dev.ruby;
 in {
-  options.modules.dev.ruby = {
+  options.modules.home.dev.ruby = {
     enable = mkEnableOption "Ruby";
   };
 

@@ -2,9 +2,9 @@
 
 with lib;
 let
-  cfg = config.modules.editors.vim;
+  cfg = config.modules.home.editors.vim;
 in {
-  options.modules.editors.vim = {
+  options.modules.home.editors.vim = {
     enable = mkEnableOption "Vim";
   };
 

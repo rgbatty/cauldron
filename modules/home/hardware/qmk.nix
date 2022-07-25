@@ -2,9 +2,9 @@
 
 with lib;
 let
-  cfg = config.modules.hardware.qmk;
+  cfg = config.modules.home.hardware.qmk;
 in {
-  options.modules.hardware.qmk = {
+  options.modules.home.hardware.qmk = {
     enable = mkEnableOption "QMK";
   };
 

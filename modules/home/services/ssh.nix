@@ -2,9 +2,9 @@
 
 with lib;
 let
-  cfg = config.modules.services.ssh;
+  cfg = config.modules.home.services.ssh;
 in {
-  options.modules.services.ssh = with types; {
+  options.modules.home.services.ssh = with types; {
     enable = mkEnableOption "ssh";
   };
 

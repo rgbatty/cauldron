@@ -2,9 +2,9 @@
 
 with lib;
 let
-  cfg = config.modules.hardware.zmk;
+  cfg = config.modules.home.hardware.zmk;
 in {
-  options.modules.hardware.zmk = {
+  options.modules.home.hardware.zmk = {
     enable = mkEnableOption "ZMK";
   };
 

@@ -2,12 +2,12 @@
 
 with lib;
 let
-  cfg = config.modules.shell.shells.fish;
+  cfg = config.modules.home.shell.shells.fish;
 
   shellAbbrs = import ../common/abbrs.nix;
   shellAliases = import ../common/aliases.nix;
 in {
-  options.modules.shell.shells.fish = with types; {
+  options.modules.home.shell.shells.fish = with types; {
     enable = mkEnableOption "fish";
   };
 
