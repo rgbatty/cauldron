@@ -33,9 +33,7 @@ In summary, expect to install Nix, enable flakes, pull the repo, and then build 
 
 <details>
 <summary>
-
 ### Darwin
-
 </summary>
 
 Install Nix:
