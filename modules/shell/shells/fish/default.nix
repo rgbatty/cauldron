@@ -16,7 +16,8 @@ in {
       fish
       fishPlugins.done
       fishPlugins.forgit
-      fishPlugins.fzf-fish
+      # TODO: Fzf-fish breaks after channel updates
+      # fishPlugins.fzf-fish
       fishPlugins.pisces
     ];
 
