@@ -27,9 +27,7 @@ Given it's personal nature, these files are in a constant state of flux as my ne
 
 ## Installation 🔮
 
-### Prerequisites
-
-**General**
+**Darwin**
 
 Install Nix:
 ```
@@ -42,18 +40,60 @@ mkdir -p ~/.config/nix
 echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
 ```
 
-**Darwin**
-
 Install Nix-Darwin:
 ```
 nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
 ./result/bin/darwin-installer
 ```
 
-Build and apply using build (for flake support), replacing `<host>` with chosen:
+After cloning and moving to the project directory, build and apply using build package (for flake support), replacing `<host>` with chosen host (listed in `./flake-parts/darwin.nix`):
 ```
-nix build cauldron/\#darwinConfigurations.<host>.system
-./result/sw/bin/darwin-rebuild switch --flake .#darwin-<host>
+nix build .#darwinConfigurations.<host>.system
+./result/sw/bin/darwin-rebuild switch --flake .#darwinConfigurations.<host>
+```
+
+**NixOS**
+
+Enable Nix Flakes support:
+```
+mkdir -p ~/.config/nix
+echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
+```
+
+After cloning and moving to the project directory, build and apply your chosen home-manager configuration, replacing `<host>` with chosen host (listed in `./flake-parts/nixos.nix`):
+```
+sudo nixos-rebuild switch --flake .#nixosConfigurations.<host>
+```
+
+**Linux**
+
+Install Nix:
+```
+sh <(curl -L https://nixos.org/nix/install --darwin-use-unencrypted-nix-store-volume --daemon
+```
+
+Enable Nix Flakes support:
+```
+mkdir -p ~/.config/nix
+echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
+```
+
+Install Home Manager:
+```
+# Add the Nix Channel
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
+
+# Update your path for Non-NixOS hosts
+export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
+
+# Install Home Manager
+nix-shell '<home-manager>' -A install
+```
+
+After cloning and moving to the project directory, build and apply your chosen home-manager configuration, replacing `<user@host>` with the chosen user and host (listed in `./flake-parts/darwin.nix`):
+```
+home-manager switch --flake .#homeManagerConfigurations.<user@host>
 ```
 
 ## Configuration
