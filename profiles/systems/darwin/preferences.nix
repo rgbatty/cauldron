@@ -45,7 +45,7 @@
       KeyRepeat = 1;
       NSAutomaticSpellingCorrectionEnabled = false;
       NSDocumentSaveNewDocumentsToCloud = false;
-      com.apple.swipescrolldirection = false;
+      "com.apple.swipescrolldirection" = false;
     };
 
     spaces = {
