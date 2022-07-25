@@ -39,7 +39,7 @@ in {
 
     home.activation = {
       installDoomEmacs = mkIf cfg.doom.enable (lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          if [ ! -d "$XDG_CONFIG_HOME/emacs" ]; then
+          if [ ! -d "$HOME/emacs" ]; then
             $DRY_RUN_CMD git clone --depth=1 --single-branch "${cfg.doom.repoUrl}" "$XDG_CONFIG_HOME/emacs"
           fi
         '');
