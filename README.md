@@ -30,12 +30,13 @@ Given it's personal nature, these files are in a constant state of flux as my ne
 ### Prerequisites
 
 **General**
-- Nix
+
+Install Nix:
 ```
 sh <(curl -L https://nixos.org/nix/install --darwin-use-unencrypted-nix-store-volume --daemon
 ```
 
-- Nix Flakes support
+Enable Nix Flakes support:
 ```
 mkdir -p ~/.config/nix
 echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
@@ -43,13 +44,13 @@ echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
 
 **Darwin**
 
-- Nix-Darwin
+Install Nix-Darwin:
 ```
 nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
 ./result/bin/darwin-installer
 ```
 
-- Build and apply using build (for flake support), replacing `<host>` with chosen:
+Build and apply using build (for flake support), replacing `<host>` with chosen:
 ```
 nix build cauldron/\#darwinConfigurations.<host>.system
 ./result/sw/bin/darwin-rebuild switch --flake .#darwin-<host>
