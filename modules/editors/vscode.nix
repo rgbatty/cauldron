@@ -38,7 +38,7 @@ in {
         editor.cursorBlinking = "phase";
         editor.cursorStyle = "line";
         editor.dragAndDrop = false;
-        editor.fontFamily = "'FiraCode', Consolas, 'Courier New', monospace";
+        editor.fontFamily = "'Fira Code', Consolas, 'Courier New', monospace";
         editor.fontLigatures = true;
         editor.fontSize = 15;
         # TODO: Re-evaluate formatOnSave (per-project?)
