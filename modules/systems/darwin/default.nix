@@ -4,6 +4,7 @@
     ./preferences.nix
     ./fonts.nix
     ./brew.nix
+    ./yabai.nix
   ];
 
   nix = {
