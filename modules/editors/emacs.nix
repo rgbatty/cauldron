@@ -10,9 +10,7 @@ in {
     enable = mkEnableOption "Emacs";
     doom = rec {
       enable = mkEnableOption "Doom Emacs";
-      forgeUrl = mkDefault "https://github.com";
-      repoUrl = mkDefault "${forgeUrl}/doomemacs/doomemacs";
-      # configRepoUrl = mkDefault "${forgeUrl}/hlissner/doom-emacs-private";
+      repoUrl = mkOption { default = "https://github.com/doomemacs/doomemacs"; };
     };
   };
 
@@ -38,6 +36,14 @@ in {
     };
 
     # TODO: Add emacs service config for linux
+
+    home.activation = {
+      installDoomEmacs = mkIf cfg.doom.enable (lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          if [ ! -d "$XDG_CONFIG_HOME/emacs" ]; then
+            $DRY_RUN_CMD git clone --depth=1 --single-branch "${cfg.doom.repoUrl}" "$XDG_CONFIG_HOME/emacs"
+          fi
+        '');
+    };
 
     # system.userActivationScripts = mkIf cfg.doom.enable {
     #   installDoomEmacs = ''
