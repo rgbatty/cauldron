@@ -11,7 +11,7 @@ let
 
     in homeManagerConfiguration {
       inherit pkgs;
-      modules = [ baseConfig ../modules ../profiles/users/${user} ];
+      modules = [ baseConfig ../modules/home ../profiles/users/${user} ];
       extraSpecialArgs = { flake = self; };
     });
 

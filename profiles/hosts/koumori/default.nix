@@ -1,6 +1,5 @@
 { lib, config, flake, pkgs, home-manager, users, ... }: {
   imports = [
-    ../../systems/nixos
     ./hardware-configuration.nix
   ];
 

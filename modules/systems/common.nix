@@ -15,7 +15,7 @@ with lib;
   };
 
   home-manager = {
-    sharedModules = [ ../../modules ];
+    sharedModules = [ ../home ];
   };
 
   nix = {

@@ -6,12 +6,12 @@
     # TODO: Add agenix to NixOS
     # inherit (inputs.agenix.nixosModules) age;
 
-    mkNixos = host: { system ? "x86_64-linux" }: withSystem system ({ pkgs, system, ... }:
-      nixosSystem {
+    mkNixos = host: { system ? "x86_64-linux" }:
+      withSystem system ({ pkgs, system, ... }: nixosSystem {
         inherit pkgs system;
 
         specialArgs = { inherit inputs; flake = self; };
-        modules = [ notDetected home-manager host ];
+        modules = [ ../modules/systems/nixos notDetected home-manager host ];
       });
   in {
     nixosConfigurations =  {

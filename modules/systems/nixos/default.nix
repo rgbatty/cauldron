@@ -2,7 +2,7 @@
 
 with lib;
 {
-  imports = [ ../. ];
+  imports = [ ../common.nix ];
 
   nix = {
     settings.trusted-users = [ "root" "@wheel" ];

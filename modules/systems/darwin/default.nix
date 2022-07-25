@@ -1,5 +1,10 @@
 { inputs, lib, config, flake, pkgs, home-manager, ... }: {
-  imports = [ ../. ./preferences.nix ./fonts.nix ./brew.nix ];
+  imports = [
+    ../common.nix
+    ./preferences.nix
+    ./fonts.nix
+    ./brew.nix
+  ];
 
   nix = {
     trustedUsers = [ "@admin" "@staff" ];

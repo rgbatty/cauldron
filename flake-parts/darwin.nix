@@ -8,7 +8,7 @@
         darwinSystem {
           inherit pkgs system;
 
-          modules = [ home-manager host ];
+          modules = [ ../modules/systems/darwin home-manager host ];
         });
 
     mkDarwinArm = mkDarwin "aarch64-darwin";

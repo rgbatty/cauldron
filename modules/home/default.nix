@@ -1,7 +1,18 @@
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 with lib;
 {
+  # TODO: Find a way to auto-import the whole modules directory
+  imports = [
+    ./desktop
+    ./dev
+    ./editors
+    ./hardware
+    ./services
+    ./shell
+    ./themes
+  ];
+
   config = {
     home = {
       packages = lib.optionals (pkgs.stdenv.isLinux) [ pkgs.xdg_utils ];
@@ -37,3 +48,4 @@ with lib;
     programs.home-manager.enable = true;
   };
 }
+
