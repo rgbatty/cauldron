@@ -1,4 +1,9 @@
-{ inputs, config, lib, pkgs, ... }: {
+{ inputs, config, lib, pkgs, ... }:
+
+let
+  result = cmd: "$(${cmd})";
+  focusedWindowBorderColor = "";
+in {
   services = {
     yabai = {
       enable = true;
@@ -8,9 +13,9 @@
         # ${yabai} -m signal --add event=dock_did_restart action="sudo ${yabai} --load-sa"
         layout = "bsp";
         focus_follows_mouse = "autofocus";
-        # window_topmost = "off";
+        window_topmost = "off";
 
-        # external_bar all:${result "${sketchybar} --query bar | ${pkgs.jq}/bin/jq '.geometry.height'"}:0
+        external_bar = "all:${result "${pkgs.sketchybar} --query bar | ${pkgs.jq}/bin/jq '.geometry.height'"}:0";
 
         top_padding = 20;
         bottom_padding = 20;
@@ -19,7 +24,7 @@
         window_gap = 20;
 
         window_border = "on";
-        # active_window_border_color ${focusedWindowBorderColor}
+        active_window_border_color = focusedWindowBorderColor;
 
         window_opacity = "on";
         active_window_opacity = 1.0;
