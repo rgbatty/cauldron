@@ -4,6 +4,8 @@
       enable = true;
       package = pkgs.yabai;
       config = {
+        # sudo ${yabai} --load-sa
+        # ${yabai} -m signal --add event=dock_did_restart action="sudo ${yabai} --load-sa"
         layout = "bsp";
         focus_follows_mouse = "autofocus";
         # window_topmost = "off";
@@ -24,14 +26,14 @@
         normal_window_opacity = 0.9;
       };
       extraConfig = ''
-        # yabai -m rule --add app='^Emacs$' manage=on
-        # yabai -m rule --add title='Preferences' manage=off layer=above
-        # yabai -m rule --add title='^(Opening)' manage=off layer=above
+        yabai -m rule --add app='^Emacs$' manage=on
+        yabai -m rule --add title='Preferences' manage=off layer=above
+        yabai -m rule --add title='^(Opening)' manage=off layer=above
         # yabai -m rule --add title='Library' manage=off layer=above
-        # yabai -m rule --add app='^System Preferences$' manage=off layer=above
-        # yabai -m rule --add app='Activity Monitor' manage=off layer=above
+        yabai -m rule --add app='^System Preferences$' manage=off layer=above
+        yabai -m rule --add app='Activity Monitor' manage=off layer=above
         # yabai -m rule --add app='Finder' manage=off layer=above
-        # yabai -m rule --add app='^System Information$' manage=off layer=above
+        yabai -m rule --add app='^System Information$' manage=off layer=above
       '';
     };
 
@@ -44,3 +46,4 @@
   };
 
 }
+
