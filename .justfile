@@ -65,5 +65,8 @@ switch-home: build-home
 switch-nixos subcommand *flags: build-os
 	{{ os_command }} {{subcommand }} {{ nixos_flags }} {{ flags }}
 
+# TODO: Add theme command
+# theme name:
+
 tree: gcroot
   nix-tree ./result-gcroot

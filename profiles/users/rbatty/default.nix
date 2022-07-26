@@ -79,6 +79,8 @@
           navi = true;
         };
       };
+
+      theme.active = "dracula";
     };
   };
 }
