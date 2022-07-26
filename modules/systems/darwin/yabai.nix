@@ -43,6 +43,11 @@ in {
         yabai -m rule --add app='Activity Monitor' manage=off layer=above
         # yabai -m rule --add app='Finder' manage=off layer=above
         yabai -m rule --add app='^System Information$' manage=off layer=above
+
+        # yabai -m rule --add app="^(Slack|Discord)$" space=^1
+        yabai -m rule --add app="^(Code|Emacs)$" space=^2
+        # yabai -m rule --add app="Vivaldi" space=^3
+        # yabai -m rule --add app="Spotify" space=^4
       '';
     };
 
