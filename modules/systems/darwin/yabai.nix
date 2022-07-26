@@ -4,6 +4,11 @@ let
   result = cmd: "$(${cmd})";
   focusedWindowBorderColor = "";
 in {
+  environment.systemPackages = with pkgs; [
+    yabai
+    skhd
+  ];
+
   services = {
     yabai = {
       enable = true;
