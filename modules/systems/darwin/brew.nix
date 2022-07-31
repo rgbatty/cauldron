@@ -20,7 +20,8 @@
       # "wez/wezterm"
     ];
 
-    brews = [];
+    brews = [
+    ];
 
 
     casks = [
@@ -38,5 +39,10 @@
     masApps = {
 
     };
+
+    extraConfig = ''
+      brew "yabai", restart_service: true
+      brew "skhd", restart_service: true
+    '';
   };
 }
