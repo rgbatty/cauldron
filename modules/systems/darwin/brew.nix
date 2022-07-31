@@ -17,7 +17,7 @@
       "homebrew/core"
       "homebrew/services"
       "koekeishiya/formulae"
-      # "wez/wezterm"
+      "wez/wezterm"
     ];
 
     brews = [
@@ -32,7 +32,7 @@
       "google-chrome"
       "obsidian"
       # "raycast"
-      # "wez/wezterm/wezterm"
+      "wez/wezterm/wezterm"
       "vivaldi"
     ];
 
