@@ -5,13 +5,13 @@ let
   focusedWindowBorderColor = "";
 in {
   environment.systemPackages = with pkgs; [
-    yabai
-    skhd
+    # yabai
+    # skhd
   ];
 
   services = {
     yabai = {
-      enable = true;
+      # enable = true;
       package = pkgs.yabai;
       enableScriptingAddition = true;
       config = {
@@ -52,7 +52,7 @@ in {
     };
 
     skhd = {
-      enable = true;
+      # enable = true;
       package = pkgs.skhd;
       skhdConfig = ''
         # Open Terminal
