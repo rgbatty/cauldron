@@ -15,6 +15,7 @@ with lib;
   };
 
   home-manager = {
+    backupFileExtension = "backup";
     sharedModules = [ ../home ];
   };
 
