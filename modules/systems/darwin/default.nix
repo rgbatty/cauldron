@@ -3,8 +3,7 @@
     ../common.nix
     ./preferences.nix
     ./fonts.nix
-    ./brew.nix
-    ./yabai.nix
+    ./apps
   ];
 
   nix = {

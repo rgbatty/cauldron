@@ -57,9 +57,11 @@
       };
 
       services = {
-        ssh.enable = true;
         docker.enable = true;
+        ssh.enable = true;
         vaultwarden.enable = true;
+        yabai.enable = true;
+        skhd.enable = true;
       };
 
       shell = {
