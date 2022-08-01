@@ -34,7 +34,7 @@ in {
         yabai -m config window_topmost on
 
         # Auto-raise moused windows
-        yabai -m config focus_follows_mouse autoraise
+        # yabai -m config focus_follows_mouse autoraise
 
         # Shadows
         yabai -m config window_shadow on
