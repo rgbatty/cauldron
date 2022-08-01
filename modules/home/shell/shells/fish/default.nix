@@ -50,6 +50,9 @@ in {
 
       interactiveShellInit = ''
         set -g fish_greeting ""
+
+        # TODO: revisit this asdf include. Nix should be able to solve this
+        source $HOME/.asdf/asdf.fish
       '';
     };
   };
