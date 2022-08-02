@@ -55,7 +55,7 @@ in {
 
   config = with wm; mkIf (cfg.enable && pkgs.stdenv.isDarwin) {
     home.file.skhd = {
-      executable = true;
+      # executable = true;
       target = ".config/skhd/skhdrc";
       text = ''
         # ======Core Actions================================================================
@@ -66,7 +66,7 @@ in {
         ${core.closeWindow} : yabai -m window --close
         # ${core.restart} :
         # Restart Yabai
-        # MODKEY + shift - r:
+        # MODKEY + shift - r: 
         # shift + ctrl + alt - r : \
         #     /usr/bin/env osascript <<< \
         #         "display notification \"Restarting Yabai\" with title \"Yabai\""; \
