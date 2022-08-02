@@ -1,6 +1,6 @@
 { inputs, config, lib, pkgs, ... }: {
   environment.interactiveShellInit = ''
-    eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
+    eval "$(${config.homebrew.brewPrefix}/brew shellenv)"
   '';
 
   homebrew = {
