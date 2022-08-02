@@ -5,7 +5,6 @@ with lib;
   environment = {
     shells = with pkgs; [ bashInteractive fish zsh ];
     variables = {
-      SHELL = "${pkgs.fish}/bin/fish";
       NIXPKGS_ALLOW_UNFREE = "1";
     };
     systemPackages = with pkgs; [
