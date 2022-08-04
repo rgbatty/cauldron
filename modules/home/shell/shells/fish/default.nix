@@ -15,7 +15,6 @@ in {
     home.packages = with pkgs; [
       fish
       fishPlugins.done
-      fishPlugins.forgit
       # TODO: Fzf-fish breaks after channel updates
       # fishPlugins.fzf-fish
       fishPlugins.pisces
@@ -46,6 +45,8 @@ in {
             sha256 = "sha256-0TlKq2ur2I6Bv7pu7JObrJxV0NbQhydmCuUs6ZdDU1I=";
           };
         }
+
+        # TODO: Look into Tide over Starship for Fish - https://github.com/IlanCosman/tide
       ];
 
       interactiveShellInit = ''
