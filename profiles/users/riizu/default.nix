@@ -23,7 +23,6 @@
         utilities = {
           enable = true;
           modern = true;
-          navi = true;
         };
       };
     };

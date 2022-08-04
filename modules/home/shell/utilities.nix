@@ -8,7 +8,6 @@ in {
   options.modules.home.shell.utilities = with types; {
     enable = mkEnableOption "Utilities";
     modern = mkEnableOption "Modern Utilities";
-    navi = mkEnableOption "navi";
   };
 
   config = mkIf cfg.enable {
@@ -25,9 +24,11 @@ in {
       exa
       fd
       just
-    ] ++ pkgs.lib.optionals (cfg.navi) [
-      navi
     ];
+
+    programs.bat = mkIf cfg.modern {
+      enable = true;
+    };
 
     programs.direnv = {
       enable = true;
@@ -44,17 +45,6 @@ in {
     };
 
     programs.zoxide = {
-      enable = true;
-      enableBashIntegration = shellsCfg.bash.enable;
-      enableFishIntegration = shellsCfg.fish.enable;
-      enableZshIntegration = shellsCfg.zsh.enable;
-    };
-
-    programs.bat = mkIf cfg.modern {
-      enable = true;
-    };
-
-    programs.navi = mkIf cfg.navi {
       enable = true;
       enableBashIntegration = shellsCfg.bash.enable;
       enableFishIntegration = shellsCfg.fish.enable;
