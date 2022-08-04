@@ -4,6 +4,7 @@ with lib;
 let
   cfg = config.modules.home.shell.shells.fish;
   shellCfg = config.modules.home.shell;
+  editorCfg = config.modules.home.editors;
 
   shellAbbrs = import ../common/abbrs.nix;
   shellAliases = import ../common/aliases.nix;
@@ -53,13 +54,19 @@ in {
       interactiveShellInit = mkMerge [
         ''
           set -g fish_greeting ""
-
-          # TODO: revisit this asdf include. Nix should be able to solve this
-          source $HOME/.asdf/asdf.fish
         ''
         (mkIf (shellCfg.utilities.enable) ''
           ${pkgs.zoxide}/bin/zoxide init fish | source
         '')
+
+        (mkIf (editorCfg.emacs.enable && editorCfg.emacs.doom.enable) ''
+          set -g --append PATH ${config.xdg.configHome}/emacs/bin
+        '')
+
+        # TODO: replace asdf with nix/direnv
+        ''
+          source $HOME/.asdf/asdf.fish
+        ''
       ];
     };
   };
