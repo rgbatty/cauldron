@@ -24,7 +24,6 @@
       end
     end
   '';
-  environment.variables.SHELL = "${pkgs.fish}/bin/fish";
 
   # enables nix-darwin in shell
   programs.bash.enable = true;
