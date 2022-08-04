@@ -3,6 +3,7 @@
 with lib;
 let
   cfg = config.modules.home.shell.shells.fish;
+  shellCfg = config.modules.home.shell;
 
   shellAbbrs = import ../common/abbrs.nix;
   shellAliases = import ../common/aliases.nix;
@@ -49,12 +50,17 @@ in {
         # TODO: Look into Tide over Starship for Fish - https://github.com/IlanCosman/tide
       ];
 
-      interactiveShellInit = ''
-        set -g fish_greeting ""
+      interactiveShellInit = mkMerge [
+        ''
+          set -g fish_greeting ""
 
-        # TODO: revisit this asdf include. Nix should be able to solve this
-        source $HOME/.asdf/asdf.fish
-      '';
+          # TODO: revisit this asdf include. Nix should be able to solve this
+          source $HOME/.asdf/asdf.fish
+        ''
+        (mkIf (shellCfg.utilities.enable) ''
+          ${pkgs.zoxide}/bin/zoxide init fish | source
+        '')
+      ];
     };
   };
 }

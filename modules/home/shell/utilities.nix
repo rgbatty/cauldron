@@ -39,16 +39,14 @@ in {
 
     programs.fzf = {
       enable = true;
-      enableBashIntegration = shellsCfg.bash.enable;
-      enableFishIntegration = shellsCfg.fish.enable;
-      enableZshIntegration = shellsCfg.zsh.enable;
+      # added via interactiveShellInit instead
+      enableFishIntegration = false;
     };
 
     programs.zoxide = {
       enable = true;
-      enableBashIntegration = shellsCfg.bash.enable;
-      enableFishIntegration = shellsCfg.fish.enable;
-      enableZshIntegration = shellsCfg.zsh.enable;
+      # added via interactiveShellInit instead
+      enableFishIntegration = false;
     };
   };
 }
