@@ -10,10 +10,7 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      # TODO: Not supported on Darwin
       # (mkIf cfg.calibre.enable calibre)
     ];
-
-    # # TODO calibre dotfiles
   };
 }

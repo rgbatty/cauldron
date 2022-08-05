@@ -1,8 +1,7 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let
-  cfg = config.modules.home.desktop.browsers.vivaldi;
+let cfg = config.modules.home.desktop.browsers.vivaldi;
 in {
   options.modules.home.desktop.browsers.vivaldi = {
     enable = mkEnableOption "Vivaldi";
@@ -10,7 +9,6 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      # TODO: Doesn't build on darwin
       #vivaldi
     ];
   };

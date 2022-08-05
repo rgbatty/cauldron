@@ -8,9 +8,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-    ];
-
-    # TODO: Configure elixir
+    home.packages = with pkgs; [];
   };
 }

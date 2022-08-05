@@ -11,7 +11,5 @@ in {
     home.packages = with pkgs; [
       iterm2
     ];
-
-    # TODO: Configure iTerm
   };
 }

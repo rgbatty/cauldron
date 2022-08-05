@@ -1,3 +1,8 @@
+# TODO: Browser Configuration
+# * Add Vivaldi pkg and configuration
+# * Add Firefox pkg and configuration
+# * Add default browser support
+
 { options, config, lib, pkgs, ... }:
 
 with lib;

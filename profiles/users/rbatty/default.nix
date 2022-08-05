@@ -3,9 +3,7 @@
   modules = {
     home = {
       desktop = {
-        apps = {
-          unity3d.enable = true;
-        };
+        # apps = {};
 
         browsers = {
           vivaldi.enable = true;

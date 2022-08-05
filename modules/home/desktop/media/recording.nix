@@ -11,13 +11,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs;
-      # TODO: Broken package
+    home.packages = with pkgs; [
       # for recording and remastering audio
       # (if cfg.audio.enable then [ pkgs.audacity-gtk3 pkgs.ardour ] else []) ++
-      # TODO: Not supported on Darwin
       # for longer term streaming/recording the screen
       # (if cfg.video.enable then [ pkgs.obs-studio pkgs.handbrake ] else []);
-      [];
+    ];
   };
 }

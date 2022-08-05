@@ -9,10 +9,7 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      # TODO: Doesn't support Darwin
       # spotify
     ];
-
-    # TODO: Configure spotify
   };
 }

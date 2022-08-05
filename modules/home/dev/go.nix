@@ -8,9 +8,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-    ];
-
-    # TODO: Configure golang
+    home.packages = with pkgs; [];
   };
 }
