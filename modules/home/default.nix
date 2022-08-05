@@ -42,9 +42,6 @@ with lib;
 
     manual.manpages.enable = true;
 
-    # TODO: Is this redundant?
-    nixpkgs.config.allowUnfree = true;
-
     programs.home-manager.enable = true;
   };
 }
