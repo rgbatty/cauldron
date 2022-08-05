@@ -16,6 +16,8 @@ with lib;
   home-manager = {
     backupFileExtension = "backup";
     sharedModules = [ ../home ];
+    useGlobalPkgs = true;
+    useUserPackages = true;
   };
 
   nix = {
