@@ -4,8 +4,7 @@ with lib;
 let
   cfg = config.modules.home.shell.shells.zsh;
 
-  shellAliases = (import ../common/aliases.nix)
-  // (import ../common/abbrs.nix);
+  shellAliases = import ../common/aliases.nix;
 in {
   options.modules.home.shell.shells.zsh = with types; {
     enable = mkEnableOption "zsh";
@@ -22,7 +21,6 @@ in {
 
       enable = true;
       dotDir = ".config/zsh";
-      # TODO: Possibly slow completion?
       enableCompletion = true;
       enableSyntaxHighlighting = true;
       enableAutosuggestions = true;

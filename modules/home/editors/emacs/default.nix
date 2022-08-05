@@ -1,3 +1,7 @@
+# TODO: Emacs Configuration
+# * Configure EDITOR
+# * move path injection to here from shells
+
 { config, options, lib, pkgs, ... }:
 
 with lib;
@@ -25,10 +29,8 @@ in {
     ];
 
     home.sessionVariables = mkMerge [
-      # { EDITOR = "emacsclient -t -a ''"; }
       (mkIf cfg.doom.enable {
         DOOMDIR = toString "${config.xdg.configHome}/doom";
-        # PATH = [ "$XDG_CONFIG_HOME/emacs/bin" "$PATH" ];
       })
     ];
 
@@ -48,7 +50,6 @@ in {
         '');
     };
 
-    xdg.configFile."doom".source = config.lib.file.mkOutOfStoreSymlink
-      ./doom;
+    xdg.configFile."doom".source = config.lib.file.mkOutOfStoreSymlink ./doom;
   };
 }

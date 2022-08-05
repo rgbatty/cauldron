@@ -1,3 +1,7 @@
+# TODO: QMK Configuration
+# * Add repo/build process
+# * pull down custom configs for enabled boards
+
 { config, options, lib, pkgs, ... }:
 
 with lib;
@@ -12,6 +16,4 @@ in {
     home.packages = with pkgs; [
     ];
   };
-
-  # TODO: Configure QMK
 }

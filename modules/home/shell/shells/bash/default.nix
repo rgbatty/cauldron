@@ -4,8 +4,7 @@ with lib;
 let
   cfg = config.modules.home.shell.shells.bash;
 
-  shellAliases = (import ../common/aliases.nix)
-  // (import ../common/abbrs.nix);
+  shellAliases = import ../common/aliases.nix;
 in {
   options.modules.home.shell.shells.bash = with types; {
     enable = mkEnableOption "bash";

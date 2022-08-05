@@ -1,3 +1,5 @@
+# TODO: Vaultwarden Configuration
+
 { config, options, lib, pkgs, ... }:
 
 with lib;
@@ -12,6 +14,4 @@ in {
     home.packages = with pkgs; [
     ];
   };
-
-  # TODO: Configure Vaultwarden
 }

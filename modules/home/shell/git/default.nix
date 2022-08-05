@@ -1,37 +1,14 @@
+# TODO: Git Configuration
+# * Implement aliases (system & git-specific, ideally)
+# * implement commit templating
+# * use user information
+# * colorize/theme using themes
+# * pretty.nice?
+
 { config, lib, pkgs, ... }:
 
 with lib;
-let
-  cfg = config.modules.home.shell.git;
-
-  # TODO: Update git templates
-  commit-templates = {
-    conventional = pkgs.writeText "gitmessage-conventional" ''
-      # <type>(<scope>): <subject>
-      # types: feat, fix, docs, style, refactor, test, chore
-      # scope: arbitrary by project
-      # subject: imperative tense, no capital, no period
-      #
-      # body: imperative tense, include motivation for the change and contrasts with previous behavior
-      #
-      # footer: BREAKING CHANGE, issue references (closes #12345)
-      # https://github.com/clog-tool/clog-cli/tree/bd3e45fdc8674e5f9a03a5136760dff0657817d6#about
-      # https://github.com/conventional-changelog/conventional-changelog/blob/a5505865ff3dd710cf757f50530e73ef0ca641da/conventions/angular.md
-    '';
-
-    dotfiles = pkgs.writeText "gitmessage-dotfiles" ''
-      # categories: "", security, break, feature, fix, add, remove, deprecate
-      # scopes: "", asdf, brew, doc, emacs, homemanager, nix
-    '';
-  };
-
-  configIncludes = {
-    conventionalCommits = {
-      commit = { template = commit-templates.conventional.outPath; };
-    };
-
-    dotfiles = { commit = { template = commit-templates.dotfiles.outPath; }; };
-  };
+let cfg = config.modules.home.shell.git;
 in {
   options.modules.home.shell.git = with types; {
     enable = mkEnableOption "git";
@@ -44,7 +21,6 @@ in {
 
     programs.git = {
       enable = true;
-      # TODO: Add dynamic git user
       userName = "Ryan Batty";
       userEmail = "rbatty@koumori.dev";
 
@@ -58,6 +34,10 @@ in {
           condition = "gitdir:~/src/side-projects/";
         }
       ];
+
+      # ignores = [];
+      # aliases = {};
+      # xdg.configFile."git/templates".source = "/git/templates";
 
       extraConfig = {
         branch.sort = "-committerdate";
@@ -118,30 +98,9 @@ in {
         # Result: <short-sha> <commit-message> (<pointer-names>) -- <commit-author-name>; <relative-time>
         # pretty.nice = "%C(yellow)%h%C(reset) %C(white)%s%C(cyan)%d%C(reset) -- %an; %ar";
       };
-
-      ignores = [];
-
-      aliases = {
-        # logging
-        plog =
-          "log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'";
-        tlog =
-          "log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative";
-        rank = "shortlog -sn --no-merges";
-      };
-
-      # TODO: Add gitignore_global
-      # xdg.configFile = {
-      #   "git/config.conventional".text =
-      #     generators.toINI { } configIncludes.conventionalCommits;
-      #   "git/config.dotfiles".text =
-      #       generators.toINI { } configIncludes.dotfiles;
-      #   # "git/.gitignore_global".so = "";
-      # };
     };
 
     programs.gh.enable = true;
     programs.gh.settings.git_protocol = "ssh";
-    # xdg.configFile."git/templates".source = "${pkgs.dotfield-config}/git/templates";
   };
 }

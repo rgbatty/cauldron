@@ -25,6 +25,7 @@
 
 
     casks = [
+      # TODO: Pick a launcher for macos
       # "alfred"
       "discord"
       "docker"

@@ -1,3 +1,5 @@
+# TODO: phase out user 'riizu'
+
 { config, ... }: {
   modules = {
     home = {

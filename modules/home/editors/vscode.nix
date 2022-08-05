@@ -1,3 +1,9 @@
+# TODO: Code Configuration
+# * find out why settings.json can't be edited
+# * fix extension install
+# * configure terminal usage
+# * configure auto format
+
 { config, lib, pkgs, ... }:
 
 with lib;
@@ -13,11 +19,10 @@ in {
       enable = true;
 
       extensions = with pkgs.vscode-extensions; [
-        # TODO: Evaluate these for nixpkg equivalents
+        # Evaluate these for nixpkg equivalents
         # aaron-bond.better-comments
         # BriteSnow.vscode-toggle-quotes
 
-        # TODO: these don't build... for some reason
         # bbenoist.nix
         # christian-kohler.path-intellisense
         # dracula-theme.theme-dracula
@@ -41,8 +46,6 @@ in {
         editor.fontFamily = "'Fira Code', Consolas, 'Courier New', monospace";
         editor.fontLigatures = true;
         editor.fontSize = 15;
-        # TODO: Re-evaluate formatOnSave (per-project?)
-        # editor.formatOnSave = false;
         editor.glyphMargin = false;
         editor.lineHeight = 22;
         editor.linkedEditing = true;
@@ -81,13 +84,6 @@ in {
 
         telemetry.enableCrashReporter = false;
         telemetry.enableTelemetry = false;
-
-        # TODO: evaluate terminal settings for Darwin
-        # terminal.explorerKind = "external";
-        # terminal.external.osxExec = "iTerm.app";
-        # terminal.integrated.fontFamily = "Inconsolata for Powerline"; // Install Powerline fonts for this to work
-        # terminal.integrated.fontSize = 12;
-        # terminal.integrated.shell.osx = "fish";
 
         window.title = "\${activeEditorMedium}\${separator}\${rootName}";
         window.zoomLevel = 1;

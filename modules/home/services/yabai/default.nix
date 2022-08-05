@@ -1,3 +1,6 @@
+# TODO: Yabai Configuration
+# * doesn't respect emacs/doom consistently
+
 { inputs, config, lib, pkgs, ... }:
 
 with lib;
@@ -53,7 +56,7 @@ in {
 
         # Rules
         # Forced tiling
-        yabai -m rule --add app="Emacs" manage=on
+        yabai -m rule --add app="emacs" manage=on
 
         # Floatable apps
 
@@ -82,6 +85,4 @@ in {
       '';
     };
   };
-
 }
-

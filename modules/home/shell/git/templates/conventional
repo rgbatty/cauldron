@@ -1,0 +1,10 @@
+# <type>(<scope>): <subject>
+# types: feat, fix, docs, style, refactor, test, chore
+# scope: arbitrary by project
+# subject: imperative tense, no capital, no period
+#
+# body: imperative tense, include motivation for the change and contrasts with previous behavior
+#
+# footer: BREAKING CHANGE, issue references (closes #12345)
+# https://github.com/clog-tool/clog-cli/tree/bd3e45fdc8674e5f9a03a5136760dff0657817d6#about
+# https://github.com/conventional-changelog/conventional-changelog/blob/a5505865ff3dd710cf757f50530e73ef0ca641da/conventions/angular.md

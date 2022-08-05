@@ -1,3 +1,6 @@
+# TODO: SSH Configuration
+# * 'useKeychain' doesn't work in ubuntu
+
 { config, lib, pkgs, ... }:
 
 with lib;
@@ -20,7 +23,6 @@ in {
             controlPersist = "5";
 
             addKeysToAgent = "yes";
-            # TODO: 'useKeychain' doesn't work in ubuntu?
             # useKeychain = "yes";
 
             serverAliveCountMax = "6";

@@ -1,3 +1,7 @@
+# Utilities
+# Fish Integrations
+# - Manually via interactiveShellInit for performance
+
 { config, lib, pkgs, ... }:
 
 with lib;
@@ -39,13 +43,11 @@ in {
 
     programs.fzf = {
       enable = true;
-      # added via interactiveShellInit instead
       enableFishIntegration = false;
     };
 
     programs.zoxide = {
       enable = true;
-      # added via interactiveShellInit instead
       enableFishIntegration = false;
     };
   };
