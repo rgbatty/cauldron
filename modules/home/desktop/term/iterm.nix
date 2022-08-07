@@ -7,7 +7,7 @@ in {
     enable = mkEnableOption "iTerm";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf (cfg.enable && pkgs.stdenv.isDarwin) {
     home.packages = with pkgs; [
       iterm2
     ];
