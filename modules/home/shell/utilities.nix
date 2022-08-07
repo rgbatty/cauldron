@@ -18,7 +18,6 @@ in {
     home.packages = with pkgs; [
       fd
       fzf
-      navi
       ripgrep
       tealdeer
       zoxide
