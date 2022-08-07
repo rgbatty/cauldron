@@ -3,13 +3,13 @@
     ./hardware-configuration.nix
   ];
 
-  users.users.riizu = {
-    home = "/Users/riizu";
+  users.users.rbatty = {
+    home = "/Users/rbatty";
     shell = pkgs.fish;
     isNormalUser = true;
   };
 
-  home-manager.users.riizu = {
-    imports = [ ../../users/riizu ];
+  home-manager.users.rbatty = {
+    imports = [ ../../users/rbatty ];
   };
 }
