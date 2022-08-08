@@ -8,6 +8,7 @@ with lib;
     ./dev
     ./editors
     ./hardware
+    ./nix
     ./services
     ./shell
     ./themes

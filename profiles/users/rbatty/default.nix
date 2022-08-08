@@ -54,6 +54,8 @@
         zmk.enable = true;
       };
 
+      nix.enable = true;
+
       services = {
         docker.enable = true;
         ssh.enable = true;
