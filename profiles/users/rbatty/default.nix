@@ -46,7 +46,10 @@
           doom.enable = true;
         };
         vim.enable = true;
-        vscode.enable = true;
+        vscode = {
+          enable = true;
+          mutable = true;
+        };
       };
 
       hardware = {
