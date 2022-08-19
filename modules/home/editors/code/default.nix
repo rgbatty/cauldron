@@ -46,28 +46,7 @@ in {
 
     programs.vscode = {
       enable = true;
-      extensions = with pkgs.vscode-extensions; [
-        bbenoist.nix
-        christian-kohler.path-intellisense
-        dracula-theme.theme-dracula
-        eamodio.gitlens
-        gruntfuggly.todo-tree
-        ms-azuretools.vscode-docker
-        pkief.material-icon-theme
-        skellock.just
-        skyapps.fish-vscode
-      ]++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        # TODO: Add these extensions to build directly
-        # aaron-bond.better-comments
-        # BriteSnow.vscode-toggle-quotes
-        # Example:
-        # {
-        #   name = "vscode-docker";
-        #   publisher = "ms-azuretools";
-        #   version = "1.18.0";
-        #   sha256 = "UPUfTOc5xJhI5ACm2oyWqtZ4zNxZjy16D6Mf30eHFEI=";
-        # }
-      ];
+      extensions = import ./extensions.nix { inherit pkgs; };
       package = pkgs.vscodium;
       userSettings = import ./settings.nix;
     };
