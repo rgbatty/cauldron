@@ -1,5 +1,3 @@
-# TODO: Nix configuration
-# * aliasing
 # Sources nix.sh based on install type
 # Original: https://gist.github.com/colinxs/2898ecfb610ee613fef1329fe2c821d4
 # Issue: https://github.com/nix-community/home-manager/issues/2012
@@ -170,17 +168,3 @@ in {
     })
   ]);
 }
-
-  # nix aliases
-    # n = "nix";
-    # np = "n profile";
-    # ni = "np install";
-    # nr = "np remove";
-    # ns = "n search --no-update-lock-file";
-    # nf = "n flake";
-    # nepl = "n repl '<nixpkgs>'";
-    # srch = "ns nixos";
-    # orch = "ns override";
-    # mn = ''
-    #   manix "" | grep '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^ //' | sk --preview="manix '{}'" | xargs manix
-    # '';

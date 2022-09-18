@@ -1,4 +1,3 @@
-# TODO: Implement user 'root'
 { ... }:
 # recommend using `hashedPassword`
 {

@@ -1,7 +1,3 @@
-# TODO: Code Configuration
-# * configure terminal usage
-# * configure auto format
-
 { config, lib, pkgs, ... }:
 
 with lib;

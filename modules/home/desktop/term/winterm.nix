@@ -8,6 +8,5 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # TODO: Configure WinTerm dotfiles
   };
 }

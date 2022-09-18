@@ -1,6 +1,3 @@
-# TODO: Yabai Configuration
-# * doesn't respect emacs/doom consistently
-
 { inputs, config, lib, pkgs, ... }:
 
 with lib;

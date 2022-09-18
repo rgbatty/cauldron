@@ -1,5 +1,3 @@
-# TODO: Implement colors for CLI
-
 {
   ## Colorization aliasing
   # =================================================================

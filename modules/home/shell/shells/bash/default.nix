@@ -37,8 +37,6 @@ in {
         "nocaseglob"
         "globstar"
         "no_empty_cmd_completion"
-        # TODO - 'noclobber' is invalid
-        # "noclobber"
       ];
     };
   };

@@ -1,9 +1,3 @@
-# TODO: Shell aliases
-# * fix posix-uncompliant aliases
-# * explore cross-system clipboard aliasing
-# * add personal aliases (doc, projects, etc.)
-# * fix network aliases
-
 {
   ## File Management
   # =================================================================
@@ -43,7 +37,6 @@
   # =================================================================
 
   # Uses human sizes, classifications, and color output for `ls`.
-  # TODO: adapt 'ls' alias to fish
   # ls = "command ls -Fh \${colorflag}";
 
   # Finds directories.
@@ -66,7 +59,6 @@
   sudo = "sudo ";
 
   # Prints each $PATH entry on a separate line.
-  # TODO: adapt 'path' alias to fish
   # path = "echo -e \${PATH//:/\\n}";
 
   ## System

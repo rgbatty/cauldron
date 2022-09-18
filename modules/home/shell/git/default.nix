@@ -1,10 +1,3 @@
-# TODO: Git Configuration
-# * Implement aliases (system & git-specific, ideally)
-# * implement commit templating
-# * use user information
-# * colorize/theme using themes
-# * pretty.nice?
-
 { config, lib, pkgs, ... }:
 
 with lib;
@@ -34,10 +27,6 @@ in {
           condition = "gitdir:~/src/side-projects/";
         }
       ];
-
-      # ignores = [];
-      # aliases = {};
-      # xdg.configFile."git/templates".source = "/git/templates";
 
       extraConfig = {
         branch.sort = "-committerdate";
@@ -91,12 +80,6 @@ in {
         push.default = "current";
         rebase.autostash = true;
         status.submoduleSummary = true;
-
-        # Environment variables will not be expanded -- this requires a path.
-        # init.templateDir = "${config.xdg.configHome}/git/templates";
-
-        # Result: <short-sha> <commit-message> (<pointer-names>) -- <commit-author-name>; <relative-time>
-        # pretty.nice = "%C(yellow)%h%C(reset) %C(white)%s%C(cyan)%d%C(reset) -- %an; %ar";
       };
     };
 

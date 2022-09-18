@@ -1,7 +1,3 @@
-# TODO: Emacs Configuration
-# * Configure EDITOR
-# * move path injection to here from shells
-
 { config, options, lib, pkgs, ... }:
 
 with lib;
@@ -39,8 +35,6 @@ in {
       package = emacsPackage;
       extraPackages = epkgs: (with epkgs; [ vterm ]);
     };
-
-    # TODO: Add emacs service config for linux
 
     home.activation = {
       installDoomEmacs = mkIf cfg.doom.enable (lib.hm.dag.entryAfter [ "writeBoundary" ] ''

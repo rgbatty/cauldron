@@ -1,5 +1,3 @@
-# TODO: Migrate system fonts to common/fontconfig
-
 { inputs, config, lib, pkgs, ... }: {
   fonts = {
     fontDir.enable = true;

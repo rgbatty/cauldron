@@ -2,7 +2,6 @@
 
 with lib;
 {
-  # TODO: Find a way to auto-import the whole modules directory
   imports = [
     ./desktop
     ./dev

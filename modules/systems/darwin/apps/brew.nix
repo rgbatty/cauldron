@@ -25,14 +25,11 @@
 
 
     casks = [
-      # TODO: Pick a launcher for macos
-      # "alfred"
       "discord"
       "docker"
       "firefox"
       "google-chrome"
       "obsidian"
-      # "raycast"
       "wez/wezterm/wezterm"
       "vivaldi"
     ];
@@ -40,10 +37,5 @@
     masApps = {
 
     };
-
-    # extraConfig = ''
-    #   brew "yabai", restart_service: true
-    #   brew "skhd", restart_service: true
-    # '';
   };
 }

@@ -1,6 +1,3 @@
-# TODO: Skhd Configuration
-# * Doesn't work on M1s
-
 { inputs, config, lib, pkgs, ... }:
 
 with lib;

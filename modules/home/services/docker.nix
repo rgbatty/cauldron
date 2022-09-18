@@ -1,5 +1,3 @@
-# TODO: Docker Configuration
-
 { config, options, lib, pkgs, ... }:
 
 with lib;
@@ -14,7 +12,4 @@ in {
     home.packages = with pkgs; [
     ];
   };
-  # Some aliases
-  # dk = "docker";
-  # dco = "docker-compose";
 }

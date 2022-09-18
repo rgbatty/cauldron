@@ -1,5 +1,3 @@
-# TODO: Vaultwarden Configuration
-
 { config, options, lib, pkgs, ... }:
 
 with lib;

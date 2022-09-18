@@ -1,8 +1,3 @@
-# TODO: Fish Improvements
-# * Re-implement fzf-fish
-# * Look into Tide over Starship - https://github.com/IlanCosman/tide
-# * remove ASDF in favor of direnv
-
 { config, lib, pkgs, ... }:
 
 with lib;

@@ -1,8 +1,3 @@
-# TODO: Implement Theming
-# * finish adding dracula
-# * decide on ./defaults or a different pattern
-# * figure out where per-app theming lives
-
 { options, config, lib, pkgs, ... }:
 
 with lib;

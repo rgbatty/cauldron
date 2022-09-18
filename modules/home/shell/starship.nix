@@ -18,7 +18,6 @@ in {
       enableFishIntegration = shellsCfg.fish.enable;
       enableZshIntegration = shellsCfg.zsh.enable;
 
-      # TODO: Configure Starship
       settings = {
         add_newline = false;
       };

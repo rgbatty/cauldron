@@ -30,16 +30,8 @@ with lib;
 
     gc = {
       automatic = true;
-      # TODO: Not in Darwin
-      # dates = "daily";
-      # persistent = true;
-      # randomizedDelaySec = "30min";
     };
 
     package = pkgs.nixFlakes;
   };
-
-
-  # TODO: Nix-Darwin doesn't like this...
-  # time.timeZone = mkDefault "America/Denver";
 }
