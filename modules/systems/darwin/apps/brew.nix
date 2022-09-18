@@ -41,9 +41,9 @@
 
     };
 
-    extraConfig = ''
-      brew "yabai", restart_service: true
-      brew "skhd", restart_service: true
-    '';
+    # extraConfig = ''
+    #   brew "yabai", restart_service: true
+    #   brew "skhd", restart_service: true
+    # '';
   };
 }
