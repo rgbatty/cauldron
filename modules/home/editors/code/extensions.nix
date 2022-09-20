@@ -9,8 +9,8 @@ with pkgs.vscode-extensions; [
   esbenp.prettier-vscode
   golang.go
   gruntfuggly.todo-tree
-  ms-azuretools.vscode-docker
-  ms-vsliveshare.vsliveshare
+  # ms-azuretools.vscode-docker
+  # ms-vsliveshare.vsliveshare
   pkief.material-icon-theme
   skellock.just
   skyapps.fish-vscode
