@@ -23,7 +23,7 @@ in {
     homeConfigurations = {
       "rbatty@luna" = mkHomeAppleSilicon "rbatty" ;
       "rbatty@fang" = mkHomeAppleIntel "rbatty" ;
-      "rbatty@koumori" = mkHomeLinux "rbatty" ;
+      "rbatty@selene" = mkHomeLinux "rbatty" ;
     };
 
     packages.aarch64-darwin."rbatty@luna" =
@@ -32,7 +32,7 @@ in {
     packages.x86_64-darwin."rbatty@fang" =
       self.outputs.homeConfigurations.${"rbatty@fang"}.activationPackage;
 
-    packages.x86_64-linux."rbatty@koumori" =
-      self.outputs.homeConfigurations.${"rbatty@koumori"}.activationPackage;
+    packages.x86_64-linux."rbatty@selene" =
+      self.outputs.homeConfigurations.${"rbatty@selene"}.activationPackage;
   };
 }

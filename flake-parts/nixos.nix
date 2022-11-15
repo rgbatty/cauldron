@@ -13,7 +13,7 @@
       });
   in {
     nixosConfigurations =  {
-      koumori = mkNixos ../profiles/hosts/koumori {};
+      selene = mkNixos ../profiles/hosts/selene {};
     };
 
     packages.x86_64-linux = lib.attrsets.mapAttrs' (name: value:
