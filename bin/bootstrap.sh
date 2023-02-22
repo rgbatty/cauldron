@@ -10,7 +10,7 @@ SSH_TYPE=ed25519
 GH_USER=rgbatty
 # WORKSPACE="$HOME/dev"
 # DOTFILES_LOCATION="$HOME/.dotfiles"
-# XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME"/.config}
+XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME"/.config}
 
 UNAME=$(uname | tr "[:upper:]" "[:lower:]")
 
@@ -84,7 +84,7 @@ append_if_absent() {
 }
 
 cmd_exists() {
-  $1 >/dev/null
+  eval $1 >/dev/null
 }
 
 install() {
@@ -103,7 +103,7 @@ install() {
 press_to_continue() {
   log_warn 'Press enter to continue, ctrl+c to abort'
   read _
-  
+
   # TODO: Add press_to_continue functionality
 }
 
@@ -114,7 +114,8 @@ restart_nix_daemon() {
 
 # Installers
 
-install_homebrew() {
+install_brew() {
+  echo "installing brew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
@@ -154,6 +155,7 @@ verify_deps_darwin() {
   install xcode-select 'xcode-select -p'
   install brew
   verify_deps_unix
+  verify_nix
   install nix_darwin 'command -v /run/current-system/sw/bin/darwin-rebuild'
 }
 
