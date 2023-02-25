@@ -8,8 +8,9 @@ SSH_KEY_EMAIL_ADDRESS="rgbatty@outlook.com"
 SSH_KEY_LOCATION="$HOME"/.ssh/id_ed25519.pub
 SSH_TYPE=ed25519
 GH_USER=rgbatty
-# WORKSPACE="$HOME/dev"
-# DOTFILES_LOCATION="$HOME/.dotfiles"
+WORKSPACE="$HOME/dev"
+HOST_FILE_LOCATION="$DOTFILES_LOCATION/.nix-host"
+DOTFILES_LOCATION="$HOME/.dotfiles"
 XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME"/.config}
 
 UNAME=$(uname | tr "[:upper:]" "[:lower:]")
@@ -114,6 +115,10 @@ restart_nix_daemon() {
 
 # Installers
 
+install_batt() {
+  log_info 'Batt install placeholder'
+}
+
 install_brew() {
   echo "installing brew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -141,7 +146,7 @@ install_nix_flakes() {
   (["$NIX_DAEMON" = true] && restart_nix_daemon)
 }
 
-install_xcode-select() {
+install_xcode() {
   xcode-select --install
 }
 
@@ -152,7 +157,7 @@ verify_batt() {
 }
 
 verify_deps_darwin() {
-  install xcode-select 'xcode-select -p'
+  install xcode 'xcode-select -p'
   install brew
   verify_deps_unix
   verify_nix
@@ -168,6 +173,21 @@ verify_deps_unix() {
   install make
 }
 
+verify_host() {
+  log_info 'Nix Host Type - Checking...'
+
+  if [ ! -f "$HOST_FILE_LOCATION" ]; then
+    log_info 'Nix Host Type - Setting up...'
+    nix_host=
+    select nix_host in $(find "$DOTFILES_LOCATION/profiles/hosts/" -mindepth 1 -type d -exec basename {} \; | xargs); do
+       test -n "$nix_host" && break
+       log_warn "Invalid host!"
+    done
+    printf '%s' "$nix_host" >>"$HOST_FILE_LOCATION"
+  fi
+
+  log_success "Nix Host Type - Set to '$(cat "$HOST_FILE_LOCATION")'!"
+}
 
 verify_nix() {
   install nix
@@ -175,9 +195,9 @@ verify_nix() {
 }
 
 verify_repo() {
-  if [ ! -d "$HOME/.dotfiles" ]; then
+  if [ ! -d "$DOTFILES_LOCATION" ]; then
     log_info 'Cloning Cauldron'
-    git clone git@github.com:$GH_USER/cauldron.git "$HOME/.dotfiles"
+    git clone git@github.com:$GH_USER/cauldron.git "$DOTFILES_LOCATION"
   fi
 
   log_success 'Cauldron repository verified!'
@@ -218,5 +238,6 @@ press_to_continue
 verify_ssh
 verify_repo
 verify_batt
+verify_host
 
 log_success 'Bootstrap completed. Run `batt` for more information.'
