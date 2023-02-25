@@ -152,9 +152,10 @@ install_xcode() {
 
 # Script
 
-verify_batt() {
-  install_batt
-}
+# TODO: Decide on Batt implementation (alias for Just?)
+# verify_batt() {
+#   install_batt
+# }
 
 verify_deps_darwin() {
   install xcode 'xcode-select -p'
@@ -173,21 +174,22 @@ verify_deps_unix() {
   install make
 }
 
-verify_host() {
-  log_info 'Nix Host Type - Checking...'
+# TODO: Decide on whether or not host value should be selectable/preset
+# verify_host() {
+#   log_info 'Nix Host Type - Checking...'
 
-  if [ ! -f "$HOST_FILE_LOCATION" ]; then
-    log_info 'Nix Host Type - Setting up...'
-    nix_host=
-    select nix_host in $(find "$DOTFILES_LOCATION/profiles/hosts/" -mindepth 1 -type d -exec basename {} \; | xargs); do
-       test -n "$nix_host" && break
-       log_warn "Invalid host!"
-    done
-    printf '%s' "$nix_host" >>"$HOST_FILE_LOCATION"
-  fi
+#   if [ ! -f "$HOST_FILE_LOCATION" ]; then
+#     log_info 'Nix Host Type - Setting up...'
+#     nix_host=
+#     select nix_host in $(find "$DOTFILES_LOCATION/profiles/hosts/" -mindepth 1 -type d -exec basename {} \; | xargs); do
+#        test -n "$nix_host" && break
+#        log_warn "Invalid host!"
+#     done
+#     printf '%s' "$nix_host" >>"$HOST_FILE_LOCATION"
+#   fi
 
-  log_success "Nix Host Type - Set to '$(cat "$HOST_FILE_LOCATION")'!"
-}
+#   log_success "Nix Host Type - Set to '$(cat "$HOST_FILE_LOCATION")'!"
+# }
 
 verify_nix() {
   install nix
@@ -237,7 +239,7 @@ press_to_continue
 "verify_deps_${SYSTEM}"
 verify_ssh
 verify_repo
-verify_batt
-verify_host
+# verify_batt
+# verify_host
 
 log_success 'Bootstrap completed. Run `batt` for more information.'
