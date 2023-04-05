@@ -49,7 +49,7 @@ esac
 # Logging
 
 log_system() {
-  log_info "[System Details: $SYSTEM running $PKG_MANAGER]"
+  log_info "[System Details: $SYSTEM running $PKG_MANAGER. Installing as $NIX_DAEMON]"
 }
 
 log_info() {
@@ -122,6 +122,8 @@ install_batt() {
 install_brew() {
   echo "installing brew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> $HOME/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 }
 
 install_make() {
@@ -129,7 +131,7 @@ install_make() {
 }
 
 install_nix() {
-  daemonFlag=$(if ["$NIX_DAEMON" = true]; then echo "--daemon"; else echo "--no-daemon"; fi)
+  daemonFlag=$(if [ "$NIX_DAEMON" = true ]; then echo "--daemon"; else echo "--no-daemon"; fi)
   (curl -L https://nixos.org/nix/install | sh -s -- $daemonFlag --yes)
 
   . $HOME/.nix-profile/etc/profile.d/nix.sh
@@ -143,7 +145,7 @@ install_nix_darwin() {
 install_nix_flakes() {
   mkdir -p "$XDG_CONFIG_HOME"/nix
   append_if_absent 'experimental-features = nix-command flakes' "$XDG_CONFIG_HOME"/nix/nix.conf
-  (["$NIX_DAEMON" = true] && restart_nix_daemon)
+  ([ "$NIX_DAEMON" = true ] && restart_nix_daemon)
 }
 
 install_xcode() {

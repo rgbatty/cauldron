@@ -7,7 +7,7 @@
   ];
 
   nix = {
-    trustedUsers = [ "@admin" "@staff" ];
+    trustedUsers = [ "root" "@admin" "@staff" "@wheel" ];
     extraOptions = ''
       extra-platforms = x86_64-darwin aarch64-darwin
     '';
