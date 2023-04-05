@@ -25,9 +25,13 @@
   };
 
 
-  outputs = inputs @ { self, flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit self; } {
-      imports = [ ./flake-parts ];
+  outputs = { flake-parts, ... } @ inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "aarch64-darwin" "x86_64-darwin" "x86_64-linux" ];
+      imports = [ ./flake-parts ];
+
+      flake = {
+        homeModules = import ./modules/home inputs;
+      };
     };
 }
