@@ -123,7 +123,6 @@ in {
         };
 
         config = {
-          # entryPoint = import "${self}/home/configurations/${config.username}@${config.hostname}.nix" (inputs // {inherit self;});
           entryPoint = import "${self}/profiles/users/${config.username}" (inputs // { inherit self; });
           base =
             if lib.strings.hasSuffix "-darwin" config.system
@@ -135,14 +134,10 @@ in {
             [
               config.entryPoint
               {home = {inherit (config) username homeDirectory;};}
-              # {systemd.user.startServices = "legacy";}
-              # inputs.nixos-vscode-server.nixosModules.home
-              # inputs.sops-nix.homeManagerModules.sops
               self.homeModules
+              # self.mixedModules
             ]
             ++ config.modules;
-            # ++ builtins.attrValues self.homeModules;
-            # ++ builtins.attrValues self.mixedModules;
 
           packageName = "home/config/${name}";
           finalPackage = config.finalHome.activationPackage;
@@ -159,6 +154,8 @@ in {
   };
 
   config.cauldron.homeConfigurations."rbatty@fang".system = "aarch64-darwin";
+  config.cauldron.homeConfigurations."rbatty@luna".system = "aarch64-darwin";
+  config.cauldron.homeConfigurations."rbatty@selene".system = "x86_64-linux";
 
   config.flake.homeConfigurations = configs;
   config.flake.packages = lib.mkMerge packages;
