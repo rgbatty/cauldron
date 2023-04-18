@@ -2,33 +2,39 @@
   description = "Cauldron: A Colony of Bats and Other Witchcraft";
 
   inputs = {
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs-2211.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    master.url = "github:nixos/nixpkgs/master";
 
-    darwin.url = "github:LnL7/nix-darwin/master";
-    darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    parts.url = "github:hercules-ci/flake-parts";
+
+    # The following is required to make flake-parts work.
+    nixpkgs.follows = "nixpkgs-unstable";
+    unstable.follows = "nixpkgs-unstable";
+    stable.follows = "nixpkgs-2211";
 
     home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.inputs.nixpkgs.follows = "unstable";
 
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "nixpkgs/master";
-    nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
+    # agenix.url = "github:ryantm/agenix";
+    # agenix.inputs.nixpkgs.follows = "nixpkgs";
 
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    flake-parts.inputs.nixpkgs.follows = "nixpkgs";
+    # darwin.url = "github:LnL7/nix-darwin/master";
+    # darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     # Extras
     # nixos-generators.url = "github:nix-community/nixos-generators";
     # nixos-hardware.url = "github:nixos/nixos-hardware";
-    emacs-overlay.url  = "github:nix-community/emacs-overlay";
+    # emacs-overlay.url  = "github:nix-community/emacs-overlay";
   };
 
 
-  outputs = { flake-parts, ... } @ inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = { parts, ... } @ inputs:
+    parts.lib.mkFlake { inherit inputs; } {
       systems = [ "aarch64-darwin" "x86_64-darwin" "x86_64-linux" ];
-      imports = [ ./flake-parts ];
+      imports = [
+        ./parts/home-manager.nix 
+      ];
 
       flake = {
         homeModules = import ./modules/home inputs;
