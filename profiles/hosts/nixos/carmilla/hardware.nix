@@ -10,19 +10,19 @@
     boot.kernelModules = [ "kvm-intel" ];
     boot.extraModulePackages = [ ];
 
-    fileSystems."/" = {
-        device = "/dev/disk/by-uuid/CHANGEME";
-        fsType = "ext4";
+    fileSystems."/" =
+    { device = "/dev/disk/by-uuid/59ed866e-6463-4f5c-99fc-0602dda11b84";
+      fsType = "ext4";
     };
 
-    fileSystems."/boot/efi" = {
-        device = "/dev/disk/by-uuid/CHANGEME2";
-        fsType = "vfat";
-    };
+    fileSystems."/boot/efi" =
+        { device = "/dev/disk/by-uuid/EE50-41C7";
+           fsType = "vfat";
+        };
 
-    swapDevices = [
-        { device = "/dev/disk/by-uuid/CHANGEME3"; }
-    ];
+    swapDevices =
+        [ { device = "/dev/disk/by-uuid/75a191fa-24d5-4b60-9964-343296eff202"; }
+        ];
 
     networking.useDHCP = lib.mkDefault true;
 
