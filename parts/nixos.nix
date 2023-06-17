@@ -97,6 +97,8 @@ in {
                 #   imports = [ rgbatty ];
                 # };
               }
+              inputs.hyprland.nixosModules.default
+              {programs.hyprland.enable = true;}
             ]
             ++ config.modules
             ++ builtins.attrValues {

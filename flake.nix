@@ -27,6 +27,7 @@
     # darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     # Extras
+    hyprland.url = "github:hyprwm/Hyprland";
     # nixos-generators.url = "github:nix-community/nixos-generators";
     # nixos-hardware.url = "github:nixos/nixos-hardware";
     # emacs-overlay.url  = "github:nix-community/emacs-overlay";
