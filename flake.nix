@@ -13,6 +13,10 @@
     unstable.follows = "nixpkgs-unstable";
     stable.follows = "nixpkgs-2211";
 
+    # Known to work, try again after nixos/nix#8072 git fixed
+    # https://github.com/NixOS/nix/issues/8072
+    nix.url = "github:nixos/nix";
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "unstable";
 
@@ -33,11 +37,14 @@
     parts.lib.mkFlake { inherit inputs; } {
       systems = [ "aarch64-darwin" "x86_64-darwin" "x86_64-linux" ];
       imports = [
-        ./parts/home-manager.nix 
+        ./parts/home-manager.nix
+        ./parts/nixos.nix
       ];
 
       flake = {
         homeModules = import ./modules/home inputs;
+
+        nixosModules = import ./modules/systems/nixos inputs;
       };
     };
 }

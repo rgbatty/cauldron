@@ -1,37 +1,48 @@
-{ inputs, lib, config, flake, pkgs, home-manager, ... }:
+{ unstable, nixpkgs-2211, nix, ... }: { lib, config, pkgs, ... }:
 
 with lib;
 {
-  environment = {
-    shells = with pkgs; [ bashInteractive fish zsh ];
-    variables = {
-      NIXPKGS_ALLOW_UNFREE = "1";
-    };
-    systemPackages = with pkgs; [
-      git
-      vim
-    ];
-  };
-
-  home-manager = {
-    backupFileExtension = "backup";
-    sharedModules = [ ../home ];
-    useGlobalPkgs = true;
-    useUserPackages = true;
-  };
-
   nix = {
-    extraOptions = ''
-      auto-optimise-store = true
-      experimental-features = nix-command flakes
-      keep-derivations = true
-      keep-outputs = true
-    '';
+    # package = mkDefault (nix.packages.${pkgs.system}.nix.overrideAttrs (oa: {
+    #   version = "${oa.version}_patched";
+    #   patches = [./prefer-local.patch];
+    # }));
+    # package = pkgs.nixFlakes;    
 
-    gc = {
-      automatic = true;
+    # registry = {
+    #   nixpkgs.flake = unstable;
+    #   nixpkgs2211.flake = nixpkgs-2211;
+    # };
+
+    settings = {
+      auto-optimise-store = mkDefault true;
+      experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = mkDefault [ "root" "@wheel" ];
     };
-
-    package = pkgs.nixFlakes;
   };
+  # environment = {
+  #   shells = with pkgs; [ bashInteractive fish zsh ];
+  #   variables = {
+  #     NIXPKGS_ALLOW_UNFREE = "1";
+  #   };
+  #   systemPackages = with pkgs; [
+  #     git
+  #     vim
+  #   ];
+  # };
+
+  # home-manager = {
+  #   backupFileExtension = "backup";
+  #   sharedModules = [ ../home ];
+  #   useGlobalPkgs = true;
+  #   useUserPackages = true;
+  # };
+
+
+
+  #   gc = {
+  #     automatic = true;
+  #   };
+
+  # };
 }
