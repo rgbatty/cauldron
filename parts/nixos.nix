@@ -78,10 +78,10 @@ in {
         };
 
         config = {
-          configFolder = "${self}/profiles/hosts";
-          entryPoint = import "${config.configFolder}/${name}.nix" (inputs // {inherit self;});
+          configFolder = "${self}/profiles/hosts/nixos";
+          entryPoint = import "${config.configFolder}/${name}" (inputs // {inherit self;});
+          hardware = "${config.configFolder}/${name}/hardware.nix";
           # bootloader = "${config.configFolder}/${name}/bootloader.nix";
-          # hardware = "${config.configFolder}/${name}/hardware.nix";
 
           finalModules =
             [
@@ -93,11 +93,12 @@ in {
               # {documentation.man.generateCaches = true;}
               # inputs.sops-nix.nixosModules.sops
             ]
+            # ++ config.entryPoint
             ++ config.modules
-            # ++ builtins.attrValues {
-            #   inherit (config) entryPoint bootloader hardware;
-            # }
-            ++ builtins.attrValues self.nixosModules;
+            ++ builtins.attrValues {
+              inherit (config) entryPoint hardware; # bootloader
+            };
+            # ++ builtins.attrValues self.nixosModules;
             # ++ builtins.attrValues self.mixedModules;
 
           packageName = "nixos/config/${name}";
@@ -115,7 +116,8 @@ in {
     };
   };
 
-  config.cauldron.nixosConfigurations.fang.system = "x86_64-linux";
+  # config.cauldron.nixosConfigurations.fang.system = "x86_64-linux";
+  config.cauldron.nixosConfigurations.carmilla.system = "x86_64-linux";
 
   config.flake.nixosConfigurations = configs;
   config.flake.packages = lib.mkMerge packages;
