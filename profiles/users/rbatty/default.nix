@@ -2,12 +2,13 @@
 {
   modules = {
     home = {
-      # desktop = {
+      desktop = {
       #   # apps = {};
 
-      #   browsers = {
-      #     vivaldi.enable = true;
-      #   };
+        browsers = {
+          #  vivaldi.enable = true;
+          firefox.enable = true;
+        };
 
       #   gaming = {
       #     steam.enable = true;
@@ -26,10 +27,10 @@
       #     spotify.enable = true;
       #   };
 
-      #   term = {
+        # term = {
       #     iterm.enable = true;
-      #   };
-      # };
+        # };
+      };
 
       # dev = {
       #   elixir.enable = true;

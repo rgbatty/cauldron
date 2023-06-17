@@ -3,4 +3,8 @@
     ./iterm.nix
     ./winterm.nix
   ];
+
+  home.packages = with pkgs; [
+    kitty
+  ];
 }
