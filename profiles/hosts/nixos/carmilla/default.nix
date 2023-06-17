@@ -1,6 +1,6 @@
-_: { config, pkgs, ... }:
-
-{
+inputs: { config, pkgs, home-manager, ... }: let
+    rgbatty = import "${inputs.self}/profiles/users/rbatty" inputs;
+in {
     # Bootloader
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
@@ -44,16 +44,9 @@ _: { config, pkgs, ... }:
         packages = with pkgs; [];
     };
 
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-    nixpkgs.config.allowUnfree = true;
-
-    environment.systemPackages = with pkgs; [
-        vim
-        wget
-    ];
-
-    services.openssh.enable = true;
-    
-    system.stateVersion = "22.11";
+    home-manager.users.rgbatty = {
+      home.username = "rgbatty";
+      home.homeDirectory = "/home/rgbatty"; 
+      imports = [ rgbatty ];
+    };
 }

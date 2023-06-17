@@ -15,7 +15,7 @@
 
     # Known to work, try again after nixos/nix#8072 git fixed
     # https://github.com/NixOS/nix/issues/8072
-    nix.url = "github:nixos/nix";
+    # nix.url = "github:nixos/nix";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "unstable";

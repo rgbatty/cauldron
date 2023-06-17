@@ -82,23 +82,27 @@ in {
           entryPoint = import "${config.configFolder}/${name}" (inputs // {inherit self;});
           hardware = "${config.configFolder}/${name}/hardware.nix";
           # bootloader = "${config.configFolder}/${name}/bootloader.nix";
+          
 
           finalModules =
             [
-              # {boot.cleanTmpDir = true;}
-              # {networking.hostName = name;}
-              # {nix.flakes.enable = true;}
-              # {system.configurationRevision = self.rev or "dirty";}
-              # {documentation.man.enable = true;}
-              # {documentation.man.generateCaches = true;}
-              # inputs.sops-nix.nixosModules.sops
+              inputs.home-manager.nixosModules.home-manager
+              {
+                home-manager.sharedModules = [self.homeModules];
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                # home-manager.users.rgbatty = {
+                #   home.username = "rgbatty";
+                #   home.homeDirectory = "/home/rgbatty"; 
+                #   imports = [ rgbatty ];
+                # };
+              }
             ]
-            # ++ config.entryPoint
             ++ config.modules
             ++ builtins.attrValues {
               inherit (config) entryPoint hardware; # bootloader
-            };
-            # ++ builtins.attrValues self.nixosModules;
+            }
+            ++ builtins.attrValues self.nixosModules;
             # ++ builtins.attrValues self.mixedModules;
 
           packageName = "nixos/config/${name}";
