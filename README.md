@@ -42,96 +42,24 @@ For those wondering, "how do you configure X?" take a look at `./modules`. The m
 
 ## Installation 🔮
 
-Listed below are installation steps for each supported platform. These are subject to change and may be out of date, but are consolidated for ease. I highly recommend users view the individual documentation for each.
-
-In summary, expect to install Nix, enable flakes, pull the repo, and then build and apply the output you're interested in.
-
-<details>
-<summary>
-
-### Darwin
-
-</summary>
-
-Install Nix:
 ```
-sh <(curl -L https://nixos.org/nix/install --darwin-use-unencrypted-nix-store-volume --daemon
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/rgbatty/cauldron/main/bin/bootstrap.sh)"
 ```
 
-Enable Nix Flakes support:
-```
-mkdir -p ~/.config/nix
-echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
-```
+The one-liner above will:
 
-Install Nix-Darwin:
-```
-nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
-./result/bin/darwin-installer
-```
+- Install xcode and brew for darwin systems
+- Install make
+- Install Nix
+- Enable Nix Flakes
+- Install Nix-Darwin for darwin systems
+- Verify SSH credentials are present
+- Pull down this repo to `~/.dotfiles`
+- Create the `batts` alias for Just detailed in [Usage](#usage)
 
-After cloning and moving to the project directory, build and apply using build package (for flake support), replacing `<host>` with chosen host (listed in `./flake-parts/darwin.nix`):
-```
-nix build .#darwinConfigurations.<host>.system
-./result/sw/bin/darwin-rebuild switch --flake .#darwinConfigurations.<host>
-```
-</details>
+It is intended to be **100% idempototent.** Due to the nature of Nix and how it modifies your shell, it typically requires an additional run after shell reload for the Nix install.
 
-<details>
-<summary>
-
-### NixOS
-
-</summary>
-
-Enable Nix Flakes support:
-```
-mkdir -p ~/.config/nix
-echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
-```
-
-After cloning and moving to the project directory, build and apply your chosen home-manager configuration, replacing `<host>` with chosen host (listed in `./flake-parts/nixos.nix`):
-```
-sudo nixos-rebuild switch --flake .#nixosConfigurations.<host>
-```
-</details>
-
-<details>
-<summary>
-
-### Linux
-
-</summary>
-
-Install Nix:
-```
-sh <(curl -L https://nixos.org/nix/install --darwin-use-unencrypted-nix-store-volume --daemon
-```
-
-Enable Nix Flakes support:
-```
-mkdir -p ~/.config/nix
-echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
-```
-
-Install Home Manager:
-```
-# Add the Nix Channel
-nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-nix-channel --update
-
-# Update your path for Non-NixOS hosts
-export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}
-
-# Install Home Manager
-nix-shell '<home-manager>' -A install
-```
-
-After cloning and moving to the project directory, build and apply your chosen home-manager configuration, replacing `<user@host>` with the chosen user and host (listed in `./flake-parts/darwin.nix`):
-```
-home-manager switch --flake .#homeManagerConfigurations.<user@host>
-```
-</details>
+<p align="right"><a href="#top" title="Back to top">🔝</a></p>
 
 ## Usage
 
