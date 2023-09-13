@@ -23,8 +23,8 @@
     # agenix.url = "github:ryantm/agenix";
     # agenix.inputs.nixpkgs.follows = "nixpkgs";
 
-    # darwin.url = "github:LnL7/nix-darwin/master";
-    # darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    darwin.url = "github:LnL7/nix-darwin/master";
+    darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     # Extras
     hyprland.url = "github:hyprwm/Hyprland";
@@ -38,13 +38,15 @@
     parts.lib.mkFlake { inherit inputs; } {
       systems = [ "aarch64-darwin" "x86_64-darwin" "x86_64-linux" ];
       imports = [
+        ./parts/darwin.nix
         ./parts/home-manager.nix
         ./parts/nixos.nix
       ];
 
       flake = {
+        darwinModules = import ./modules/systems/darwin inputs;
         homeModules = import ./modules/home inputs;
-
+        mixedModules = {};
         nixosModules = import ./modules/systems/nixos inputs;
       };
     };

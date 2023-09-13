@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs, ... }: {
+_: {config, lib, pkgs, ... }: {
   fonts = {
     fontDir.enable = true;
     fonts = with pkgs; [

@@ -1,8 +1,8 @@
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, osConfig, ... }:
 
 with lib;
 let
-  cfg = config.modules.home.services.skhd;
+  cfg = config.modules.systems.darwin.services.skhd;
   jq = "${pkgs.jq}/bin/jq";
 
   MODKEY = "alt";
@@ -49,14 +49,15 @@ let
     };
   };
 in {
-  options.modules.home.services.skhd = with types; {
+  options.modules.systems.darwin.services.skhd = with types; {
     enable = mkEnableOption "skhd";
   };
 
   config = with wm; mkIf (cfg.enable && pkgs.stdenv.isDarwin) {
-    home.file.skhd = {
-      target = ".config/skhd/skhdrc";
-      text = ''
+    services.skhd = {
+      enable = true;
+      package = pkgs.skhd;
+      skhdConfig = ''
         # ======Core Actions================================================================
 
         ${core.terminal} : wezterm
@@ -145,5 +146,7 @@ in {
         # MODKEY + comma	switch focus to prev monitor
       '';
     };
+    
+    system.keyboard.enableKeyMapping = true;
   };
 }

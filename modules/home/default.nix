@@ -1,7 +1,8 @@
 inputs: { config, lib, pkgs, ... }:
 
-with lib;
-{
+with lib; let
+  systemPackages = lib.optionals (pkgs.stdenv.isLinux) [ pkgs.xdg_utils ];
+in {
   imports = [
     ./desktop
     ./dev
@@ -15,9 +16,10 @@ with lib;
 
   config = {
     home = {
-      packages = lib.optionals (pkgs.stdenv.isLinux) [ pkgs.xdg_utils ];
+      packages = systemPackages ++ [pkgs.home-manager];
       stateVersion = "22.11";
 
+      # TODO: Still needed?
       # activation = mkIf pkgs.stdenv.isDarwin {
       #   copyApplications = let
       #     apps = pkgs.buildEnv {

@@ -85,9 +85,6 @@ _: {config, lib, pkgs, ...}: {
     services.openssh.enable = true;
     # home-manager = {
     #   backupFileExtension = "backup";
-    #   sharedModules = [ ../home ];
-    #   useGlobalPkgs = true;
-    #   useUserPackages = true;
     # };
 
 

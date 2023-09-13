@@ -6,14 +6,14 @@
   lib,
   ...
 }: let
-  cfg = config.cauldron.nixosConfigurations;
+  cfg = config.cauldron.darwinConfigurations;
 
   configs = builtins.mapAttrs (_: config: config.finalSystem) cfg;
 
   packages = builtins.attrValues (builtins.mapAttrs (_: config: config.packageModule) cfg);
 in {
   options = {
-    cauldron.nixosConfigurations = lib.mkOption {
+    cauldron.darwinConfigurations = lib.mkOption {
       type = lib.types.attrsOf (lib.types.submodule ({
         name,
         config,
@@ -24,7 +24,7 @@ in {
             type = lib.types.unspecified;
             default = inputs.nixpkgs;
           };
-          system = lib.mkOption {type = lib.types.enum ["x86_64-linux" "aarch64-linux"];};
+          system = lib.mkOption {type = lib.types.enum ["x86_64-darwin" "aarch64-darwin"];};
 
           modules = lib.mkOption {
             type = lib.types.listOf lib.types.unspecified;
@@ -42,16 +42,6 @@ in {
           };
 
           configFolder = lib.mkOption {
-            type = lib.types.str;
-            readOnly = true;
-          };
-
-          bootloader = lib.mkOption {
-            type = lib.types.str;
-            readOnly = true;
-          };
-
-          hardware = lib.mkOption {
             type = lib.types.str;
             readOnly = true;
           };
@@ -78,36 +68,31 @@ in {
         };
 
         config = {
-          configFolder = "${self}/profiles/hosts/nixos";
+          configFolder = "${self}/profiles/hosts/darwin";
           entryPoint = import "${config.configFolder}/${name}" (inputs // {inherit self;});
-          hardware = "${config.configFolder}/${name}/hardware.nix";
-          # bootloader = "${config.configFolder}/${name}/bootloader.nix";
-          
 
           finalModules =
             [
-              inputs.home-manager.nixosModules.home-manager
+              inputs.home-manager.darwinModules.home-manager
               {
                 home-manager.sharedModules = [self.homeModules];
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
               }
-              inputs.hyprland.nixosModules.default
-              {programs.hyprland.enable = true;}
             ]
             ++ config.modules
             ++ builtins.attrValues {
-              inherit (config) entryPoint hardware; # bootloader
+              inherit (config) entryPoint;
             }
-            ++ builtins.attrValues self.nixosModules
+            ++ builtins.attrValues self.darwinModules
             ++ builtins.attrValues self.mixedModules;
 
-          packageName = "nixos/config/${name}";
+          packageName = "darwin/config/${name}";
           finalPackage = config.finalSystem.config.system.build.toplevel;
 
           packageModule = {${config.system}.${config.packageName} = config.finalPackage;};
 
-          finalSystem = config.nixpkgs.lib.nixosSystem {
+          finalSystem = inputs.darwin.lib.darwinSystem {
             inherit (config) system;
 
             modules = config.finalModules;
@@ -117,9 +102,10 @@ in {
     };
   };
 
-  # config.cauldron.nixosConfigurations.fang.system = "x86_64-linux";
-  config.cauldron.nixosConfigurations.carmilla.system = "x86_64-linux";
+  config.cauldron.darwinConfigurations.luna.system = "aarch64-darwin";
+  config.cauldron.darwinConfigurations.fang.system = "x86_64-darwin";
 
-  config.flake.nixosConfigurations = configs;
+  config.flake.darwinConfigurations = configs;
+
   config.flake.packages = lib.mkMerge packages;
 }

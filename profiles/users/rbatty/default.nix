@@ -3,11 +3,10 @@
   modules = {
     home = {
       desktop = {
-      #   # apps = {};
+        # apps = {};
 
         browsers = {
-          #  vivaldi.enable = true;
-          firefox.enable = true;
+          vivaldi.enable = true;
         };
 
       #   gaming = {
@@ -28,7 +27,7 @@
       #   };
 
         # term = {
-      #     iterm.enable = true;
+      #     wezterm.enable = true;
         # };
       };
 
@@ -64,8 +63,6 @@
       #   docker.enable = true;
       #   ssh.enable = true;
       #   vaultwarden.enable = true;
-      #   yabai.enable = true;
-      #   skhd.enable = true;
       # };
 
       shell = {
