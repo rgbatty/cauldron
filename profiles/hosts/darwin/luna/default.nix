@@ -21,7 +21,6 @@ in {
         "homebrew/core"
         "homebrew/services"
         "koekeishiya/formulae"
-        "wez/wezterm"
       ];
       brews = [
         "coreutils"
@@ -32,11 +31,11 @@ in {
         "libyaml"
         "libpq"
         "gmp"
+        "gpg"
       ];
       casks = [
         # "docker" tmp disable until new profile for work
         "obsidian"
-        "wez/wezterm/wezterm"
         "vivaldi"
       ];
     };

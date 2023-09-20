@@ -26,9 +26,9 @@
       #     spotify.enable = true;
       #   };
 
-        # term = {
-      #     wezterm.enable = true;
-        # };
+        term = {
+          wezterm.enable = true;
+        };
       };
 
       # dev = {
@@ -40,17 +40,17 @@
       #   rust.enable = true;
       # };
 
-      # editors = {
+      editors = {
       #   emacs = {
       #     enable = true;
       #     doom.enable = true;
       #   };
       #   vim.enable = true;
-      #   vscode = {
-      #     enable = true;
-      #     mutable = true;
-      #   };
-      # };
+        # vscode = {
+          # enable = true;
+          # mutable = true;
+        # };
+      };
 
       # hardware = {
       #   qmk.enable = true;
