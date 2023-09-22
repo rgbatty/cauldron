@@ -15,6 +15,9 @@ in {
   ];
 
   config = {
+    # Remove once merged - https://github.com/nix-community/home-manager/issues/2942
+    nixpkgs.config.allowUnfreePredicate = (pkg: true);
+
     home = {
       packages = systemPackages ++ [pkgs.home-manager];
       stateVersion = "22.11";
