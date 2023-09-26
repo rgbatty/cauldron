@@ -5,6 +5,12 @@ inputs: {
   services = import ./services inputs;
 
   defaults = {config, lib, pkgs, ...} : {
+    environment.shells = with pkgs; [
+      bashInteractive
+      fish
+      zsh
+    ];
+
     nix = {
       settings.trusted-users = [ "root" "@admin" "@staff" "@wheel" ];
       extraOptions = ''
