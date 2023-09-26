@@ -88,6 +88,7 @@ in {
             [
               inputs.home-manager.nixosModules.home-manager
               {
+                home-manager.backupFileExtension = "backup";
                 home-manager.sharedModules = [self.homeModules];
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
