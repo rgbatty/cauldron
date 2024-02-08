@@ -146,7 +146,7 @@ in {
         # MODKEY + comma	switch focus to prev monitor
       '';
     };
-    
+
     system.keyboard.enableKeyMapping = true;
   };
 }

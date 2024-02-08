@@ -16,9 +16,9 @@ in {
     apps.brew = {
       enable = true;
       taps = [
-        "homebrew/cask"
+        # "homebrew/cask"
         "homebrew/cask-versions"
-        "homebrew/core"
+        # "homebrew/core"
         "homebrew/services"
         "koekeishiya/formulae"
       ];
@@ -36,7 +36,7 @@ in {
       casks = [
         # "docker" tmp disable until new profile for work
         "obsidian"
-        "vivaldi"
+        # "vivaldi"
       ];
     };
 

@@ -100,7 +100,7 @@ in {
             ]
             ++ config.modules;
 
-          packageName = "home/config/${name}";
+          packageName = name;
           finalPackage = config.finalHome.activationPackage;
 
           packageModule = {${config.system}.${config.packageName} = config.finalPackage;};

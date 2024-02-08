@@ -24,7 +24,7 @@ in {
     ] ++ pkgs.lib.optionals (cfg.modern) [
       bat
       bottom
-      exa
+      # exa - replace with eza?
       fd
       just
     ];

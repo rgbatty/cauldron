@@ -1,6 +1,5 @@
 # cachix_name := "rgbatty"
 
-# TODO: resolve host matching issues on darwin
 host_short := lowercase(`hostname -s`)
 username := env_var('USER')
 home_package := ".#" + username + "@" + host_short

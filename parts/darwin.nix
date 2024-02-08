@@ -88,7 +88,7 @@ in {
             ++ builtins.attrValues self.darwinModules
             ++ builtins.attrValues self.mixedModules;
 
-          packageName = "darwin/config/${name}";
+          packageName = name;
           finalPackage = config.finalSystem.config.system.build.toplevel;
 
           packageModule = {${config.system}.${config.packageName} = config.finalPackage;};
