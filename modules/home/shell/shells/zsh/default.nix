@@ -22,7 +22,7 @@ in {
       enable = true;
       dotDir = ".config/zsh";
       enableCompletion = true;
-      enableSyntaxHighlighting = true;
+      syntaxHighlighting.enable = true;
       enableAutosuggestions = true;
 
       history.path = "${config.xdg.dataHome}/zsh/history";

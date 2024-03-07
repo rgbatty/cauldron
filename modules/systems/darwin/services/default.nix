@@ -1,5 +1,6 @@
 _: {
   imports = [
-    ./brew.nix
+    ./skhd
+    ./yabai
   ];
 }

@@ -2,32 +2,52 @@
   description = "Cauldron: A Colony of Bats and Other Witchcraft";
 
   inputs = {
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs-2211.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    master.url = "github:nixos/nixpkgs/master";
+
+    parts.url = "github:hercules-ci/flake-parts";
+
+    # The following is required to make flake-parts work.
+    nixpkgs.follows = "nixpkgs-unstable";
+    unstable.follows = "nixpkgs-unstable";
+    stable.follows = "nixpkgs-2211";
+
+    # Known to work, try again after nixos/nix#8072 git fixed
+    # https://github.com/NixOS/nix/issues/8072
+    # nix.url = "github:nixos/nix";
+
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "unstable";
+
+    # agenix.url = "github:ryantm/agenix";
+    # agenix.inputs.nixpkgs.follows = "nixpkgs";
 
     darwin.url = "github:LnL7/nix-darwin/master";
     darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "nixpkgs/master";
-    nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
-
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    flake-parts.inputs.nixpkgs.follows = "nixpkgs";
-
     # Extras
+    hyprland.url = "github:hyprwm/Hyprland";
     # nixos-generators.url = "github:nix-community/nixos-generators";
     # nixos-hardware.url = "github:nixos/nixos-hardware";
-    emacs-overlay.url  = "github:nix-community/emacs-overlay";
+    # emacs-overlay.url  = "github:nix-community/emacs-overlay";
   };
 
 
-  outputs = inputs @ { self, flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit self; } {
-      imports = [ ./flake-parts ];
+  outputs = { parts, ... } @ inputs:
+    parts.lib.mkFlake { inherit inputs; } {
       systems = [ "aarch64-darwin" "x86_64-darwin" "x86_64-linux" ];
+      imports = [
+        ./parts/darwin.nix
+        ./parts/home-manager.nix
+        ./parts/nixos.nix
+      ];
+
+      flake = {
+        darwinModules = import ./modules/systems/darwin inputs;
+        homeModules = import ./modules/home inputs;
+        mixedModules = {};
+        nixosModules = import ./modules/systems/nixos inputs;
+      };
     };
 }

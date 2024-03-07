@@ -1,13 +1,13 @@
-{ inputs, lib, config, pkgs, ... }: {
+_: { lib, config, pkgs, ... }: {
   system.defaults = {
     # alf = {};
 
     dock = {
       autohide = false;
-      autohide-delay = "0.0";
-      autohide-time-modifier = "1.0";
+      autohide-delay = 0.0;
+      autohide-time-modifier = 1.0;
       # dashboard-in-overlay  = false;
-      # expose-animation-duration = "1.0";
+      # expose-animation-duration = 1.0;
       # launchanim = "true";
       # mineffect = ""; # 'genie', 'suck', 'scale'
       # minimize-to-application = true;

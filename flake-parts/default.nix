@@ -1,11 +1,11 @@
 _inputs: {
   imports = [
-    ./overlays.nix
+    # ./overlays.nix
 
-    ./darwin.nix
-    ./devshell.nix
+    # ./darwin.nix
+    # ./devshell.nix
     ./home-manager.nix
-    ./nixos.nix
-    ./packages.nix
+    # ./nixos.nix
+    # ./packages.nix
   ];
 }

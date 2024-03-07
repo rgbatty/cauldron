@@ -1,13 +1,13 @@
-{ config, pkgs, ... }:
+{ self, ... }: { config, pkgs, ... }:
 {
   modules = {
     home = {
-      # desktop = {
-      #   # apps = {};
+      desktop = {
+        # apps = {};
 
-      #   browsers = {
-      #     vivaldi.enable = true;
-      #   };
+        browsers = {
+          vivaldi.enable = true;
+        };
 
       #   gaming = {
       #     steam.enable = true;
@@ -26,10 +26,10 @@
       #     spotify.enable = true;
       #   };
 
-      #   term = {
-      #     iterm.enable = true;
-      #   };
-      # };
+        term = {
+          wezterm.enable = true;
+        };
+      };
 
       # dev = {
       #   elixir.enable = true;
@@ -40,17 +40,17 @@
       #   rust.enable = true;
       # };
 
-      # editors = {
+      editors = {
       #   emacs = {
       #     enable = true;
       #     doom.enable = true;
       #   };
       #   vim.enable = true;
-      #   vscode = {
-      #     enable = true;
-      #     mutable = true;
-      #   };
-      # };
+        vscode = {
+          enable = true;
+          mutable = true;
+        };
+      };
 
       # hardware = {
       #   qmk.enable = true;
@@ -63,8 +63,6 @@
       #   docker.enable = true;
       #   ssh.enable = true;
       #   vaultwarden.enable = true;
-      #   yabai.enable = true;
-      #   skhd.enable = true;
       # };
 
       shell = {

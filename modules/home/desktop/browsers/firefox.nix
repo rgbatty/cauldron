@@ -1,9 +1,9 @@
 { options, config, lib, pkgs, ... }:
 
 with lib;
-let cfg = config.modules.desktop.browsers.firefox;
+let cfg = config.modules.home.desktop.browsers.firefox;
 in {
-  options.modules.desktop.browsers.firefox = with types; {
+  options.modules.home.desktop.browsers.firefox = with types; {
     enable = mkEnableOption "Firefox";
     profileName = mkOption { type = types.str; default = config.user.name; };
 
@@ -27,6 +27,7 @@ in {
   config = mkIf cfg.enable (mkMerge [
     {
       home.packages = with pkgs; [
+        firefox-wayland
         # firefox-bin
         # (makeDesktopItem {
         #   name = "firefox-private";

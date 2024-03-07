@@ -49,7 +49,7 @@ esac
 # Logging
 
 log_system() {
-  log_info "[System Details: $SYSTEM running $PKG_MANAGER. Installing as $NIX_DAEMON]"
+  log_info "[System Details: $SYSTEM running $PKG_MANAGER. Installing as Nix Daemon: $NIX_DAEMON]"
 }
 
 log_info() {
@@ -122,7 +122,7 @@ install_batt() {
 install_brew() {
   echo "installing brew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> $HOME/.zprofile
+  (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> $HOME/.zshrc
   eval "$(/opt/homebrew/bin/brew shellenv)"
 }
 
