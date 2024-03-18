@@ -1,53 +1,22 @@
 {
-  description = "Cauldron: A Colony of Bats and Other Witchcraft";
+  description = "Nixos config flake";
 
   inputs = {
-    nixpkgs-2211.url = "github:nixos/nixpkgs/nixos-22.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    master.url = "github:nixos/nixpkgs/master";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    parts.url = "github:hercules-ci/flake-parts";
-
-    # The following is required to make flake-parts work.
-    nixpkgs.follows = "nixpkgs-unstable";
-    unstable.follows = "nixpkgs-unstable";
-    stable.follows = "nixpkgs-2211";
-
-    # Known to work, try again after nixos/nix#8072 git fixed
-    # https://github.com/NixOS/nix/issues/8072
-    # nix.url = "github:nixos/nix";
-
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "unstable";
-
-    # agenix.url = "github:ryantm/agenix";
-    # agenix.inputs.nixpkgs.follows = "nixpkgs";
-
-    darwin.url = "github:LnL7/nix-darwin/master";
-    darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
-
-    # Extras
-    hyprland.url = "github:hyprwm/Hyprland";
-    # nixos-generators.url = "github:nix-community/nixos-generators";
-    # nixos-hardware.url = "github:nixos/nixos-hardware";
-    # emacs-overlay.url  = "github:nix-community/emacs-overlay";
+    # home-manager = {
+    #   url = "github:nix-community/home-manager";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
-
-  outputs = { parts, ... } @ inputs:
-    parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "aarch64-darwin" "x86_64-darwin" "x86_64-linux" ];
-      imports = [
-        ./parts/darwin.nix
-        ./parts/home-manager.nix
-        ./parts/nixos.nix
+  outputs = { self, nixpkgs, ... }@inputs: {
+    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./configuration.nix
+        # inputs.home-manager.nixosModules.default
       ];
-
-      flake = {
-        darwinModules = import ./modules/systems/darwin inputs;
-        homeModules = import ./modules/home inputs;
-        mixedModules = {};
-        nixosModules = import ./modules/systems/nixos inputs;
-      };
     };
+  };
 }
