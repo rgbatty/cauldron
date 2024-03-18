@@ -121,6 +121,7 @@
       kate
       mangohud
       neofetch
+      parted
       vivaldi
       vscode
       xivlauncher
