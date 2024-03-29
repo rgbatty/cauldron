@@ -9,4 +9,10 @@
     ./hardware-configuration.nix
     ../../../modules/nixos
   ];
+
+  modules.nixos = {
+    # nvidia.enable = true;
+    # wayland.enable = true;
+    x11.enable = true;
+  };
 }
