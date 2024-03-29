@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   cfg = config.modules.nixos.x11;
+  nvidiaCfg = config.modules.nixos.nvidia;
 in
 {
   options.modules.nixos.x11 = {
@@ -20,7 +21,7 @@ in
         layout= "us";
         variant = "";
       };
-      videoDrivers = [ "nvidia" ];
+      videoDrivers = lib.mkIf nvidiaCfg.enable [ "nvidia" ];
     };
   };
 }
