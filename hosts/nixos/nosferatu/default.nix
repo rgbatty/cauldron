@@ -15,4 +15,6 @@
     # wayland.enable = true;
     x11.enable = true;
   };
+
+  networking.hostName = "nosferatu";
 }
