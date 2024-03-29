@@ -33,6 +33,24 @@
           }
         ];
       };
+
+      nosferatu = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./modules/nixos
+          ./hosts/nixos/nosferatu
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.backupFileExtension = "backup";
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.riizu = import ./modules/home/nixos;
+            home-manager.extraSpecialArgs = { inherit inputs;};
+          }
+        ];
+      };
     };
   };
 }
