@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   cfg = config.modules.nixos.wayland;
+  nvidiaCfg = config.modules.nixos.nvidia;
 in
 {
   options.modules.nixos.wayland = {
@@ -18,7 +19,7 @@ in
     };
 
     services = {
-      xserver.videoDrivers = ["nvidia"]; # might be unused
+      xserver.videoDrivers = lib.mkIf nvidiaCfg.enable ["nvidia"]; # might be unused
       xserver.enable = false; # disable xorg server
       # https://wiki.archlinux.org/title/Greetd
       greetd = {
@@ -82,9 +83,4 @@ in
       wl-clipboard
     ];
   };
-
-
-
-
-
 }
