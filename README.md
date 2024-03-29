@@ -8,15 +8,11 @@
 
 <!-- badges -->
 ![License](https://img.shields.io/github/license/rgbatty/cauldron?style=flat-square)
-![Latest commit](https://img.shields.io/github/last-commit/rgbatty/cauldron/master?style=flat-square)
-![Build status: master](https://img.shields.io/github/workflow/status/rgbatty/cauldron/CI/master?style=flat-square)
-![Supports Emacs 27.1 - 28.1](https://img.shields.io/badge/Supports-Emacs_27.1--28.1-blueviolet.svg?style=flat-square&logo=GNU%20Emacs&logoColor=white)
+![Latest commit](https://img.shields.io/github/last-commit/rgbatty/cauldron?style=flat-square)
+<!-- ![Build status: master](https://img.shields.io/github/workflow/status/rgbatty/cauldron/CI/main?style=flat-square) -->
+<!-- ![Supports Emacs 27.1 - 28.1](https://img.shields.io/badge/Supports-Emacs_27.1--28.1-blueviolet.svg?style=flat-square&logo=GNU%20Emacs&logoColor=white) -->
 
 <!-- Screenshot -->
-![Cauldron Screenshot](https://raw.githubusercontent.com/doomemacs/doomemacs/screenshots/main.png)
-</div>
-
-REMOVE THIS PLACEHOLDER IMAGE
 
 ---
 
@@ -36,7 +32,7 @@ Given it's personal nature, these files are in a constant state of flux as my ne
 
 This repo, having previously tried other dotfile management tools, has settled on Nix - predominantly out of personal interest. Nix has been a fascinating rabbit hole, but be forewarned that it is not for beginners. Development is fast, documentation can be poor, but the reward of idempotent, declarative configuration is equally exciting.
 
-For those wondering, "how do you configure X?" take a look at `./modules`. The majority of these are self-explanatory, though the syntax may not be. Raw dotfiles are kept within their associated user profile or the module itself.
+<!-- For those wondering, "how do you configure X?" take a look at `./modules`. The majority of these are self-explanatory, though the syntax may not be. Raw dotfiles are kept within their associated user profile or the module itself. -->
 
 <p align="right"><a href="#top" title="Back to top">🔝</a></p>
 
@@ -73,7 +69,7 @@ Common commands (listable with `just -l`) are:
 - `just switch-darwin`: Build and apply nix-darwin output `darwin-<host>`.
 - `just switch-nixos`: Build and apply NixOS output `nixos-<host>`.
 
-### Configuration Profiles
+<!-- ### Configuration Profiles
 
 Outputs should be named `<nixos/darwin>-<host>` for `nixosConfigurations` and `darwinConfigurations`, while `homeManagerConfigurations` are expected to be named `<user>@<host>`. Examples of each can be found in their respective `./flake-parts` file.
 
@@ -89,15 +85,15 @@ Given just a `system` (eg. `aarch64-darwin`), the flake will apply configuration
 
 Simply forking the repo, adding your `profiles`, and re-running the desired `just` command will apply your new configurations wherever they are relevant.
 
-<p align="right"><a href="#top" title="Back to top">🔝</a></p>
+<p align="right"><a href="#top" title="Back to top">🔝</a></p> -->
 
 ## Supported Toolset
 
-Given the ephemeral nature of dotfiles, the given active toolset is likely to change on a whim. I highly encourage you take a look at `./modules`, as its quite well sorted and intended to be a running collection of all configurations I might need, with `./profiles` enabling and disabling as necessary.
+<!-- Given the ephemeral nature of dotfiles, the given active toolset is likely to change on a whim. I highly encourage you take a look at `./modules`, as its quite well sorted and intended to be a running collection of all configurations I might need, with `./profiles` enabling and disabling as necessary.
 
-On a high level:
+On a high level: -->
 
-------
+<!-- ------
 
 |                |                                                          |
 |----------------|----------------------------------------------------------|
@@ -111,7 +107,7 @@ On a high level:
 | **Browser:**   | [Vivaldi](https://vivaldi.com) |
 | **Theme:** | [Dracula](https://github.com/dracula/dracula-theme) |
 
------
+----- -->
 
 <p align="right"><a href="#top" title="Back to top">🔝</a></p>
 
@@ -125,13 +121,17 @@ This repo has been heavily inspired by the excellent work of many other engineer
 - :octocat: [Narze's Dotfiles](https://github.com/narze/dotfiles)
 - :octocat: [Paul Irish's Dotfiles](https://github.com/paulirish/dotfiles)
 - :octocat: [René-Marc Simard's Dotfiles](https://github.com/renemarc/dotfiles)
+- :octocat: [Ryan4yin's Config](https://github.com/ryan4yin/nix-config)
 
 ### Learning References
+- [NixOS & Flakes Book](https://nixos-and-flakes.thiscute.world/)
 - [dotfiles.github.io](https://dotfiles.github.io/)
 
 ### Projects
 - [Shell Awesome List](https://project-awesome.org/alebcay/awesome-shell)
 - [Fish Awesome List](https://github.com/jorgebucaran/awsm.fish)
+- [Nix Awesome List](https://github.com/nix-community/awesome-nix)
+
 
 <p align="center"><strong><sub>🦇 Assembled with <b title="love">💜</b> in Denver, CO. 🦇</sub></strong></p>
 
