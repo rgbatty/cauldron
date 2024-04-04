@@ -31,6 +31,7 @@
   fileSystems."/mnt/media" = {
     device = "192.168.50.2:/mnt/pool1/media";
     fsType = "nfs";
+    options = [ "x-systemd.automount" "noauto" ];
   };
 
   swapDevices =
