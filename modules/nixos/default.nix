@@ -2,7 +2,9 @@
 
 {
   imports = [
+    ./gaming.nix
     ./nvidia.nix
+    ./synergy.nix
     ./wayland.nix
     ./x11.nix
   ];
@@ -80,14 +82,10 @@
 
   programs.fish.enable = true;
 
-  programs.steam = {
-    enable = true;
-  };
-
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = false;
+  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -113,11 +111,8 @@
     packages = with pkgs; [
       discord
       firefox
-      steam
-      synergy
       unetbootin
       vivaldi
-      xivlauncher
     ];
     shell = pkgs.fish;
   };

@@ -11,7 +11,9 @@
   ];
 
   modules.nixos = {
+    gaming.enable = true;
     nvidia.enable = true;
+    synergy.enable = true;
     # wayland.enable = true;
     x11.enable = true;
   };
