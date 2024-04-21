@@ -21,7 +21,6 @@ in
         layout= "us";
         variant = "";
       };
-      videoDrivers = lib.mkIf nvidiaCfg.enable [ "nvidia" ];
     };
   };
 }

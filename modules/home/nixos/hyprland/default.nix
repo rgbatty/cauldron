@@ -9,6 +9,38 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [
+      waybar # Panel
+      mako # Notifications
+
+      alsa-utils
+      mpd
+
+
+      libnotify
+
+      # Wallpaper daemons
+      # hyprpaper
+      # swaybg
+      # wpaperd
+      # mpvpaper
+      swww
+
+      # App launchers
+      rofi-wayland
+      # wofi
+      # anyrun
+
+      wl-clipboard # clipboard
+
+      grimblast
+    ];
+
+    # May be redundant?
+    # programs.hyprland = {
+    #   enable = true;
+    # };
+
     wayland.windowManager.hyprland = {
       enable = true;
       package = hyprlandFlake;
@@ -22,8 +54,8 @@ in
         "$mod" = "SUPER";
 
         exec-once = [
-          "dunst"
-          "waybar"
+          "waybar &"
+          "mako &"
         ];
 
         monitor = [
@@ -163,8 +195,10 @@ in
           "WLR_NO_HARDWARE_CURSORS,1"
 
           "NIXOS_OZONE_WL,1" # for any ozone-based browser & electron apps to run on wayland
+
           "MOZ_ENABLE_WAYLAND,1" # for firefox to run on wayland
           "MOZ_WEBRENDER,1"
+
           # misc
           "_JAVA_AWT_WM_NONREPARENTING,1"
           "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
@@ -181,7 +215,6 @@ in
     };
 
     home.file.".wayland-session" = {
-      # source = "${pkgs.hyprland}/bin/Hyprland";
       source = "${hyprlandFlake}/bin/Hyprland";
       executable = true;
     };

@@ -19,7 +19,6 @@ in
     };
 
     services = {
-      xserver.videoDrivers = lib.mkIf nvidiaCfg.enable ["nvidia"]; # might be unused
       xserver.enable = false; # disable xorg server
       # https://wiki.archlinux.org/title/Greetd
       greetd = {
@@ -44,10 +43,6 @@ in
     #   };
     # };
 
-    programs.hyprland = {
-      enable = true;
-    };
-
     # environment.systemPackages = [
     #   (pkgs.waybar.overrideAttrs (oldAttrs: {
     #       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
@@ -57,30 +52,6 @@ in
     # ];
 
     environment.systemPackages = with pkgs; [
-      alsa-utils
-      mpd
-
-      waybar
-      # mako # or dunst (ported from X)
-      dunst
-      libnotify
-
-      # Wallpaper daemons
-      # hyprpaper
-      # swaybg
-      # wpaperd
-      # mpvpaper
-      swww
-
-      # App launchers
-      rofi-wayland
-      # wofi
-      # bemenu
-      # fuzzel
-      # tofi
-      # anyrun
-
-      wl-clipboard
     ];
   };
 }

@@ -34,6 +34,12 @@
     options = [ "x-systemd.automount" "noauto" ];
   };
 
+  fileSystems."/mnt/backups" = {
+    device = "192.168.50.2:/mnt/pool1/backups";
+    fsType = "nfs";
+    options = [ "x-systemd.automount" "noauto" ];
+  };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/6de17bfc-0f43-4a16-bd54-babffedf695f"; }
     ];

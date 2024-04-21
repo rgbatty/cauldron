@@ -1,4 +1,4 @@
-{ inputs, lib, ... }:
+{ inputs, lib, pkgs, ... }:
 
 {
   imports = [
@@ -27,4 +27,11 @@
       hyprland.enable = true;
     };
   };
+
+  home.packages = with pkgs; [
+    discord
+    # firefox
+    unetbootin
+    # vivaldi
+  ];
 }

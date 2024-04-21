@@ -109,9 +109,9 @@
     description = "Ryan";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      discord
-      firefox
-      unetbootin
+      # discord
+      # firefox
+      # unetbootin
       vivaldi
     ];
     shell = pkgs.fish;
