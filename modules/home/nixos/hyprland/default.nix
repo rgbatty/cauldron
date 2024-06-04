@@ -53,37 +53,10 @@ in
       settings = {
         "$mod" = "SUPER";
 
-        exec-once = [
-          "waybar &"
-          "mako &"
-        ];
-
-        monitor = [
-          "DP-1,5120x1440@240,0x0,1"
-        ];
-
-        misc = {
-          vfr = true; #CPU usage improvements?
-          vrr = false; # adaptive sync
-        };
-
-        xwayland = {
-          force_zero_scaling = true;
-        };
-
-        input = {
-          kb_layout = "us";
-          follow_mouse = 1;
-          mouse_refocus = false;
-        };
-
-        general = {
-          gaps_in = 5;
-          gaps_out = 10;
-          border_size = 4;
-          # col.active_border = "0xFFB4A1DB";
-          # col.inactive_border = "0xFF343A40";
-        };
+        # animations = {
+        #   enabled = 1;
+        #   "workspaces,1,8,default"
+        # };
 
         decoration = {
           rounding = 8;
@@ -104,10 +77,63 @@ in
           # the more passes, the more you can up the blur_size without noticing artifacts.
         };
 
-        # animations = {
-        #   enabled = 1;
-        #   "workspaces,1,8,default"
-        # };
+        # nvidia settings
+        env = [
+          # for hyprland with nvidia gpu, ref https://wiki.hyprland.org/Nvidia/
+          # "LIBVA_DRIVER_NAME,nvidia"
+          #"XDG_SESSION_TYPE,wayland"
+          #"GBM_BACKEND,nvidia-drm"
+          #"__GLX_VENDOR_LIBRARY_NAME,nvidia"
+          # fix https://github.com/hyprwm/Hyprland/issues/1520
+          "WLR_NO_HARDWARE_CURSORS,1"
+
+          "NIXOS_OZONE_WL,1" # for any ozone-based browser & electron apps to run on wayland
+
+          "MOZ_ENABLE_WAYLAND,1" # for firefox to run on wayland
+          "MOZ_WEBRENDER,1"
+
+          # misc
+          "_JAVA_AWT_WM_NONREPARENTING,1"
+          "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+          "QT_QPA_PLATFORM,wayland"
+          "SDL_VIDEODRIVER,wayland"
+          "GDK_BACKEND,wayland"
+        ];
+
+        exec-once = [
+          "waybar &"
+          "mako &"
+        ];
+
+        monitor = [
+          "DP-1,5120x1440@240,0x0,1"
+        ];
+
+        misc = {
+          vfr = true; #CPU usage improvements?
+          vrr = false; # adaptive sync
+        };
+
+        general = {
+          gaps_in = 5;
+          gaps_out = 10;
+          border_size = 4;
+          # col.active_border = "0xFFB4A1DB";
+          # col.inactive_border = "0xFF343A40";
+        };
+
+        input = {
+          follow_mouse = 1;
+          kb_layout = "us";
+          mouse_refocus = false;
+          numlock_by_default = 1;
+          repeat_delay = 140;
+          repeat_rate = 30;
+        };
+
+        xwayland = {
+          force_zero_scaling = true;
+        };
 
         bind = [
           "$mod,RETURN,exec,kitty"
@@ -182,29 +208,6 @@ in
           # Mouse binds
           "SUPER,mouse:272,movewindow"
           "SUPER,mouse:273,resizewindow"
-        ];
-
-        # nvidia settings
-        env = [
-          # for hyprland with nvidia gpu, ref https://wiki.hyprland.org/Nvidia/
-          "LIBVA_DRIVER_NAME,nvidia"
-          #"XDG_SESSION_TYPE,wayland"
-          #"GBM_BACKEND,nvidia-drm"
-          #"__GLX_VENDOR_LIBRARY_NAME,nvidia"
-          # fix https://github.com/hyprwm/Hyprland/issues/1520
-          "WLR_NO_HARDWARE_CURSORS,1"
-
-          "NIXOS_OZONE_WL,1" # for any ozone-based browser & electron apps to run on wayland
-
-          "MOZ_ENABLE_WAYLAND,1" # for firefox to run on wayland
-          "MOZ_WEBRENDER,1"
-
-          # misc
-          "_JAVA_AWT_WM_NONREPARENTING,1"
-          "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
-          "QT_QPA_PLATFORM,wayland"
-          "SDL_VIDEODRIVER,wayland"
-          "GDK_BACKEND,wayland"
         ];
       };
 

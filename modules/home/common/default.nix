@@ -5,6 +5,7 @@
     ./editors/vscode
     ./shells
     ./terminals/wezterm
+    ./lanmouse.nix
   ];
 
   home = {

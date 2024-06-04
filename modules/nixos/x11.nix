@@ -12,11 +12,9 @@ in
     # Enable the X11 windowing system.
     services.xserver.enable = true;
     # Enable the KDE Plasma Desktop Environment.
-    services.xserver.displayManager.sddm.enable = true;
+    services.displayManager.sddm.enable = true;
     services.xserver.desktopManager.plasma5.enable = true;
     services.xserver = {
-      layout = "us";
-      xkbVariant = "";
       xkb = {
         layout= "us";
         variant = "";

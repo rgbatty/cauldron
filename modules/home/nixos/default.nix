@@ -12,6 +12,8 @@
         vscode.enable = true;
       };
 
+      lanmouse.enable = true;
+
       shells = {
         bash.enable = true;
         fish.enable = true;
@@ -33,5 +35,6 @@
     # firefox
     unetbootin
     # vivaldi
+    vlc
   ];
 }

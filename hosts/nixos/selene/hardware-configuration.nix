@@ -40,6 +40,12 @@
     options = [ "x-systemd.automount" "noauto" ];
   };
 
+  fileSystems."/mnt/vms" = {
+    device = "192.168.50.2:/mnt/pool1/vms";
+    fsType = "nfs";
+    options = [ "x-systemd.automount" "noauto" ];
+  };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/6de17bfc-0f43-4a16-bd54-babffedf695f"; }
     ];

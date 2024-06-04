@@ -20,7 +20,7 @@ in
       dotDir = ".config/zsh";
       enableCompletion = true;
       syntaxHighlighting.enable = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
 
       history.path = "${config.xdg.dataHome}/zsh/history";
       history.expireDuplicatesFirst = true;

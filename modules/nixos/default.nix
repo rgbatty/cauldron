@@ -39,7 +39,7 @@
   };
 
   environment.etc = {
-    "resolv.conf".text = "nameserver 192.168.50.4\n";
+    "resolv.conf".text = "nameserver 192.168.50.4\nnameserver 1.1.1.1\n";
   };
 
   environment.systemPackages = with pkgs; [

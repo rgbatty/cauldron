@@ -27,8 +27,8 @@
     powerOnBoot = true;
   };
 
-  networking.firewall.allowedTCPPorts = [ 24800 ];
-  networking.firewall.allowedUDPPorts = [ 24800 ];
+  networking.firewall.allowedTCPPorts = [ 24800 4242 ];
+  networking.firewall.allowedUDPPorts = [ 24800 4242 ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
