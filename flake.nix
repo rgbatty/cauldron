@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-xivlauncher.url = "github:nixos/nixpkgs/2504cd307496949ef88f40fadfd7369381fc8ddf";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -16,11 +17,18 @@
     lan-mouse.url = "github:feschber/lan-mouse";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }: {
+  outputs = inputs@{ self, nixpkgs, nixpkgs-xivlauncher, home-manager, ... }: {
     nixosConfigurations = {
-      selene = nixpkgs.lib.nixosSystem {
+      selene = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+
+          pkgs-xivlauncher = import nixpkgs-xivlauncher {
+            inherit system;
+            config.allowUnfree = true;
+          };
+        };
         modules = [
           ./modules/nixos
           ./hosts/nixos/selene
