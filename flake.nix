@@ -1,33 +1,66 @@
 {
-  description = "Cauldron: A Colony of Bats and Other Witchcraft";
+  description = "Nixos config flake";
 
   inputs = {
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-xivlauncher.url = "github:nixos/nixpkgs/2504cd307496949ef88f40fadfd7369381fc8ddf";
 
-    darwin.url = "github:LnL7/nix-darwin/master";
-    darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    hyprland = {
+      url = "github:hyprwm/Hyprland/v0.37.1";
+    };
 
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "nixpkgs/master";
-    nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
-
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    flake-parts.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Extras
-    # nixos-generators.url = "github:nix-community/nixos-generators";
-    # nixos-hardware.url = "github:nixos/nixos-hardware";
-    emacs-overlay.url  = "github:nix-community/emacs-overlay";
+    lan-mouse.url = "github:feschber/lan-mouse";
   };
 
+  outputs = inputs@{ self, nixpkgs, nixpkgs-xivlauncher, home-manager, ... }: {
+    nixosConfigurations = {
+      selene = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs;
 
-  outputs = inputs @ { self, flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit self; } {
-      imports = [ ./flake-parts ];
-      systems = [ "aarch64-darwin" "x86_64-darwin" "x86_64-linux" ];
+          pkgs-xivlauncher = import nixpkgs-xivlauncher {
+            inherit system;
+            config.allowUnfree = true;
+          };
+        };
+        modules = [
+          ./modules/nixos
+          ./hosts/nixos/selene
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.backupFileExtension = "backup";
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.riizu = import ./modules/home/nixos;
+            home-manager.extraSpecialArgs = { inherit inputs;};
+          }
+        ];
+      };
+
+      nosferatu = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./modules/nixos
+          ./hosts/nixos/nosferatu
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.backupFileExtension = "backup";
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.riizu = import ./modules/home/nixos;
+            home-manager.extraSpecialArgs = { inherit inputs;};
+          }
+        ];
+      };
     };
+  };
 }

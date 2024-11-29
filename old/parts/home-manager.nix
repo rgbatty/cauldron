@@ -1,0 +1,123 @@
+{
+  self,
+  nixpkgs,
+  inputs,
+  config,
+  lib,
+  ...
+}: let
+  cfg = config.cauldron.homeConfigurations;
+
+  configs = builtins.mapAttrs (_: config: config.finalHome) cfg;
+
+  packages = builtins.attrValues (builtins.mapAttrs (_: config: config.packageModule) cfg);
+in {
+  options = {
+    cauldron.homeConfigurations = lib.mkOption {
+      type = lib.types.attrsOf (lib.types.submodule ({
+        name,
+        config,
+        ...
+      }: {
+        options = {
+          nixpkgs = lib.mkOption {
+            type = lib.types.unspecified;
+            default = inputs.nixpkgs;
+          };
+
+          system = lib.mkOption {type = lib.types.enum ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];};
+
+          username = lib.mkOption {
+            type = lib.types.str;
+            default = builtins.elemAt (lib.strings.split "@" name) 0;
+          };
+
+          hostname = lib.mkOption {
+            type = lib.types.str;
+            default = builtins.elemAt (lib.strings.split "@" name) 2;
+          };
+
+          entryPoint = lib.mkOption {
+            type = lib.types.unspecified;
+            readOnly = true;
+          };
+
+          base = lib.mkOption {
+            type = lib.types.str;
+            readOnly = true;
+          };
+
+          homeDirectory = lib.mkOption {
+            type = lib.types.str;
+            readOnly = true;
+          };
+
+          modules = lib.mkOption {
+            type = lib.types.listOf lib.types.unspecified;
+            default = [];
+          };
+
+          finalModules = lib.mkOption {
+            type = lib.types.listOf lib.types.unspecified;
+            readOnly = true;
+          };
+
+          packageName = lib.mkOption {
+            type = lib.types.str;
+            readOnly = true;
+          };
+
+          finalPackage = lib.mkOption {
+            type = lib.types.package;
+            readOnly = true;
+          };
+
+          finalHome = lib.mkOption {
+            type = lib.types.unspecified;
+            readOnly = true;
+          };
+
+          packageModule = lib.mkOption {
+            type = lib.types.unspecified;
+            readOnly = true;
+          };
+        };
+
+        config = {
+          entryPoint = import "${self}/profiles/users/${config.username}" (inputs // { inherit self; });
+          base =
+            if lib.strings.hasSuffix "-darwin" config.system
+            then "Users"
+            else "home";
+          homeDirectory = "/${config.base}/${config.username}";
+
+          finalModules =
+            [
+              config.entryPoint
+              {home = {inherit (config) username homeDirectory;};}
+              self.homeModules
+              # self.mixedModules
+            ]
+            ++ config.modules;
+
+          packageName = name;
+          finalPackage = config.finalHome.activationPackage;
+
+          packageModule = {${config.system}.${config.packageName} = config.finalPackage;};
+
+          finalHome = inputs.home-manager.lib.homeManagerConfiguration {
+            pkgs = config.nixpkgs.legacyPackages.${config.system};
+            modules = config.finalModules;
+          };
+        };
+      }));
+    };
+  };
+
+  config.cauldron.homeConfigurations."rbatty@fang".system = "aarch64-darwin";
+  config.cauldron.homeConfigurations."rbatty@luna".system = "aarch64-darwin";
+  config.cauldron.homeConfigurations."rbatty@selene".system = "x86_64-linux";
+
+  config.flake.homeConfigurations = configs;
+  config.flake.packages = lib.mkMerge packages;
+}
